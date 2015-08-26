@@ -1,0 +1,2 @@
+cd ReleaseGenerators
+makensis AspectCoreInstall.nsi

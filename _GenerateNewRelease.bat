@@ -1,0 +1,7 @@
+_0_IncreaseVersion.bat
+_1_BuildCore.bat
+_2_BuildLWParsers.bat
+_3_CoreInstaller.bat
+_3_NPPluginBuild.bat
+_3_PABCPluginInstaller.bat
+_3_VSPluginInstaller.bat
