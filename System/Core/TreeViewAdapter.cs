@@ -22,15 +22,16 @@ namespace AspectCore
         {
             NodesToPoints.Clear();
             treeView.Nodes.Clear();
-            TreeNode tn = ConvertPointToTree(manager.WorkingAspect);
-            if (tn != null)
+            if (manager.WorkingAspect == null)
             {
-                TreeNode[] tns = new TreeNode[tn.Nodes.Count];
-                tn.Nodes.CopyTo(tns, 0);
-                treeView.Nodes.AddRange(tns);
-            }
-            else
                 manager.WorkingAspect = new PointOfInterest();
+                return;
+            }
+            if(manager.WorkingAspect.Items == null || manager.WorkingAspect.Items.Count == 0)
+                return;
+
+            foreach (PointOfInterest point in manager.WorkingAspect.Items)
+                treeView.Nodes.Add(ConvertPointToTree(point));
         }
 
         /// <summary>
@@ -86,6 +87,7 @@ namespace AspectCore
                 return null;
             TreeNode result = new TreeNode(pt.Name);
             result.ToolTipText = pt.Note;
+
             //0 - Empty, 1 - Aspect, 2 - Folder, 3 - Note
             int imageindex = 0;
             if (pt.Context != null && pt.Context.Count > 0)
@@ -96,6 +98,7 @@ namespace AspectCore
                 imageindex = 3;
             result.ImageIndex = imageindex;
             result.SelectedImageIndex = imageindex;
+
             NodesToPoints.Add(result, pt);
             if (pt.Items != null)
                 foreach (PointOfInterest p in pt.Items)
