@@ -18,6 +18,7 @@ namespace PascalABCAspects
         private AspectForm _form;
         IWorkbench _workbench;
         DockState dockState = DockState.DockLeft;
+        delegate void SetTextCallback(string text);
 
         public Aspect_VisualPascalABCPlugin(IWorkbench workbench)
         {
@@ -77,12 +78,17 @@ namespace PascalABCAspects
         }
         private void TraceMessage(string str)
         {
-            try
+            CompilerConsoleWindowForm console = _workbench.CompilerConsoleWindow as CompilerConsoleWindowForm;
+            if (console.InvokeRequired)
             {
-                (_workbench.CompilerConsoleWindow as CompilerConsoleWindowForm).AppendTextToConsoleCompiler(OutputPrefix + str + Environment.NewLine);
+                SetTextCallback d = new SetTextCallback(TraceMessage);
+                console.Invoke(d, new object[] { str });
             }
-            catch (Exception e)
-            {}
+            else
+            {
+                string text = OutputPrefix + str + Environment.NewLine;
+                console.AppendTextToConsoleCompiler(text);
+            }
         }
     }
 }

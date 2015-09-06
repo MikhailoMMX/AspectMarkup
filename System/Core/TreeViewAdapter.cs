@@ -76,6 +76,20 @@ namespace AspectCore
             }
         }
 
+        private void UpdateNodeImage(TreeNode Node, PointOfInterest pt)
+        {
+            //0 - Empty, 1 - Aspect, 2 - Folder, 3 - Note
+            int imageindex = 0;
+            if (pt.Context != null && pt.Context.Count > 0)
+                imageindex = 1;
+            else if (pt.Items != null && pt.Items.Count > 0)
+                imageindex = 2;
+            else if (!string.IsNullOrWhiteSpace(pt.Note))
+                imageindex = 3;
+            Node.ImageIndex = imageindex;
+            Node.SelectedImageIndex = imageindex;
+        }
+
         /// <summary>
         /// Преобразование аспектного дерева в дерево для отображения в компоненте TreeView
         /// </summary>
@@ -87,18 +101,7 @@ namespace AspectCore
                 return null;
             TreeNode result = new TreeNode(pt.Name);
             result.ToolTipText = pt.Note;
-
-            //0 - Empty, 1 - Aspect, 2 - Folder, 3 - Note
-            int imageindex = 0;
-            if (pt.Context != null && pt.Context.Count > 0)
-                imageindex = 1;
-            else if (pt.Items != null && pt.Items.Count > 0)
-                imageindex = 2;
-            else if (!string.IsNullOrWhiteSpace(pt.Note))
-                imageindex = 3;
-            result.ImageIndex = imageindex;
-            result.SelectedImageIndex = imageindex;
-
+            UpdateNodeImage(result, pt);
             NodesToPoints.Add(result, pt);
             if (pt.Items != null)
                 foreach (PointOfInterest p in pt.Items)
@@ -153,19 +156,16 @@ namespace AspectCore
             PointOfInterest newParentPoint = newParent == null ? manager.WorkingAspect : NodesToPoints[newParent];
             undoEngine.SavePointState(point, oldParentPoint, ActionKind.Move, newParentPoint);
 
-            //TreeNode newNode = (TreeNode)Node.Clone();
-            //PointOfInterest pt = NodesToPoints[Node];
-            //NodesToPoints.Remove(Node);
-            //NodesToPoints.Add(newNode, pt);
-
-            //!Aspect MoveNodeWithinCollectionBugFix
             if (Node.Parent == newParent && newPos >= Node.Index)
                 newPos -= 1;
 
             if (Node.Parent == null)
                 manager.WorkingAspect.Items.Remove(point);
             else
+            {
                 NodesToPoints[Node.Parent].Items.Remove(point);
+                UpdateNodeImage(Node.Parent, NodesToPoints[Node.Parent]);
+            }
             Node.Remove();
 
             if (newParent == null)
@@ -177,6 +177,7 @@ namespace AspectCore
             {
                 newParent.Nodes.Insert(newPos, Node);
                 NodesToPoints[newParent].Items.Insert(newPos, point);
+                UpdateNodeImage(newParent, NodesToPoints[newParent]);
             }
             manager.isFileSaved = false;
         }
@@ -211,8 +212,7 @@ namespace AspectCore
             point.InnerContext = newAnchor.InnerContext;
             Node.Text = point.Name;
             Node.ToolTipText = point.Note;
-            Node.ImageIndex = point.Context.Count > 0 ? 1 : 0;
-            Node.SelectedImageIndex = Node.ImageIndex;
+            UpdateNodeImage(Node, newAnchor);
             manager.isFileSaved = false;
         }
 
