@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  BLUEGENE
-// DateTime: 25.08.2015 17:34:24
+// DateTime: 23.11.2015 20:39:43
 // UserName: MikhailoMMX
-// Input file <gppg.y - 02.04.2013 13:59:28>
+// Input file <gppg.y - 26.08.2015 21:26:54>
 
 // options: no-lines gplex
 
@@ -59,13 +59,13 @@ internal class ScanObj {
 [GeneratedCodeAttribute( "Gardens Point Parser Generator", "1.5.2")]
 internal partial class Parser: ShiftReduceParser<ValueType, LexSpan>
 {
-  // Verbatim content from gppg.y - 02.04.2013 13:59:28
+  // Verbatim content from gppg.y - 26.08.2015 21:26:54
 /*
  *  Parser spec for GPPG
  *  gppg.y: Author: John Gough, August 2008
  *  Process with > GPPG /gplex /no-lines gppg.y
  */
-  // End verbatim content from gppg.y - 02.04.2013 13:59:28
+  // End verbatim content from gppg.y - 26.08.2015 21:26:54
 
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;

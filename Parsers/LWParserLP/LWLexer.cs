@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  BLUEGENE
-//  DateTime: 25.08.2015 17:34:39
+//  DateTime: 23.11.2015 20:39:52
 //  UserName: MikhailoMMX
-//  GPLEX input file <LWLexer.lex - 25.08.2015 17:34:38>
+//  GPLEX input file <LWLexer.lex - 23.11.2015 20:39:52>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: unicode, parser, stack, minimize

@@ -148,6 +148,11 @@ Sign  [[:IsPunctuation:][:IsSymbol:]]
 	yylval.type_Token = new Token(yytext, yylloc);
 	return (int)Tokens.tkDirectiveHeader;
 }
+"extensionmethod"  {
+    yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens.tkDirectiveHeader;
+}
 "initialization"  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);

@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  BLUEGENE
-// DateTime: 25.08.2015 17:34:49
+// DateTime: 23.11.2015 20:39:58
 // UserName: MikhailoMMX
-// Input file <LWParser.y - 25.08.2015 17:34:48>
+// Input file <LWParser.y - 23.11.2015 20:39:58>
 
 // options: no-lines gplex
 

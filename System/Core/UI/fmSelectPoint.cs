@@ -15,27 +15,28 @@ namespace AspectCore.UI
         private IDEInterop _ide;
         private TreeSearchResult _search;
         private TreeManager _treeManager;
-        private AspectManager _aspectManager;
         private PointOfInterest _point;
-        private string Pattern = "{0,-15} {1,-30}";
+        private string Pattern = "{0,-4} {1,-15} {2,-30}";
         private string _type = "Тип узла";
         private string _name = "Имя узла";
+        private string _dist = "%";
 
-        public FmSelectPoint(IDEInterop ide, TreeManager treeManager, AspectManager aspectManager)
+        public FmSelectPoint(IDEInterop ide, TreeManager treeManager)
         {
             _ide = ide;
             _treeManager = treeManager;
-            _aspectManager = aspectManager;
             InitializeComponent();
         }
 
         private void BuildList()
         {
             lbCandidates.SelectedIndexChanged -= lbCandidates_SelectedIndexChanged;
-            label1.Text = string.Format(Pattern, _type, _name);
+            label1.Text = string.Format(Pattern, _dist, _type, _name);
+            lOldPointInfo.Text = string.Format(Pattern, 1.ToString("F2"), _point.Context[0].Type, string.Join(" ", _point.Context[0].Name));
+
             lbCandidates.Items.Clear();
             foreach (TreeSearchResultNode node in _search._result)
-                lbCandidates.Items.Add(string.Format(Pattern, node.TreeNode.Context[0].Type, string.Join(" ",node.TreeNode.Context[0].Name)));
+                lbCandidates.Items.Add(string.Format(Pattern, ((float)node.TotalMatch/TreeSearchOptions.Equility).ToString("F2"), node.TreeNode.Context[0].Type, string.Join(" ",node.TreeNode.Context[0].Name)));
             lbCandidates.SelectedIndexChanged += lbCandidates_SelectedIndexChanged;
         }
 

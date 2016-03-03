@@ -114,8 +114,8 @@ Sign  [[:IsPunctuation:][:IsSymbol:]]
 
 } //end of Anon3
 <Anon4> {
-	"''" { }
-"''" { }
+	"\\\\" { }
+"\\'" { }
 "'" { 
     
     ReturnToLastState(); }

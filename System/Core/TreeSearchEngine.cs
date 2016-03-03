@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QUT.Gppg;
 
 namespace AspectCore
@@ -19,37 +17,37 @@ namespace AspectCore
         /// <returns></returns>
         public static TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)
         {
-            TreeSearchResult Result = InitializeResultFromTree(TreeRoot, Point.Context[0].Type);
-            ProcessNames(Result, Point);
-            if (Result.Singular)
+            TreeSearchResult result = InitializeResultFromTree(TreeRoot, Point.Context[0].Type);
+            ProcessNames(result, Point);
+            if (result.Singular)
             {
-                FillLocationForSingularResult(Result, SourceText, Point.Text);
-                return Result;
+                FillLocationForSingularResult(result, SourceText, Point.Text);
+                return result;
             }
             
-            ProcessOuterContext(Result, Point);
-            if (Result.Singular)
+            ProcessOuterContext(result, Point);
+            if (result.Singular)
             {
-                FillLocationForSingularResult(Result, SourceText, Point.Text);
-                return Result;
+                FillLocationForSingularResult(result, SourceText, Point.Text);
+                return result;
             }
             
-            ProcessInnerContext(Result, Point);
-            if (Result.Singular)
+            ProcessInnerContext(result, Point);
+            if (result.Singular)
             {
-                FillLocationForSingularResult(Result, SourceText, Point.Text);
-                return Result;
+                FillLocationForSingularResult(result, SourceText, Point.Text);
+                return result;
             }
             
-            ProcessText(Result, Point, SourceText);
-            if (Result.Singular)
+            ProcessText(result, Point, SourceText);
+            if (result.Singular)
             {
-                FillLocationForSingularResult(Result, SourceText, Point.Text);
-                return Result;
+                FillLocationForSingularResult(result, SourceText, Point.Text);
+                return result;
             }
             
-            Result.Sort();
-            return Result;
+            result.Sort();
+            return result;
         }
         /// <summary>
         /// Поиск точки в дереве аспектов.
@@ -73,32 +71,32 @@ namespace AspectCore
 
             //сортируем список и выбираем из него строго совпадающие элементы, они будут в начале.
             res.Sort();
-            List<PointOfInterest> Candidates = new List<PointOfInterest>();
+            List<PointOfInterest> candidates = new List<PointOfInterest>();
             for (int i=0; i< res.Count; ++i)
                 if (res._result[i].NameMatch == TreeSearchOptions.Equility)
-                    Candidates.Add(res._result[i].TreeNode);
+                    candidates.Add(res._result[i].TreeNode);
                 else
                     break;
 
             //если совпадающих элементов нет
-            if (Candidates.Count == 0)
+            if (candidates.Count == 0)
                 return null;
 
             //совпадающих элементов 2 или более
             //сравниваем текстовые строки, возвращаем узел с наиболее похожей текстовой строкой
-            List<string> PointText = TextSearch.TokenizeString(Point.Text);
-            int MaxSim = TreeSearchComparer.TokenListsSimilarity(TextSearch.TokenizeString(Candidates[0].Text), PointText);
-            int MaxSimIndex = 0;
-            for (int i = 1; i < Candidates.Count; ++i)
+            List<string> pointText = TextSearch.TokenizeString(Point.Text);
+            int maxSim = TreeSearchComparer.TokenListsSimilarity(TextSearch.TokenizeString(candidates[0].Text), pointText);
+            int maxSimIndex = 0;
+            for (int i = 1; i < candidates.Count; ++i)
             {
-                int sim = TreeSearchComparer.TokenListsSimilarity(TextSearch.TokenizeString(Candidates[i].Text), PointText);
-                if (sim> MaxSim)
+                int sim = TreeSearchComparer.TokenListsSimilarity(TextSearch.TokenizeString(candidates[i].Text), pointText);
+                if (sim> maxSim)
                 {
-                    MaxSim = sim;
-                    MaxSimIndex = i;
+                    maxSim = sim;
+                    maxSimIndex = i;
                 }
             }
-            return Candidates[MaxSimIndex];
+            return candidates[maxSimIndex];
         }
 
         /// <summary>
@@ -114,16 +112,16 @@ namespace AspectCore
             if (!p.IsInside(line, col))
                 return null;
 
-            List<PointOfInterest> Result = new List<PointOfInterest>();
+            List<PointOfInterest> result = new List<PointOfInterest>();
 
             foreach (PointOfInterest pt in p.Items)
             {
                 List<PointOfInterest> l2 = FindPointByLocation(pt, line, col);
                 if (l2 != null)
-                    Result.AddRange(l2);
+                    result.AddRange(l2);
             }
-            Result.Add(p);
-            return Result;
+            result.Add(p);
+            return result;
         }
 
         /// <summary>
@@ -134,13 +132,13 @@ namespace AspectCore
         /// <returns></returns>
         private static TreeSearchResult InitializeResultFromTree(PointOfInterest TreeRoot, string Type)
         {
-            TreeSearchResult Result = new TreeSearchResult();
+            TreeSearchResult result = new TreeSearchResult();
             if (string.IsNullOrWhiteSpace(Type) || (TreeRoot.Context != null && TreeRoot.Context.Count != 0 && TreeRoot.Context[0].Type == Type))
-                Result._result.Add(new TreeSearchResultNode(TreeRoot));
+                result._result.Add(new TreeSearchResultNode(TreeRoot));
 
             foreach (PointOfInterest point in TreeRoot.Items)
-                Result._result.AddRange(InitializeResultFromTree(point, Type)._result);
-            return Result;
+                result._result.AddRange(InitializeResultFromTree(point, Type)._result);
+            return result;
         }
 
         /// <summary>
@@ -151,21 +149,21 @@ namespace AspectCore
         /// <param name="Point"></param>
         private static void ProcessNames(TreeSearchResult Result, PointOfInterest Point)
         {
-            List<TreeSearchResultNode> ExactMatch = new List<TreeSearchResultNode>();
+            List<TreeSearchResultNode> exactMatch = new List<TreeSearchResultNode>();
             foreach (TreeSearchResultNode node in Result._result)
                 if (node.TreeNode.Context.Count != 0)
                 {
-                    int Sim = 0;
+                    int sim = 0;
                     if (string.IsNullOrWhiteSpace(Point.Context[0].Type) || node.TreeNode.Context[0].Type == Point.Context[0].Type)
-                        Sim = TreeSearchComparer.TokenListsSimilarity(node.TreeNode.Context[0].Name, Point.Context[0].Name);
-                    node.NameMatch = Sim;
-                    if (Sim == TreeSearchOptions.Equility)
-                        ExactMatch.Add(node);
+                        sim = TreeSearchComparer.TokenListsSimilarity(node.TreeNode.Context[0].Name, Point.Context[0].Name);
+                    node.NameMatch = sim;
+                    if (sim == TreeSearchOptions.Equility)
+                        exactMatch.Add(node);
                 }
-            if (ExactMatch.Count == 1)
+            if (exactMatch.Count == 1)
             {
                 Result.Singular = true;
-                Result._result = ExactMatch;
+                Result._result = exactMatch;
             }
         }
         /// <summary>
@@ -303,8 +301,7 @@ namespace AspectCore
             TextSearch ts = new TextSearch(Source);
             Pair<int, int> p = ts.Similarity(point.Location, point.Text);
             int Line = p.First;
-            int Sim = p.Second;
-            int Col = 0;
+            int Col;
             if (Line == point.Location.StartLine)
                 Col = point.Location.StartColumn;
             else
@@ -316,6 +313,8 @@ namespace AspectCore
         /// Заполняет поле Location в единственном узле результата
         /// </summary>
         /// <param name="Result"></param>
+        /// <param name="Source"></param>
+        /// <param name="Text"></param>
         private static void FillLocationForSingularResult(TreeSearchResult Result, string Source, string Text)
         {
             PointOfInterest Point = Result._result[0].TreeNode.ClonePoint();
@@ -787,6 +786,7 @@ namespace AspectCore
         public int OuterContextMatch { get { return _match[OuterContextIndex]; } set { _match[OuterContextIndex] = value; } }
         public int InnerContextMatch { get { return _match[InnerContextIndex]; } set { _match[InnerContextIndex] = value; } }
         public int TextStringMatch { get { return _match[TextStringIndex]; } set { _match[TextStringIndex] = value; } }
+        public int TotalMatch { get { return (_match[0] + _match[1] + _match[2] + _match[3]) / 4; } }
     }
 
     /// <summary>
@@ -974,7 +974,7 @@ namespace AspectCore
                 while (suffix < MinLen && S1[S1.Length - 1 - suffix] == S2[S2.Length - 1 - suffix])
                     ++suffix;
 
-                int Dist = 0;
+                int Dist;
                 if (prefix == MinLen || suffix == MinLen || (prefix + suffix >= MinLen))
                     //одна строка является префиксом или суффиксом другой
                     Dist = (MaxLen - MinLen) * TreeSearchOptions.CostInsertRemoveChar;
@@ -1207,10 +1207,10 @@ namespace AspectCore
         {
             _lines = Text.Split('\n');
         }
+
         /// <summary>
         /// Находит строку из заданного диапазона, наиболее похожую на заданную строку
         /// </summary>
-        /// <param name="Point"></param>
         /// <returns>Пара (Номер строки, степень похожести)</returns>
         public Pair<int, int> Similarity(QUT.Gppg.LexLocation Loc, string pattern)
         {
@@ -1256,12 +1256,12 @@ namespace AspectCore
         internal static List<string> TokenizeString(string str)
         {
             List<string> list = new List<string>();
-            if (str == null || str == "")
+            if (string.IsNullOrEmpty(str))
                 return list;
             CommonLexer.Scanner Lexer = new CommonLexer.Scanner();
             Lexer.SetSource(str, 0);
             while (Lexer.yylex() != (int)CommonLexer.Tokens.EOF)
-                list.Add(Lexer.yytext); ;
+                list.Add(Lexer.yytext);
             return list;
         }
         /// <summary>

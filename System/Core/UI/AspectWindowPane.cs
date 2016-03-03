@@ -36,7 +36,7 @@ namespace AspectCore
                 KeyboardShortcutHelper.control = this;
                 InitializeComponent();
                 Adapter = new AspectCore.TreeViewAdapter(Manager, tvAspects);
-                fmSelectPoint = new FmSelectPoint(ide, treeManager, Manager);
+                fmSelectPoint = new FmSelectPoint(ide, treeManager);
 
                 SynchronizeUndoButtons();
 
@@ -263,7 +263,7 @@ namespace AspectCore
 
         private void OpenAspectFile(string fileName)
         {
-            Adapter.ReadAspectFile(fileName);
+            Adapter.ReadAspectFile(fileName, treeManager.Parsers);
             Manager.WorkingDir = Path.GetDirectoryName(fileName);
             CurrentAspectFileName = fileName;
             SynchronizeUndoButtons();
@@ -334,6 +334,8 @@ namespace AspectCore
                 if (tvAspects.SelectedNode == null)
                     return;
                 PointOfInterest pt = Adapter.GetPointByNode(tvAspects.SelectedNode);
+                if ((pt?.Context?.Count ?? 0) == 0)
+                    return;
                 string fileName = Manager.GetFullFilePath(pt.FileName);
                 PointOfInterest Tree = ide.IsDocumentOpen(fileName) ? treeManager.GetTree(fileName, ide.GetDocument(fileName)) : treeManager.GetTree(fileName);
                 TreeSearchResult Search = TreeSearchEngine.FindPointInTree(Tree, pt, treeManager.GetText(fileName));
@@ -388,7 +390,7 @@ namespace AspectCore
                     string fileName = ((string[])(e.Data.GetData(DataFormats.FileDrop)))[0];
                     try
                     {
-                        PointOfInterest subAspect = Manager.DeserializeAspect(fileName);
+                        PointOfInterest subAspect = Manager.DeserializeAspect(fileName, treeManager.Parsers);
                         if (subAspect != null)
                         {
                             Point pt = tvAspects.PointToClient(new Point(e.X, e.Y));
@@ -750,7 +752,7 @@ namespace AspectCore
             {
                 try
                 {
-                    PointOfInterest subAspect = Manager.DeserializeAspect(openFileDialog.FileName);
+                    PointOfInterest subAspect = Manager.DeserializeAspect(openFileDialog.FileName, treeManager.Parsers);
                     if (subAspect == null)
                         return;
                     Adapter.InsertNode(tvAspects.SelectedNode, subAspect);

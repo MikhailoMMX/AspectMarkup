@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbCandidates = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lOldPointInfo = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // lbCandidates
@@ -40,7 +43,7 @@
             this.lbCandidates.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbCandidates.FormattingEnabled = true;
             this.lbCandidates.ItemHeight = 16;
-            this.lbCandidates.Location = new System.Drawing.Point(0, 18);
+            this.lbCandidates.Location = new System.Drawing.Point(0, 34);
             this.lbCandidates.Name = "lbCandidates";
             this.lbCandidates.Size = new System.Drawing.Size(707, 84);
             this.lbCandidates.TabIndex = 0;
@@ -57,11 +60,27 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Тип, имя";
             // 
+            // lOldPointInfo
+            // 
+            this.lOldPointInfo.AutoSize = true;
+            this.lOldPointInfo.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lOldPointInfo.Location = new System.Drawing.Point(0, 18);
+            this.lOldPointInfo.Name = "lOldPointInfo";
+            this.lOldPointInfo.Size = new System.Drawing.Size(72, 16);
+            this.lOldPointInfo.TabIndex = 2;
+            this.lOldPointInfo.Text = "OldPoint";
+            this.toolTip1.SetToolTip(this.lOldPointInfo, "Имя и тип сохраненной точки");
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipTitle = "Имя и тип сохраненной точки";
+            // 
             // FmSelectPoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 102);
+            this.ClientSize = new System.Drawing.Size(707, 118);
+            this.Controls.Add(this.lOldPointInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCandidates);
             this.Name = "FmSelectPoint";
@@ -77,5 +96,7 @@
 
         private System.Windows.Forms.ListBox lbCandidates;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lOldPointInfo;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

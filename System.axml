@@ -1,1735 +1,914 @@
 <?xml version="1.0" encoding="utf-16"?>
-<AspectFile Version="2">
-  <PointOfInterest>
+<AspectFile Version="3">
+  <Node>
     <Items>
-      <PointOfInterest>
-        <Name>LP Генератор</Name>
+      <Node Name="LP Генератор">
         <Items>
-          <PointOfInterest>
-            <Name>Однородные наборы</Name>
+          <Node Name="Предварительные действия">
             <Items>
-              <PointOfInterest>
-                <Name>Класс SubRuleNonTermList</Name>
+              <Node Name="AddPredefinedEntities">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void AddPredefinedEntities()</Text>
+                <OCtx>
+                  <i Type="Method">private void AddPredefinedEntities ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="AddSourceEntitiesToSymbolTable">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void AddSourceEntitiesToSymbolTable(SourceFile source)</Text>
+                <OCtx>
+                  <i Type="Method">private void AddSourceEntitiesToSymbolTable ( SourceFile source )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Проверки">
+            <Items>
+              <Node Name="CheckExistenceOfUsedNames">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void CheckExistenceOfUsedNames()</Text>
+                <OCtx>
+                  <i Type="Method">private void CheckExistenceOfUsedNames ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="CheckList">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void CheckList(List&lt;SubRulePart&gt; list, LexLocation location)</Text>
+                <OCtx>
+                  <i Type="Method">private void CheckList ( List &lt; SubRulePart &gt; list , LexLocation location )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="CheckList">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void CheckList(List&lt;string&gt; list, LexLocation location)</Text>
+                <OCtx>
+                  <i Type="Method">private void CheckList ( List &lt; string &gt; list , LexLocation location )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="CheckOrAddPredefinedName">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void CheckOrAddPredefinedName(string name, LexLocation location)</Text>
+                <OCtx>
+                  <i Type="Method">private void CheckOrAddPredefinedName ( string name , LexLocation location )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Упрощения">
+            <Items>
+              <Node Name="SimplifyTokenOnlyRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void SimplifyTokenOnlyRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void SimplifyTokenOnlyRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="MarkRulesWithoutNode">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void MarkRulesWithoutNode()</Text>
+                <OCtx>
+                  <i Type="Method">private void MarkRulesWithoutNode ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="MarkUnnamedRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void MarkUnnamedRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void MarkUnnamedRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Однородные наборы">
+            <Items>
+              <Node Name="Класс SubRuleNonTermList">
                 <FileName>\system\parsergenerator\classes.cs</FileName>
                 <Note>Унаследованное от базового класса поле Name хранит имя нетерминала, описывающего подузлы.
 Дополнительно вводятся поля для хранения разделителя и возможности удаления последнего подузла.</Note>
                 <Text>public class SubRuleNonTermList : SubRulePart</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>SubRuleNonTermList</string>
-                    <string>:</string>
-                    <string>SubRulePart</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>ParserGenerator</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">public class SubRuleNonTermList : SubRulePart</i>
+                  <i Type="">namespace ParserGenerator</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>Separator</Name>
+                  <Node Name="Separator">
                     <FileName>\System\parsergenerator\Classes.cs</FileName>
                     <Note>Хранит строковое представление разделителя между элементами однородного набора.
 Если строка пустая - разделитель не используется.</Note>
                     <Text>public string Separator;</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>string</string>
-                        <string>Separator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>SubRuleNonTermList</string>
-                        <string>:</string>
-                        <string>SubRulePart</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>CanBeEmpty</Name>
+                    <OCtx>
+                      <i Type="">public string Separator</i>
+                      <i Type="">public class SubRuleNonTermList : SubRulePart</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="CanBeEmpty">
                     <FileName>\System\ParserGenerator\Classes.cs</FileName>
                     <Note>True означает, что узел может содержать 0 подузлов, а значит удалять последний подузел можно.
 False - узел должен содержать хотя бы один подузел.</Note>
                     <Text>public bool CanBeEmpty;</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Грамматика</Name>
+              </Node>
+              <Node Name="Грамматика">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Ветка грамматики</Name>
+                  <Node Name="Ветка грамматики">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Text>| 	UseNameValue tkList tkRoundOpen ExceptList tkRoundClose Repetition</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>UseNameValue</string>
-                        <string>tkList</string>
-                        <string>tkRoundOpen</string>
-                        <string>TokenCommaList</string>
-                        <string>tkRoundClose</string>
-                        <string>Repetition</string>
-                        <string>Action</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>SubRuleToken</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Section2</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Program</string>
-                      </OuterContextItem>
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Лексема tkList</Name>
+                    <OCtx>
+                      <i Type="">UseNameValue tkList tkRoundOpen TokenCommaList tkRoundClose Repetition Action</i>
+                      <i Type="">SubRuleToken</i>
+                      <i Type="">Section2</i>
+                      <i Type="">Program</i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Лексема tkList">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Note>1 секция, объявление лексемы tkList.
 После изменения парсера может потеряться</Note>
                     <Text>%token &lt;sVal&gt; Token RegExp tkList</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>%</string>
-                        <string>token</string>
-                        <string>&lt;</string>
-                        <string>sVal</string>
-                        <string>&gt;</string>
-                        <string>Token</string>
-                        <string>RegExp</string>
-                        <string>tkList</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Section1</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Program</string>
-                      </OuterContextItem>
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>TokenCommaList</Name>
+                    <OCtx>
+                      <i Type="">% token &lt; sVal &gt; Token RegExp tkList</i>
+                      <i Type="">Section1</i>
+                      <i Type="">Program</i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="TokenCommaList">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Text>TokenCommaList</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>TokenCommaList</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Section2</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>Program</string>
-                      </OuterContextItem>
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">TokenCommaList</i>
+                      <i Type="">Section2</i>
+                      <i Type="">Program</i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Класс UniformSetInfo</Name>
+              </Node>
+              <Node Name="Класс UniformSetInfo">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Содержит описание подузлов в данном узле, которые относятся к однородному набору</Note>
                 <Text>public class UniformSetInfo</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>UniformSetInfo</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Класс SourceEntityUniformSet</Name>
+                <OCtx>
+                  <i Type="">public class UniformSetInfo</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Класс SourceEntityUniformSet">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Используется для хранения списка узлов, построенных по конструкции List. После добавления к родительскому узлу информация о нем переносится в поле UniformSet родительского узла, список узлов добавляется к родительскому узлу.</Note>
                 <Text>public class SourceEntityUniformSet:SourceEntity</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>SourceEntityUniformSet</string>
-                    <string>:</string>
-                    <string>SourceEntity</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Константы</Name>
+                <OCtx>
+                  <i Type="">public class SourceEntityUniformSet : SourceEntity</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Константы">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Имя лексемы tkList0</Name>
+                  <Node Name="Имя лексемы tkList0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkList0 = "List0";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>tkList0</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
+                    <OCtx>
+                      <i Type="">public static string tkList0 =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
                     <Items>
-                      <PointOfInterest>
-                        <Name>Добавление к ключевым словам</Name>
+                      <Node Name="Добавление к ключевым словам">
                         <FileName>\System\ParserGenerator\ParserGenPart.cs</FileName>
                         <Text>keywords.Add(StringConstants.tkList0, (int)Tokens.tkList);</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>static</string>
-                            <string>Keywords</string>
-                            <string>(</string>
-                            <string>)</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>Keywords</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>sealed</string>
-                            <string>partial</string>
-                            <string>class</string>
-                            <string>Scanner</string>
-                            <string>:</string>
-                            <string>ScanBase</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>ParserGenerator</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <Items />
-                      </PointOfInterest>
+                        <OCtx>
+                          <i Type="">static Keywords ( )</i>
+                          <i Type="">public static class Keywords</i>
+                          <i Type="">public sealed partial class Scanner : ScanBase</i>
+                          <i Type="">namespace ParserGenerator</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                      </Node>
                     </Items>
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Имя лексемы tkList1</Name>
+                  </Node>
+                  <Node Name="Имя лексемы tkList1">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkList1 = "List1";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>tkList1</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
+                    <OCtx>
+                      <i Type="">public static string tkList1 =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
                     <Items>
-                      <PointOfInterest>
-                        <Name>Добавление к ключевым словам</Name>
+                      <Node Name="Добавление к ключевым словам">
                         <FileName>\System\ParserGenerator\ParserGenPart.cs</FileName>
                         <Text>keywords.Add(StringConstants.tkList1, (int)Tokens.tkList);</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>static</string>
-                            <string>Keywords</string>
-                            <string>(</string>
-                            <string>)</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>Keywords</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>sealed</string>
-                            <string>partial</string>
-                            <string>class</string>
-                            <string>Scanner</string>
-                            <string>:</string>
-                            <string>ScanBase</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>ParserGenerator</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <Items />
-                      </PointOfInterest>
+                        <OCtx>
+                          <i Type="">static Keywords ( )</i>
+                          <i Type="">public static class Keywords</i>
+                          <i Type="">public sealed partial class Scanner : ScanBase</i>
+                          <i Type="">namespace ParserGenerator</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                      </Node>
                     </Items>
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Имя класса SourceEntityUniformSetClassName</Name>
+                  </Node>
+                  <Node Name="Имя класса SourceEntityUniformSetClassName">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Note>Имя класса, использующегося для хранения узлов, построенных по конструкции List</Note>
                     <Text>public static string SourceEntityUniformSetClassName = "SourceEntityUniformSet";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>SourceEntityUniformSetClassName</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Ошибка - недопустимо несколько вхождений List</Name>
+                    <OCtx>
+                      <i Type="">public static string SourceEntityUniformSetClassName =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Ошибка - недопустимо несколько вхождений List">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string MultipleListsNotAllowed = "Несколько вхождений List в одном правиле недопустимо";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>MultipleListsNotAllowed</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>ErrorMessages</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Ошибка - недопустимо повторение списка</Name>
+                    <OCtx>
+                      <i Type="">public static string MultipleListsNotAllowed =</i>
+                      <i Type="">public class ErrorMessages</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Ошибка - недопустимо повторение списка">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string RepetitionAfterListNotAllowed = "Символ повторения после List недопустим";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>RepetitionAfterListNotAllowed</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>ErrorMessages</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Суффикс имени для нового правила</Name>
+                    <OCtx>
+                      <i Type="">public static string RepetitionAfterListNotAllowed =</i>
+                      <i Type="">public class ErrorMessages</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Суффикс имени для нового правила">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkUniformSetSuffix = "_set";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>tkUniformSetSuffix</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Действие для первой ветки правила</Name>
+                    <OCtx>
+                      <i Type="">public static string tkUniformSetSuffix =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Действие для первой ветки правила">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string YActionForSet1 =</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>YActionForSet1</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Действие для второй ветки правила</Name>
+                    <OCtx>
+                      <i Type="">public static string YActionForSet1 =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Действие для второй ветки правила">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string YActionForSet2 =</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>YActionForSet2</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>StringConstants</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Ошибка - неправильный первый параметр List</Name>
+                    <OCtx>
+                      <i Type="">public static string YActionForSet2 =</i>
+                      <i Type="">class StringConstants</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Ошибка - неправильный первый параметр List">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string WrongFirstParamInList = "В правиле {0} первым параметром в List должно быть имя правила";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>WrongFirstParamInList</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>ErrorMessages</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Ошибка - неправильный второй параметр List</Name>
+                    <OCtx>
+                      <i Type="">public static string WrongFirstParamInList =</i>
+                      <i Type="">public class ErrorMessages</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Ошибка - неправильный второй параметр List">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string WrongSecondParamInList = "В правиле {0} вторым параметром в List должна быть строка или имя лексемы";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>static</string>
-                        <string>string</string>
-                        <string>WrongSecondParamInList</string>
-                        <string>=</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>ErrorMessages</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">public static string WrongSecondParamInList =</i>
+                      <i Type="">public class ErrorMessages</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Метод обработки</Name>
+              </Node>
+              <Node Name="Метод обработки">
                 <FileName>\System\ParserGenerator\Engine.cs</FileName>
                 <Text>private void ReplaceUniformListsWithRules()</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>private</string>
-                    <string>void</string>
-                    <string>ReplaceUniformListsWithRules</string>
-                    <string>(</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>Engine</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>ParserGenerator</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">private void ReplaceUniformListsWithRules ( )</i>
+                  <i Type="">public class Engine</i>
+                  <i Type="">namespace ParserGenerator</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>Основная часть во вспомогательном методе</Name>
+                  <Node Name="Основная часть во вспомогательном методе">
                     <FileName>\system\parsergenerator\engine.cs</FileName>
                     <Text>private void ReplaceUniformListsWithRules(List&lt;SubRulePart&gt; branch, string Name, LexLocation Loc)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>ReplaceUniformListsWithRules</string>
-                        <string>(</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>SubRulePart</string>
-                        <string>&gt;</string>
-                        <string>branch</string>
-                        <string>,</string>
-                        <string>string</string>
-                        <string>RuleName</string>
-                        <string>,</string>
-                        <string>LexLocation</string>
-                        <string>Location</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>Engine</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Вызов в самом главном методе</Name>
+                    <OCtx>
+                      <i Type="">private void ReplaceUniformListsWithRules ( List &lt; SubRulePart &gt; branch , string RuleName , LexLocation Location )</i>
+                      <i Type="">public class Engine</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Вызов в самом главном методе">
                     <FileName>\System\ParserGenerator\Engine.cs</FileName>
                     <Text>ReplaceUniformListsWithRules();</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>SymbolTable</string>
-                        <string>ParseSourceFile</string>
-                        <string>(</string>
-                        <string>SourceFile</string>
-                        <string>source</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>Engine</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">public SymbolTable ParseSourceFile ( SourceFile source )</i>
+                      <i Type="">public class Engine</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Дополнительные изменения</Name>
+              </Node>
+              <Node Name="Дополнительные изменения">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Генерация Union</Name>
+                  <Node Name="Генерация Union">
                     <FileName>\System\ParserGenerator\Generator.cs</FileName>
                     <Text>sbUnion.AppendFormat(StringConstants.YUnionEntry, StringConstants.SourceEntityUniformSetClassName);</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>GenerateYACCFile</string>
-                        <string>(</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>Generator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Генерация типов</Name>
+                    <OCtx>
+                      <i Type="">private void GenerateYACCFile ( )</i>
+                      <i Type="">class Generator</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Генерация типов">
                     <FileName>\System\ParserGenerator\Generator.cs</FileName>
                     <Text>sb.AppendFormat(StringConstants.YType, rd.Value.Type, rd.Key);</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>string</string>
-                        <string>GenerateYTokensAndTypes</string>
-                        <string>(</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>class</string>
-                        <string>Generator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>ParserGenerator</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">private string GenerateYTokensAndTypes ( )</i>
+                      <i Type="">class Generator</i>
+                      <i Type="">namespace ParserGenerator</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
+              </Node>
             </Items>
-          </PointOfInterest>
-        </Items>
-      </PointOfInterest>
-      <PointOfInterest>
-        <Name>Ядро</Name>
-        <Items>
-          <PointOfInterest>
-            <Name>Доделать</Name>
+          </Node>
+          <Node Name="Лексемы">
             <Items>
-              <PointOfInterest>
-                <Name>Сохранение при закрытии</Name>
+              <Node Name="DeclareInlinedTokens">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void DeclareInlinedTokens()</Text>
+                <OCtx>
+                  <i Type="Method">private void DeclareInlinedTokens ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="InlineTokensInUnnamedSkips">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void InlineTokensInUnnamedSkips()</Text>
+                <OCtx>
+                  <i Type="Method">private void InlineTokensInUnnamedSkips ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Нетерминал ANY">
+            <Items>
+              <Node Name="ConvertANYToRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void ConvertANYToRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void ConvertANYToRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Правила">
+            <Items>
+              <Node Name="ConvertComplexSubruleParts">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void ConvertComplexSubruleParts()</Text>
+                <OCtx>
+                  <i Type="Method">private void ConvertComplexSubruleParts ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="ExpandRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void ExpandRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void ExpandRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Действия в правилах">
+            <Items>
+              <Node Name="AddActionsToRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void AddActionsToRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void AddActionsToRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="GeneratePredefinedRules">
+                <FileName>\system\parsergenerator\engine.cs</FileName>
+                <Text>private void GeneratePredefinedRules()</Text>
+                <OCtx>
+                  <i Type="Method">private void GeneratePredefinedRules ( )</i>
+                  <i Type="ClassOrNamespace">public class Engine</i>
+                  <i Type="ClassOrNamespace">namespace ParserGenerator</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Ошибка: EscapeSymbol не один">
+            <FileName>\Parsers\LWParserCS2\ParserDescriptor.lp</FileName>
+            <Note>Не только апостроф, но и обратный слэш, который может экранировать апостроф</Note>
+            <OCtx>
+              <i Type="dSkip">Skip BeginEnd "'" EscapeSymbol "'"</i>
+              <i Type="LP_TreeNode">
+              </i>
+            </OCtx>
+          </Node>
+        </Items>
+      </Node>
+      <Node Name="Ядро">
+        <Items>
+          <Node Name="Доделать">
+            <Items>
+              <Node Name="Сохранение при закрытии">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>Если файл еще не был сохранен - он потеряется при текущем условии
 Нужно реагировать на закрытие, приостанавливать процесс и показывать диалог.</Note>
                 <Text>public void SaveAspectFile()</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>void</string>
-                    <string>SaveAspectFile</string>
-                    <string>(</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>AspectWindowPane</string>
-                    <string>:</string>
-                    <string>UserControl</string>
-                    <string>,</string>
-                    <string>IAspectWindow</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>FIXME: ошибка при сохранении</Name>
+                <OCtx>
+                  <i Type="">public void SaveAspectFile ( )</i>
+                  <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="FIXME: ошибка при сохранении">
                 <FileName>\system\core\aspectmanager.cs</FileName>
                 <Note>Если дерево аспектов ни разу не сохранялось, не было открыто из файла, но к нему были добавлены узлы (например, импортом) - при сохранении может быть ошибка вида "невозможно получить доступ к файлу "C:\.axm"".</Note>
                 <Text>public void SerializeAspect(PointOfInterest subAspect, string FileName, bool Force = false)</Text>
-                <OuterContext>
-                  <OuterContextItem Type="Method">
-                    <string>public</string>
-                    <string>void</string>
-                    <string>SerializeAspect</string>
-                    <string>(</string>
-                    <string>PointOfInterest</string>
-                    <string>subAspect</string>
-                    <string>,</string>
-                    <string>string</string>
-                    <string>FileName</string>
-                    <string>,</string>
-                    <string>bool</string>
-                    <string>Force</string>
-                    <string>=</string>
-                    <string>false</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>AspectManager</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="CS_TreeNode" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>FIXME: пути к файлам при импорте/экспорте</Name>
+                <OCtx>
+                  <i Type="Method">public void SerializeAspect ( PointOfInterest subAspect , string FileName , bool Force = false )</i>
+                  <i Type="ClassOrNamespace">public class AspectManager</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="FIXME: пути к файлам при импорте/экспорте">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>При экспорте сохраняются относительные пути.
 Если после этого импортировать файл в другом месте или в пустом файле (когда не инициализирована переменная текущего пути к аспектному файлу), то возникают ошибки.</Note>
-                <OuterContext>
-                  <OuterContextItem Type="Method">
-                    <string>private</string>
-                    <string>void</string>
-                    <string>ExportToolStripMenuItem_Click</string>
-                    <string>(</string>
-                    <string>object</string>
-                    <string>sender</string>
-                    <string>,</string>
-                    <string>EventArgs</string>
-                    <string>e</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>AspectWindowPane</string>
-                    <string>:</string>
-                    <string>UserControl</string>
-                    <string>,</string>
-                    <string>IAspectWindow</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="CS_TreeNode" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Разрешить привязку к пустой строке</Name>
+                <OCtx>
+                  <i Type="Method">private void ExportToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                  <i Type="ClassOrNamespace">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Разрешить привязку к пустой строке">
                 <FileName>\system\core\helpers\editpointhelper.cs</FileName>
-                <Note>Если строка пустая - из диалога добавления новой точки убрать возможность привязки к узлу+строке</Note>
+                <Note>Убрать возможность привязки к узлу+строке если курсор находится в пустой строке</Note>
                 <Text>if (ide.GetCurrentDocumentFileName() == "")</Text>
-                <OuterContext>
-                  <OuterContextItem Type="Method">
-                    <string>public</string>
-                    <string>static</string>
-                    <string>void</string>
-                    <string>AddPoint</string>
-                    <string>(</string>
-                    <string>IDEInterop</string>
-                    <string>ide</string>
-                    <string>,</string>
-                    <string>TreeManager</string>
-                    <string>treeManager</string>
-                    <string>,</string>
-                    <string>AspectManager</string>
-                    <string>Manager</string>
-                    <string>,</string>
-                    <string>TreeViewAdapter</string>
-                    <string>Adapter</string>
-                    <string>,</string>
-                    <string>TreeNode</string>
-                    <string>NewParent</string>
-                    <string>,</string>
-                    <string>Action</string>
-                    <string>Callback</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>EditPointHelper</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="ClassOrNamespace">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                    <string>.</string>
-                    <string>Helpers</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="CS_TreeNode" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
+                <OCtx>
+                  <i Type="Method">public static void AddPoint ( IDEInterop ide , TreeManager treeManager , AspectManager Manager , TreeViewAdapter Adapter , TreeNode NewParent , Action Callback )</i>
+                  <i Type="ClassOrNamespace">public class EditPointHelper</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore . Helpers</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
             </Items>
-          </PointOfInterest>
-          <PointOfInterest>
-            <Name>Интерфейсное</Name>
+          </Node>
+          <Node Name="Интерфейсное">
             <Items>
-              <PointOfInterest>
-                <Name>Перенос привязки в другой файл</Name>
+              <Node Name="Перенос привязки в другой файл">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Text>private void изменитьФайлToolStripMenuItem_Click(object sender, EventArgs e)</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>private</string>
-                    <string>void</string>
-                    <string>изменитьФайлToolStripMenuItem_Click</string>
-                    <string>(</string>
-                    <string>object</string>
-                    <string>sender</string>
-                    <string>,</string>
-                    <string>EventArgs</string>
-                    <string>e</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>AspectWindowPane</string>
-                    <string>:</string>
-                    <string>UserControl</string>
-                    <string>,</string>
-                    <string>IAspectWindow</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">private void изменитьФайлToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                  <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>Шаблон маски диалога</Name>
+                  <Node Name="Шаблон маски диалога">
                     <FileName>\system\core\strings.cs</FileName>
                     <Text>public static string OFDChangeFileMask = "{0}-файл|*.{0}|Все файлы|*.*";</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>Strings</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">public class Strings</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Добавление узла в правильное место</Name>
+              </Node>
+              <Node Name="Добавление узла в правильное место">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Text>if (tvAspects.SelectedNode != null &amp;&amp; Adapter.GetPointByNode(tvAspects.SelectedNode).Context)</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>private</string>
-                    <string>void</string>
-                    <string>tsbAddPoint_Click</string>
-                    <string>(</string>
-                    <string>object</string>
-                    <string>sender</string>
-                    <string>,</string>
-                    <string>EventArgs</string>
-                    <string>e</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>AspectWindowPane</string>
-                    <string>:</string>
-                    <string>UserControl</string>
-                    <string>,</string>
-                    <string>IAspectWindow</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">private void tsbAddPoint_Click ( object sender , EventArgs e )</i>
+                  <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>И папок</Name>
+                  <Node Name="И папок">
                     <FileName>\System\Core\UI\AspectWindowPane.cs</FileName>
                     <Text>private void tsbAddFolder_Click(object sender, EventArgs e)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>tsbAddFolder_Click</string>
-                        <string>(</string>
-                        <string>object</string>
-                        <string>sender</string>
-                        <string>,</string>
-                        <string>EventArgs</string>
-                        <string>e</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>partial</string>
-                        <string>class</string>
-                        <string>AspectWindowPane</string>
-                        <string>:</string>
-                        <string>UserControl</string>
-                        <string>,</string>
-                        <string>IAspectWindow</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">private void tsbAddFolder_Click ( object sender , EventArgs e )</i>
+                      <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Импорт/Экспорт</Name>
+              </Node>
+              <Node Name="Импорт/Экспорт">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Экспорт (сериализация)</Name>
+                  <Node Name="Экспорт (сериализация)">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Text>public void SerializeAspect(PointOfInterest subAspect, string FileName, bool Force = false)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>void</string>
-                        <string>SerializeAspect</string>
-                        <string>(</string>
-                        <string>PointOfInterest</string>
-                        <string>subAspect</string>
-                        <string>,</string>
-                        <string>string</string>
-                        <string>FileName</string>
-                        <string>,</string>
-                        <string>bool</string>
-                        <string>Force</string>
-                        <string>=</string>
-                        <string>false</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>AspectManager</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Десериализация (Импорт)</Name>
+                    <OCtx>
+                      <i Type="">public void SerializeAspect ( PointOfInterest subAspect , string FileName , bool Force = false )</i>
+                      <i Type="">public class AspectManager</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Десериализация (Импорт)">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Text>public PointOfInterest DeserializeAspect(string FileName)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>PointOfInterest</string>
-                        <string>DeserializeAspect</string>
-                        <string>(</string>
-                        <string>string</string>
-                        <string>FileName</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>AspectManager</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Вызов экспорта</Name>
+                    <OCtx>
+                      <i Type="">public PointOfInterest DeserializeAspect ( string FileName )</i>
+                      <i Type="">public class AspectManager</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Вызов экспорта">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void ExportToolStripMenuItem_Click(object sender, EventArgs e)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>ExportToolStripMenuItem_Click</string>
-                        <string>(</string>
-                        <string>object</string>
-                        <string>sender</string>
-                        <string>,</string>
-                        <string>EventArgs</string>
-                        <string>e</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>partial</string>
-                        <string>class</string>
-                        <string>AspectWindowPane</string>
-                        <string>:</string>
-                        <string>UserControl</string>
-                        <string>,</string>
-                        <string>IAspectWindow</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Вызов импорта</Name>
+                    <OCtx>
+                      <i Type="">private void ExportToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                      <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Вызов импорта">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void ImportToolStripMenuItem_Click(object sender, EventArgs e)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>ImportToolStripMenuItem_Click</string>
-                        <string>(</string>
-                        <string>object</string>
-                        <string>sender</string>
-                        <string>,</string>
-                        <string>EventArgs</string>
-                        <string>e</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>partial</string>
-                        <string>class</string>
-                        <string>AspectWindowPane</string>
-                        <string>:</string>
-                        <string>UserControl</string>
-                        <string>,</string>
-                        <string>IAspectWindow</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Разрешаем перетаскивать файлы</Name>
+                    <OCtx>
+                      <i Type="">private void ImportToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                      <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Разрешаем перетаскивать файлы">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void tvAspects_DragEnter(object sender, DragEventArgs e)</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>tvAspects_DragEnter</string>
-                        <string>(</string>
-                        <string>object</string>
-                        <string>sender</string>
-                        <string>,</string>
-                        <string>DragEventArgs</string>
-                        <string>e</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>partial</string>
-                        <string>class</string>
-                        <string>AspectWindowPane</string>
-                        <string>:</string>
-                        <string>UserControl</string>
-                        <string>,</string>
-                        <string>IAspectWindow</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Обработка перетаскивания</Name>
+                    <OCtx>
+                      <i Type="">private void tvAspects_DragEnter ( object sender , DragEventArgs e )</i>
+                      <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Обработка перетаскивания">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>else if (e.Data.GetDataPresent(DataFormats.FileDrop))</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>void</string>
-                        <string>tvAspects_DragDrop</string>
-                        <string>(</string>
-                        <string>object</string>
-                        <string>sender</string>
-                        <string>,</string>
-                        <string>DragEventArgs</string>
-                        <string>e</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>partial</string>
-                        <string>class</string>
-                        <string>AspectWindowPane</string>
-                        <string>:</string>
-                        <string>UserControl</string>
-                        <string>,</string>
-                        <string>IAspectWindow</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">private void tvAspects_DragDrop ( object sender , DragEventArgs e )</i>
+                      <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
+              </Node>
+              <Node Name="Отображение процента сходства">
+                <FileName>\system\core\ui\fmselectpoint.cs</FileName>
+                <Text>lbCandidates.Items.Add(string.Format(Pattern, ((float)node.TotalMatch/TreeSearchOptions.Equility).ToString("F2"), node.TreeNode.Context[0].Type, string.Join(" ",node.TreeNode.Context[0].Name)));</Text>
+                <OCtx>
+                  <i Type="Method">private void BuildList ( )</i>
+                  <i Type="ClassOrNamespace">public partial class FmSelectPoint : Form</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore . UI</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
             </Items>
-          </PointOfInterest>
-          <PointOfInterest>
-            <Name>Внутренний контекст и привязка к промежуточным узлам</Name>
+          </Node>
+          <Node Name="Внутренний контекст и привязка к промежуточным узлам">
             <Items>
-              <PointOfInterest>
-                <Name>Поле в PointOfInterest</Name>
+              <Node Name="Поле в PointOfInterest">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Убедиться, что сохраняется и читается</Note>
                 <Text>public List&lt;InnerContextNode&gt; InnerContext;</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>List</string>
-                    <string>&lt;</string>
-                    <string>InnerContextNode</string>
-                    <string>&gt;</string>
-                    <string>InnerContext</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>[</string>
-                    <string>Serializable</string>
-                    <string>]</string>
-                    <string>public</string>
-                    <string>class</string>
-                    <string>PointOfInterest</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">public List &lt; InnerContextNode &gt; InnerContext</i>
+                  <i Type="">[ Serializable ] public class PointOfInterest</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>Тип поля - InnerContextNode</Name>
+                  <Node Name="Тип поля - InnerContextNode">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>public class InnerContextNode</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>[</string>
-                        <string>Serializable</string>
-                        <string>]</string>
-                        <string>public</string>
-                        <string>class</string>
-                        <string>InnerContextNode</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>Name</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>InnerContextNode</string>
-                        <string>&gt;</string>
-                        <string>SubNodes</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>[</string>
-                        <string>XmlIgnore</string>
-                        <string>]</string>
-                        <string>public</string>
-                        <string>bool</string>
-                        <string>SubNodesSpecified</string>
-                      </InnerContextItem>
-                    </InnerContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Заполнение поля</Name>
+                    <OCtx>
+                      <i Type="">[ Serializable ] public class InnerContextNode</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">public List &lt; string &gt; Name</i>
+                      <i Type="">public List &lt; InnerContextNode &gt; SubNodes</i>
+                      <i Type="">[ XmlIgnore ] public bool SubNodesSpecified</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="Заполнение поля">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>public void ApplyInnerContext()</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>void</string>
-                        <string>ApplyInnerContext</string>
-                        <string>(</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>[</string>
-                        <string>Serializable</string>
-                        <string>]</string>
-                        <string>public</string>
-                        <string>class</string>
-                        <string>PointOfInterest</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Выбор структуры поля</Name>
+                    <OCtx>
+                      <i Type="">public void ApplyInnerContext ( )</i>
+                      <i Type="">[ Serializable ] public class PointOfInterest</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Выбор структуры поля">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>//Вариант</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>private</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>InnerContextNode</string>
-                        <string>&gt;</string>
-                        <string>GetInnerContext</string>
-                        <string>(</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>PointOfInterest</string>
-                        <string>&gt;</string>
-                        <string>Points</string>
-                        <string>)</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>[</string>
-                        <string>Serializable</string>
-                        <string>]</string>
-                        <string>public</string>
-                        <string>class</string>
-                        <string>PointOfInterest</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">private List &lt; InnerContextNode &gt; GetInnerContext ( List &lt; PointOfInterest &gt; Points )</i>
+                      <i Type="">[ Serializable ] public class PointOfInterest</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Учет контекста при поиске</Name>
+              </Node>
+              <Node Name="Учет контекста при поиске">
                 <FileName>\system\core\treesearchengine.cs</FileName>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>private</string>
-                    <string>static</string>
-                    <string>void</string>
-                    <string>ProcessInnerContext</string>
-                    <string>(</string>
-                    <string>TreeSearchResult</string>
-                    <string>Result</string>
-                    <string>,</string>
-                    <string>PointOfInterest</string>
-                    <string>Point</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>TreeSearchEngine</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Включение привязки в интерфейсе</Name>
+                <OCtx>
+                  <i Type="">private static void ProcessInnerContext ( TreeSearchResult Result , PointOfInterest Point )</i>
+                  <i Type="">public class TreeSearchEngine</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Включение привязки в интерфейсе">
                 <FileName>\System\Core\UI\FmAddPoint.cs</FileName>
                 <Note>Проверка уникальности узла. Если узел не уникален - внутренний контекст запоминается</Note>
                 <Text>public partial class fmAddPoint : Form</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>fmAddPoint</string>
-                    <string>:</string>
-                    <string>Form</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Структура дерева в парсере Паскаля</Name>
+                <OCtx>
+                  <i Type="">public partial class fmAddPoint : Form</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Структура дерева в парсере Паскаля">
                 <FileName>\Parsers\LWParserPascal\ParserDescriptor.lp</FileName>
                 <Note>Готово</Note>
                 <Text>Rule Defs :				[@tkDefs|@"type"] List1(FieldOrClass)</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>Defs</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Доделать: поиск с учетом промежуточных узлов</Name>
+                <OCtx>
+                  <i Type="">Defs</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Доделать: поиск с учетом промежуточных узлов">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>Поиск узла в дереве аспектов должен учитывать привязку не только к листу дерева разбора, но и к промежуточным узлам.</Note>
                 <Text>PointOfInterest pt = EditPointHelper.FindPointUnderCursor(ide, treeManager);</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>private</string>
-                    <string>void</string>
-                    <string>tsbFindNode_Click</string>
-                    <string>(</string>
-                    <string>object</string>
-                    <string>sender</string>
-                    <string>,</string>
-                    <string>EventArgs</string>
-                    <string>e</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>partial</string>
-                    <string>class</string>
-                    <string>AspectWindowPane</string>
-                    <string>:</string>
-                    <string>UserControl</string>
-                    <string>,</string>
-                    <string>IAspectWindow</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
-                <Items />
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Ограничение на внутренний контекст</Name>
+                <OCtx>
+                  <i Type="">private void tsbFindNode_Click ( object sender , EventArgs e )</i>
+                  <i Type="">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Ограничение на внутренний контекст">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Пока - линейный список из не более чем 10 элементов.</Note>
                 <Text>public void ApplyInnerContext()</Text>
-                <OuterContext>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>void</string>
-                    <string>ApplyInnerContext</string>
-                    <string>(</string>
-                    <string>)</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>public</string>
-                    <string>class</string>
-                    <string>PointOfInterest</string>
-                    <string>:</string>
-                    <string>ISerializable</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="">
-                    <string>namespace</string>
-                    <string>AspectCore</string>
-                  </OuterContextItem>
-                  <OuterContextItem Type="" />
-                </OuterContext>
+                <OCtx>
+                  <i Type="">public void ApplyInnerContext ( )</i>
+                  <i Type="">public class PointOfInterest : ISerializable</i>
+                  <i Type="">namespace AspectCore</i>
+                  <i Type="">
+                  </i>
+                </OCtx>
                 <Items>
-                  <PointOfInterest>
-                    <Name>Константа MaxInnerContectCount</Name>
+                  <Node Name="Константа MaxInnerContectCount">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Text>public const int MaxInnerContectCount = 10;</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>MaxInnerContectCount</string>
-                        <string>=</string>
-                        <string>10</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>internal</string>
-                        <string>static</string>
-                        <string>class</string>
-                        <string>TreeSearchOptions</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">public const int MaxInnerContectCount = 10</i>
+                      <i Type="">internal static class TreeSearchOptions</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
+              </Node>
             </Items>
-          </PointOfInterest>
-          <PointOfInterest>
-            <Name>Поиск</Name>
+          </Node>
+          <Node Name="Поиск">
             <Items>
-              <PointOfInterest>
-                <Name>Движок поиска</Name>
+              <Node Name="Движок поиска">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Главный класс TreeSearchEngine</Name>
+                  <Node Name="Главный класс TreeSearchEngine">
                     <FileName>\system\core\treesearchengine.cs</FileName>
                     <Text>public class TreeSearchEngine</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>TreeSearchEngine</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
+                    <OCtx>
+                      <i Type="">public class TreeSearchEngine</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
                     <Items>
-                      <PointOfInterest>
-                        <Name>Главный метод поиска FindPointInTree</Name>
+                      <Node Name="Главный метод поиска FindPointInTree">
                         <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                         <Text>public TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>TreeSearchResult</string>
-                            <string>FindPointInTree</string>
-                            <string>(</string>
-                            <string>PointOfInterest</string>
-                            <string>TreeRoot</string>
-                            <string>,</string>
-                            <string>PointOfInterest</string>
-                            <string>Point</string>
-                            <string>,</string>
-                            <string>string</string>
-                            <string>SourceText</string>
-                            <string>)</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>public</string>
-                            <string>class</string>
-                            <string>TreeSearchEngine</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>AspectCore</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <Items />
-                      </PointOfInterest>
+                        <OCtx>
+                          <i Type="">public static TreeSearchResult FindPointInTree ( PointOfInterest TreeRoot , PointOfInterest Point , string SourceText )</i>
+                          <i Type="">public class TreeSearchEngine</i>
+                          <i Type="">namespace AspectCore</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                      </Node>
                     </Items>
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Сравнение объектов, класс TreeSearchComparer</Name>
+                  </Node>
+                  <Node Name="Сравнение объектов, класс TreeSearchComparer">
                     <FileName>\system\core\treesearchengine.cs</FileName>
                     <Note>Класс TreeSearchComparer реализует набор методов для четкого и нечеткого сравнения строк, списков строк.</Note>
                     <Text>private static class TreeSearchComparer</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>internal</string>
-                        <string>static</string>
-                        <string>class</string>
-                        <string>TreeSearchComparer</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>bool</string>
-                        <string>ListsEqual</string>
-                        <string>(</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>L1</string>
-                        <string>,</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>L2</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>bool</string>
-                        <string>ListsEqual</string>
-                        <string>(</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>&gt;</string>
-                        <string>L1</string>
-                        <string>,</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>&gt;</string>
-                        <string>L2</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                    </InnerContext>
+                    <OCtx>
+                      <i Type="">internal static class TreeSearchComparer</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">public bool ListsEqual ( List &lt; string &gt; L1 , List &lt; string &gt; L2 )</i>
+                      <i Type="">public bool ListsEqual ( List &lt; List &lt; string &gt; &gt; L1 , List &lt; List &lt; string &gt; &gt; L2 )</i>
+                    </ICtx>
                     <Items>
-                      <PointOfInterest>
-                        <Name>Класс LevenshteinSimilarity</Name>
+                      <Node Name="Класс LevenshteinSimilarity">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Реализуем методы, возвращающие степень похожести для строк, имен (списков строк), контекстов (списков списков строк)</Note>
                         <Text>private static class LevenshteinSimilarity</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>private</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>LevenshteinSimilarity</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>internal</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>TreeSearchComparer</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>AspectCore</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <InnerContext>
-                          <InnerContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>readonly</string>
-                            <string>int</string>
-                            <string>Equility</string>
-                            <string>=</string>
-                            <string>1024</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>static</string>
-                            <string>readonly</string>
-                            <string>private</string>
-                            <string>struct</string>
-                            <string>Key</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>static</string>
-                            <string>Dictionary</string>
-                            <string>&lt;</string>
-                            <string>Key</string>
-                            <string>,</string>
-                            <string>int</string>
-                            <string>&gt;</string>
-                            <string>_Similarity</string>
-                            <string>=</string>
-                            <string>new</string>
-                            <string>Dictionary</string>
-                            <string>&lt;</string>
-                            <string>Key</string>
-                            <string>,</string>
-                            <string>int</string>
-                            <string>&gt;</string>
-                            <string>(</string>
-                            <string>)</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>int</string>
-                            <string>GetSimilarity</string>
-                            <string>(</string>
-                            <string>string</string>
-                            <string>S1</string>
-                            <string>,</string>
-                            <string>string</string>
-                            <string>S2</string>
-                            <string>)</string>
-                          </InnerContextItem>
-                        </InnerContext>
-                        <Items />
-                      </PointOfInterest>
-                      <PointOfInterest>
-                        <Name>Класс JaroWinklerSimilarity</Name>
+                        <OCtx>
+                          <i Type="">private static class LevenshteinSimilarity</i>
+                          <i Type="">internal static class TreeSearchComparer</i>
+                          <i Type="">namespace AspectCore</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                        <ICtx>
+                          <i Type="">public static readonly int Equility = 1024</i>
+                          <i Type="">static readonly private struct Key</i>
+                          <i Type="">static Dictionary &lt; Key , int &gt; _Similarity = new Dictionary &lt; Key , int &gt; ( )</i>
+                          <i Type="">public static int GetSimilarity ( string S1 , string S2 )</i>
+                        </ICtx>
+                      </Node>
+                      <Node Name="Класс JaroWinklerSimilarity">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Содержит метод, вычисляющий степень похожести двух строк.</Note>
                         <Text>private static class JaroWinklerSimilarity</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>private</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>JaroWinklerSimilarity</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>internal</string>
-                            <string>static</string>
-                            <string>class</string>
-                            <string>TreeSearchComparer</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>AspectCore</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <InnerContext>
-                          <InnerContextItem Type="">
-                            <string>static</string>
-                            <string>Dictionary</string>
-                            <string>&lt;</string>
-                            <string>StringPairKey</string>
-                            <string>,</string>
-                            <string>int</string>
-                            <string>&gt;</string>
-                            <string>_Similarity</string>
-                            <string>=</string>
-                            <string>new</string>
-                            <string>Dictionary</string>
-                            <string>&lt;</string>
-                            <string>StringPairKey</string>
-                            <string>,</string>
-                            <string>int</string>
-                            <string>&gt;</string>
-                            <string>(</string>
-                            <string>)</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>private</string>
-                            <string>static</string>
-                            <string>readonly</string>
-                            <string>double</string>
-                            <string>mWeightThreshold</string>
-                            <string>=</string>
-                            <string>0</string>
-                            <string>.</string>
-                            <string>7</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>private</string>
-                            <string>static</string>
-                            <string>readonly</string>
-                            <string>int</string>
-                            <string>mNumChars</string>
-                            <string>=</string>
-                            <string>4</string>
-                          </InnerContextItem>
-                          <InnerContextItem Type="">
-                            <string>public</string>
-                            <string>static</string>
-                            <string>int</string>
-                            <string>Similarity</string>
-                            <string>(</string>
-                            <string>string</string>
-                            <string>S1</string>
-                            <string>,</string>
-                            <string>string</string>
-                            <string>S2</string>
-                            <string>)</string>
-                          </InnerContextItem>
-                        </InnerContext>
-                        <Items />
-                      </PointOfInterest>
-                      <PointOfInterest>
-                        <Name>Ключ для словаря</Name>
+                        <OCtx>
+                          <i Type="">private static class JaroWinklerSimilarity</i>
+                          <i Type="">internal static class TreeSearchComparer</i>
+                          <i Type="">namespace AspectCore</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                        <ICtx>
+                          <i Type="">static Dictionary &lt; StringPairKey , int &gt; _Similarity = new Dictionary &lt; StringPairKey , int &gt; ( )</i>
+                          <i Type="">private static readonly double mWeightThreshold = 0 . 7</i>
+                          <i Type="">private static readonly int mNumChars = 4</i>
+                          <i Type="">public static int Similarity ( string S1 , string S2 )</i>
+                        </ICtx>
+                      </Node>
+                      <Node Name="Ключ для словаря">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Так как степень похожести строк вычисляется часто, имеет смысл запоминать результаты вычисления в словаре.
 Данный класс хранит пару строк и используется в качестве ключа для методов вычисления степени похожести пары строк.
@@ -1737,176 +916,51 @@ False - узел должен содержать хотя бы один поду
 
 </Note>
                         <Text>private struct StringPairKey</Text>
-                        <OuterContext>
-                          <OuterContextItem Type="">
-                            <string>private</string>
-                            <string>struct</string>
-                            <string>StringPairKey</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="">
-                            <string>namespace</string>
-                            <string>AspectCore</string>
-                          </OuterContextItem>
-                          <OuterContextItem Type="" />
-                        </OuterContext>
-                        <Items />
-                      </PointOfInterest>
+                        <OCtx>
+                          <i Type="">private struct StringPairKey</i>
+                          <i Type="">namespace AspectCore</i>
+                          <i Type="">
+                          </i>
+                        </OCtx>
+                      </Node>
                     </Items>
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Поиск текстовой строки TextSearch</Name>
+                  </Node>
+                  <Node Name="Поиск текстовой строки TextSearch">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Класс инициализируется текстом текущего файла и содержит метод для нечеткого поиска строки-образца в заданном диапазоне. Возвращает номер наиболее похожей строки и степень ее похожести.</Note>
                     <Text>internal class TextSearch</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>internal</string>
-                        <string>class</string>
-                        <string>TextSearch</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>string</string>
-                        <string>[</string>
-                        <string>]</string>
-                        <string>_lines</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>TextSearch</string>
-                        <string>(</string>
-                        <string>string</string>
-                        <string>Text</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>Pair</string>
-                        <string>&lt;</string>
-                        <string>int</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>&gt;</string>
-                        <string>Similarity</string>
-                        <string>(</string>
-                        <string>QUT</string>
-                        <string>.</string>
-                        <string>Gppg</string>
-                        <string>.</string>
-                        <string>LexLocation</string>
-                        <string>Loc</string>
-                        <string>,</string>
-                        <string>string</string>
-                        <string>pattern</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>TokenizeString</string>
-                        <string>(</string>
-                        <string>string</string>
-                        <string>str</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>string</string>
-                        <string>&gt;</string>
-                        <string>&gt;</string>
-                        <string>TokenizeStrings</string>
-                        <string>(</string>
-                        <string>string</string>
-                        <string>[</string>
-                        <string>]</string>
-                        <string>Array</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>start</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>end</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                    </InnerContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Опции поиска TreeSearchOptions</Name>
+                    <OCtx>
+                      <i Type="">internal class TextSearch</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">string [ ] _lines</i>
+                      <i Type="">public TextSearch ( string Text )</i>
+                      <i Type="">public Pair &lt; int , int &gt; Similarity ( QUT . Gppg . LexLocation Loc , string pattern )</i>
+                      <i Type="">private List &lt; string &gt; TokenizeString ( string str )</i>
+                      <i Type="">private List &lt; List &lt; string &gt; &gt; TokenizeStrings ( string [ ] Array , int start , int end )</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="Опции поиска TreeSearchOptions">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Text>internal static class TreeSearchOptions</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>internal</string>
-                        <string>static</string>
-                        <string>class</string>
-                        <string>TreeSearchOptions</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>CostInsertChar</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>CostRemoveChar</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>CostReplaceChar</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>MaxDistanceToReturn</string>
-                        <string>=</string>
-                        <string>10</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>const</string>
-                        <string>int</string>
-                        <string>MaxDistanceDifference</string>
-                        <string>=</string>
-                        <string>5</string>
-                      </InnerContextItem>
-                    </InnerContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Класс результата TreeSearchResult</Name>
+                    <OCtx>
+                      <i Type="">internal static class TreeSearchOptions</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">public const int CostInsertChar = 1</i>
+                      <i Type="">public const int CostRemoveChar = 1</i>
+                      <i Type="">public const int CostReplaceChar = 1</i>
+                      <i Type="">public const int MaxDistanceToReturn = 10</i>
+                      <i Type="">public const int MaxDistanceDifference = 5</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="Класс результата TreeSearchResult">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Хранит массив элементов результата.
 Умеет сортировать массив в соответствии с заданными весами компонентовм.
@@ -1914,181 +968,315 @@ False - узел должен содержать хотя бы один поду
 
 TODO: отсечение слишком непохожих результатов по заданному порогу</Note>
                     <Text>public class TreeSearchResult</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>public</string>
-                        <string>class</string>
-                        <string>TreeSearchResult</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>readonly</string>
-                        <string>bool</string>
-                        <string>Singular</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>internal</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>TreeSearchResultNode</string>
-                        <string>&gt;</string>
-                        <string>_result</string>
-                        <string>=</string>
-                        <string>new</string>
-                        <string>List</string>
-                        <string>&lt;</string>
-                        <string>TreeSearchResultNode</string>
-                        <string>&gt;</string>
-                        <string>(</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>PointOfInterest</string>
-                        <string>this</string>
-                        <string>[</string>
-                        <string>int</string>
-                        <string>Index</string>
-                        <string>]</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>double</string>
-                        <string>Similarity</string>
-                        <string>(</string>
-                        <string>int</string>
-                        <string>Index</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>int</string>
-                        <string>Count</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>int</string>
-                        <string>_wName</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>int</string>
-                        <string>_wOuterCTX</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>int</string>
-                        <string>_wInnerCTX</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>private</string>
-                        <string>int</string>
-                        <string>_wText</string>
-                        <string>=</string>
-                        <string>1</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>void</string>
-                        <string>Sort</string>
-                        <string>(</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>void</string>
-                        <string>Sort</string>
-                        <string>(</string>
-                        <string>int</string>
-                        <string>NameWeight</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>OuterCtxWeight</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>InnerCtxWeight</string>
-                        <string>,</string>
-                        <string>int</string>
-                        <string>TextWeight</string>
-                        <string>)</string>
-                      </InnerContextItem>
-                    </InnerContext>
-                    <Items />
-                  </PointOfInterest>
-                  <PointOfInterest>
-                    <Name>Элемент результата TreeSearchResultNode</Name>
+                    <OCtx>
+                      <i Type="">public class TreeSearchResult</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">public readonly bool Singular</i>
+                      <i Type="">internal List &lt; TreeSearchResultNode &gt; _result = new List &lt; TreeSearchResultNode &gt; ( )</i>
+                      <i Type="">public PointOfInterest this [ int Index ]</i>
+                      <i Type="">public double Similarity ( int Index )</i>
+                      <i Type="">public int Count</i>
+                      <i Type="">private int _wName = 1</i>
+                      <i Type="">private int _wOuterCTX = 1</i>
+                      <i Type="">private int _wInnerCTX = 1</i>
+                      <i Type="">private int _wText = 1</i>
+                      <i Type="">public void Sort ( )</i>
+                      <i Type="">public void Sort ( int NameWeight , int OuterCtxWeight , int InnerCtxWeight , int TextWeight )</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="Элемент результата TreeSearchResultNode">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Хранит узел дерева и степень похожести его компонентов на искомый узел</Note>
                     <Text>internal class TreeSearchResultNode</Text>
-                    <OuterContext>
-                      <OuterContextItem Type="">
-                        <string>internal</string>
-                        <string>class</string>
-                        <string>TreeSearchResultNode</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="">
-                        <string>namespace</string>
-                        <string>AspectCore</string>
-                      </OuterContextItem>
-                      <OuterContextItem Type="" />
-                    </OuterContext>
-                    <InnerContext>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>PointOfInterest</string>
-                        <string>TreeNode</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>int</string>
-                        <string>NameMatch</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>int</string>
-                        <string>OuterContextMatch</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>int</string>
-                        <string>InnercontextMatch</string>
-                      </InnerContextItem>
-                      <InnerContextItem Type="">
-                        <string>public</string>
-                        <string>int</string>
-                        <string>TextStringMatch</string>
-                      </InnerContextItem>
-                    </InnerContext>
-                    <Items />
-                  </PointOfInterest>
+                    <OCtx>
+                      <i Type="">internal class TreeSearchResultNode</i>
+                      <i Type="">namespace AspectCore</i>
+                      <i Type="">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="">public PointOfInterest TreeNode</i>
+                      <i Type="">public int NameMatch</i>
+                      <i Type="">public int OuterContextMatch</i>
+                      <i Type="">public int InnercontextMatch</i>
+                      <i Type="">public int TextStringMatch</i>
+                    </ICtx>
+                  </Node>
                 </Items>
-              </PointOfInterest>
-              <PointOfInterest>
-                <Name>Доделать</Name>
+              </Node>
+              <Node Name="Доделать">
                 <Items>
-                  <PointOfInterest>
-                    <Name>Протестировать все</Name>
-                    <Items />
-                  </PointOfInterest>
+                  <Node Name="Протестировать все" />
+                  <Node Name="Чувствительность к регистру">
+                    <FileName>\System\Core\TreeSearchEngine.cs</FileName>
+                    <Note>Если исходный язык нечувствительный к регистру - учесть это при сравнении</Note>
+                    <Text>public static int Similarity(string S1, string S2)</Text>
+                    <OCtx>
+                      <i Type="Method">public static int Similarity ( string S1 , string S2 )</i>
+                      <i Type="ClassOrNamespace">private static class LevenshteinSimilarity</i>
+                      <i Type="ClassOrNamespace">internal static class TreeSearchComparer</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <Items>
+                      <Node Name="Добавить в интерфейс парсера информацию о регистре">
+                        <FileName>\System\Core\Classes.cs</FileName>
+                        <Text>public abstract class LightweightParserBase</Text>
+                        <OCtx>
+                          <i Type="ClassOrNamespace">public abstract class LightweightParserBase</i>
+                          <i Type="ClassOrNamespace">namespace AspectCore</i>
+                          <i Type="CS_TreeNode">
+                          </i>
+                        </OCtx>
+                        <ICtx>
+                          <i Type="Method">public abstract SourceEntity Root</i>
+                          <i Type="Method">public abstract List &lt; SourceEntity &gt; Errors</i>
+                          <i Type="Field">public abstract bool Parse ( )</i>
+                          <i Type="Method">public abstract string [ ] LanguageID</i>
+                          <i Type="Method">public virtual void ProcessTree ( )</i>
+                        </ICtx>
+                      </Node>
+                    </Items>
+                  </Node>
                 </Items>
-              </PointOfInterest>
+              </Node>
             </Items>
-          </PointOfInterest>
+          </Node>
+          <Node Name="Парсеры">
+            <Items>
+              <Node Name="Главный классParserWrapper">
+                <FileName>\System\Core\ParserWrapper.cs</FileName>
+                <Text>public class ParserWrapper</Text>
+                <OCtx>
+                  <i Type="ClassOrNamespace">public class ParserWrapper</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+                <ICtx>
+                  <i Type="Field">private static string ScannerClassName =</i>
+                  <i Type="Field">private static string ParserClassName =</i>
+                  <i Type="Field">private Dictionary &lt; string , LightweightParserBase &gt; parsers = new Dictionary &lt; string , LightweightParserBase &gt; ( )</i>
+                  <i Type="Field">private Dictionary &lt; string , ILightWeightScanner &gt; scanners = new Dictionary &lt; string , ILightWeightScanner &gt; ( )</i>
+                  <i Type="Field">private LightweightParserBase DefaultParser</i>
+                  <i Type="Field">private ILightWeightScanner DefaultScanner</i>
+                  <i Type="Field">private List &lt; PointOfInterest &gt; _LastTimeErrors = new List &lt; PointOfInterest &gt; ( )</i>
+                  <i Type="Method">public ParserWrapper ( )</i>
+                  <i Type="Method">public ParserWrapper ( string Path )</i>
+                  <i Type="Method">public void ReloadParsers ( )</i>
+                </ICtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Отмена действий">
+            <Items>
+              <Node Name="Главный класс UndoEngine">
+                <FileName>\System\Core\UndoEngine.cs</FileName>
+                <Text>public class UndoEngine</Text>
+                <OCtx>
+                  <i Type="ClassOrNamespace">public class UndoEngine</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+                <ICtx>
+                  <i Type="Field">private Stack &lt; UndoUnit &gt; UndoStack = new Stack &lt; UndoUnit &gt; ( )</i>
+                  <i Type="Field">private Stack &lt; UndoUnit &gt; RedoStack = new Stack &lt; UndoUnit &gt; ( )</i>
+                  <i Type="Method">private UndoUnit CreateUndoUnit ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
+                  <i Type="Method">public void SavePointState ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
+                  <i Type="Method">private UndoUnit CreateReverseUndoAction ( UndoUnit unit )</i>
+                  <i Type="Method">public UndoUnit Undo ( )</i>
+                  <i Type="Method">public UndoUnit Redo ( )</i>
+                  <i Type="Method">public void Clear ( )</i>
+                  <i Type="Method">public bool HasUndoActions ( )</i>
+                  <i Type="Method">public bool HasRedoActions ( )</i>
+                </ICtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Хранение синтаксических деревьев">
+            <Items>
+              <Node Name="Главный класс TreeManager">
+                <FileName>\System\Core\TreeManager.cs</FileName>
+                <Text>public class TreeManager</Text>
+                <OCtx>
+                  <i Type="ClassOrNamespace">public class TreeManager</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+                <ICtx>
+                  <i Type="Field">ParserWrapper parserWrapper</i>
+                  <i Type="Field">Dictionary &lt; string , PointOfInterest &gt; FilenameToTree = new Dictionary &lt; string , PointOfInterest &gt; ( )</i>
+                  <i Type="Field">Dictionary &lt; string , string &gt; FilenameToText = new Dictionary &lt; string , string &gt; ( )</i>
+                  <i Type="Field">Dictionary &lt; string , DateTime &gt; FilenameToDateTime = new Dictionary &lt; string , DateTime &gt; ( )</i>
+                  <i Type="Field">List &lt; PointOfInterest &gt; _LastTimeErrors</i>
+                  <i Type="Method">public TreeManager ( string ParsersPath = )</i>
+                  <i Type="Method">public ParserWrapper Parsers</i>
+                  <i Type="Method">public List &lt; string &gt; GetParserIDs ( )</i>
+                  <i Type="Method">public int GetParsersCount ( )</i>
+                  <i Type="Method">public List &lt; PointOfInterest &gt; GetLastParseErrors ( )</i>
+                </ICtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Интеграция в IDE">
+            <Items>
+              <Node Name="Интерфейс IDEInterop">
+                <FileName>\System\Core\IDEInterop.cs</FileName>
+                <Text>public class IDEInterop</Text>
+                <OCtx>
+                  <i Type="ClassOrNamespace">public class IDEInterop</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+                <ICtx>
+                  <i Type="Method">public virtual bool IsDocumentOpen ( )</i>
+                  <i Type="Method">public virtual bool IsDocumentOpen ( string FileName )</i>
+                  <i Type="Method">public virtual string GetCurrentTextDocument ( )</i>
+                  <i Type="Method">public virtual string GetCurrentDocumentFileName ( )</i>
+                  <i Type="Method">public virtual string GetDocument ( string FileName )</i>
+                  <i Type="Method">public virtual string GetCurrentLine ( )</i>
+                  <i Type="Method">public virtual string GetLine ( int lineIndex )</i>
+                  <i Type="Method">public virtual LexLocation GetCursorPosition ( )</i>
+                  <i Type="Method">public virtual void NavigateToFileAndPosition ( string file , int line , int col , int lineEnd = 0 , int columnEnd = 0 )</i>
+                  <i Type="Method">public virtual void UpdateSubAspectProperties ( PointOfInterest point , System . Windows . Forms . TreeNode node )</i>
+                </ICtx>
+              </Node>
+            </Items>
+          </Node>
+          <Node Name="Хранение дерева аспектов AXML">
+            <Items>
+              <Node Name="Реализация чтения: по версиям">
+                <Items>
+                  <Node Name="AspectFileReader">
+                    <FileName>\system\core\aspectmanager.cs</FileName>
+                    <Note>Базовый класс</Note>
+                    <Text>internal class AspectFileReader</Text>
+                    <OCtx>
+                      <i Type="ClassOrNamespace">internal class AspectFileReader</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="Method">protected static XmlNode TryFindNode ( XmlNode Node , string Name )</i>
+                      <i Type="Method">protected static string TryFindValue ( XmlNode node , string Name )</i>
+                      <i Type="Method">protected static List &lt; string &gt; TryReadListOfStrings ( XmlNode Node )</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="AspectFileV1Reader">
+                    <FileName>\system\core\aspectmanager.cs</FileName>
+                    <Note>Чтение первой версии XML</Note>
+                    <Text>internal class AspectFileV1Reader : AspectFileReader</Text>
+                    <OCtx>
+                      <i Type="ClassOrNamespace">internal class AspectFileV1Reader : AspectFileReader</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="Method">public static PointOfInterest BuildTreeFromXML ( XmlElement Element )</i>
+                      <i Type="Method">private static PointOfInterest ConvertXMLNodeToPointOfInterest ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; OuterContextNode &gt; TryReadOuterContext ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; InnerContextNode &gt; TryReadInnerContext ( XmlNode Node )</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="AspectFileV2Reader">
+                    <FileName>\system\core\aspectmanager.cs</FileName>
+                    <Note>Чтение второй версии XML</Note>
+                    <Text>internal class AspectFileV2Reader : AspectFileReader</Text>
+                    <OCtx>
+                      <i Type="ClassOrNamespace">internal class AspectFileV2Reader : AspectFileReader</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="Method">public static PointOfInterest BuildTreeFromXML ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; OuterContextNode &gt; TryReadOuterContext ( XmlNode Node )</i>
+                      <i Type="Method">private static OuterContextNode TryReadOuterContextNode ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; InnerContextNode &gt; TryReadInnerContext ( XmlNode Node )</i>
+                      <i Type="Method">private static InnerContextNode TryReadInnerContextNode ( XmlNode Node )</i>
+                    </ICtx>
+                  </Node>
+                  <Node Name="AspectFileV3Reader">
+                    <FileName>\system\core\aspectmanager.cs</FileName>
+                    <Note>Чтение третьей версии XML</Note>
+                    <Text>internal class AspectFileV3Reader : AspectFileReader</Text>
+                    <OCtx>
+                      <i Type="ClassOrNamespace">internal class AspectFileV3Reader : AspectFileReader</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="Method">public static PointOfInterest BuildTreeFromXML ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; OuterContextNode &gt; TryReadOuterContext ( XmlNode Node )</i>
+                      <i Type="Method">private static OuterContextNode TryReadOuterContextNode ( XmlNode Node )</i>
+                      <i Type="Method">private static List &lt; InnerContextNode &gt; TryReadInnerContext ( XmlNode Node )</i>
+                      <i Type="Method">private static InnerContextNode TryReadInnerContextNode ( XmlNode Node )</i>
+                    </ICtx>
+                  </Node>
+                </Items>
+              </Node>
+              <Node Name="Реализация записи: AspectFileBuilder">
+                <FileName>\system\core\aspectmanager.cs</FileName>
+                <Note>Класс, сохраняющий дерево аспектов в XML текущей версии</Note>
+                <Text>internal class AspectFileBuilder</Text>
+                <OCtx>
+                  <i Type="ClassOrNamespace">internal class AspectFileBuilder</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+                <ICtx>
+                  <i Type="Method">public static XmlElement BuildXMLTree ( PointOfInterest AspectTree , XmlDocument Doc )</i>
+                  <i Type="Method">private static XmlNode BuildInnerContext ( List &lt; InnerContextNode &gt; IC , XmlDocument Doc )</i>
+                  <i Type="Method">private static XmlNode BuildInnerContextNode ( InnerContextNode IN , XmlDocument Doc )</i>
+                  <i Type="Method">private static XmlNode BuildOuterContext ( List &lt; OuterContextNode &gt; OC , XmlDocument Doc )</i>
+                  <i Type="Method">private static XmlNode BuildPoint ( PointOfInterest Point , XmlDocument Doc )</i>
+                </ICtx>
+              </Node>
+              <Node Name="Чтение / Выбор версии">
+                <FileName>\system\core\aspectmanager.cs</FileName>
+                <Text>if (attr.Name == "Version")</Text>
+                <OCtx>
+                  <i Type="Method">public PointOfInterest DeserializeAspect ( string FileName , ParserWrapper _parserWrapper )</i>
+                  <i Type="ClassOrNamespace">public class AspectManager</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
+                  </i>
+                </OCtx>
+              </Node>
+              <Node Name="Опасные места">
+                <Items>
+                  <Node Name="Жестко зашитые константы EOF">
+                    <FileName>\System\Core\AspectManager.cs</FileName>
+                    <Note>Для Standalone лексера (CommonLexer) EOF == 0.
+Если для лексера есть парсер, то лексемы определены в парсере и там EOF == 3.
+По-умалчанию это так. </Note>
+                    <Text>//Warning - hardcoded constants. May be wrong.</Text>
+                    <OCtx>
+                      <i Type="Method">private static List &lt; string &gt; TokenizeString ( string Str , dynamic Lexer )</i>
+                      <i Type="ClassOrNamespace">internal class AspectFileV3Reader : AspectFileReader</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                </Items>
+              </Node>
+            </Items>
+          </Node>
         </Items>
-      </PointOfInterest>
+      </Node>
     </Items>
-  </PointOfInterest>
+  </Node>
 </AspectFile>

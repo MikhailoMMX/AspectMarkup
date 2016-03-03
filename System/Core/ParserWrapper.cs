@@ -57,7 +57,7 @@ namespace AspectCore
         {
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
-            string gacPath = Environment.GetFolderPath(System.Environment.SpecialFolder.Windows) + "\\Microsoft.NET\\assembly";
+            string gacPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\Microsoft.NET\\assembly";
 
             DirectoryInfo di = new DirectoryInfo(gacPath);
             FileInfo [] files = di.GetFiles(GlobalData.ParserAssemblyMask, SearchOption.AllDirectories);
@@ -202,7 +202,7 @@ namespace AspectCore
         /// <returns>Корень дерева</returns>
         public PointOfInterest ParseFile(string FileName)
         {
-            string text = System.IO.File.ReadAllText(FileName, Encoding.Default);
+            string text = File.ReadAllText(FileName, Encoding.Default);
             PointOfInterest Result = ParseText(text, FileName);
             return Result;
         }
@@ -239,12 +239,12 @@ namespace AspectCore
             SourceEntity result = Parser.Root;
             if (result == null)
                 return null;
-            PointOfInterest pt = ConvertSourceEntityToPointOfInterest(result, FileName);
-            SetContext(pt);
+            PointOfInterest rootPt = ConvertSourceEntityToPointOfInterest(result, FileName);
+            SetContext(rootPt);
             _LastTimeErrors.Clear();
             foreach (SourceEntity se in Parser.Errors)
                 _LastTimeErrors.Add(ConvertSourceEntityToPointOfInterest(se, FileName));
-            return pt;
+            return rootPt;
         }
 
         /// <summary>
@@ -296,6 +296,15 @@ namespace AspectCore
             if (DefaultParser != null)
                 result.Add("*");
             return result;
+        }
+
+        internal ILightWeightScanner GetLexer(string FileName)
+        {
+            string ID = FilenameToLangID(FileName);
+            if (scanners.ContainsKey(ID))
+                return scanners[ID];
+            else
+                return null;
         }
 
     }

@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  BLUEGENE
-//  DateTime: 10.08.2015 21:24:29
+//  DateTime: 23.11.2015 20:35:11
 //  UserName: MikhailoMMX
-//  GPLEX input file <D:\Work\Аспирантура\MainProject\Auxiliary\TestFilesGeneratorCS\Grammar.lex - 22.04.2015 22:41:45>
+//  GPLEX input file <D:\Work\Аспирантура\MainProject.Git\Auxiliary\TestFilesGeneratorCS\Grammar.lex - 26.08.2015 21:26:54>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: unicode, noParser, minimize

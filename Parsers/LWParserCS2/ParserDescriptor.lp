@@ -5,7 +5,7 @@
 Skip Begin "//"
 Skip Begin "#" Preprocessor
 Skip Begin "/*" End "*/"
-Skip BeginEnd "'" EscapeSymbol "'"
+Skip BeginEnd "'" EscapeSymbol "\\"
 Skip BeginEnd '\"' EscapeSymbol '\\'
 Skip Begin '@\"' End '\"'
 

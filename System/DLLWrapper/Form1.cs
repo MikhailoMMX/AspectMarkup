@@ -187,7 +187,14 @@ namespace DLLWrapper
 
         private void bReparseText_Click(object sender, EventArgs e)
         {
-            ParseText();
+            try
+            {
+                ParseText();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
         }
 
         private PointOfInterest FindPointInCurrentPosition(PointOfInterest ParsedPoints)

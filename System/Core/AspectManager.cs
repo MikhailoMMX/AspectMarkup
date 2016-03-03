@@ -5,8 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
-//using System.Xml.Serialization;
-//using System.Runtime.Serialization.Formatters.Soap;
+
 
 namespace AspectCore
 {
@@ -16,7 +15,7 @@ namespace AspectCore
         /// Путь к папке проекта.
         /// </summary>
         public string WorkingDir = "";
-        internal bool isFileSaved = false;
+        internal bool isFileSaved;
 
         /// <summary>
         /// Корень текущего аспектного дерева
@@ -41,7 +40,6 @@ namespace AspectCore
         /// Преобразование полного пути к файлу в относительный, если это возможно
         /// </summary>
         /// <param name="FileName">Полное имя файла</param>
-        /// <param name="Folder">Папка, относительно которой вычисляется относительный путь</param>
         /// <returns>Относительный путь, если файл находится в папке (или ее подпапках)
         /// Абсолютный путь (исходное значение параметра FileName) в противном случае</returns>
         public string GetRelativePath(string FileName)
@@ -51,11 +49,12 @@ namespace AspectCore
             else
                 return FileName;
         }
-        
+
         /// <summary>
         /// Сохранение дерева в файл на диске
         /// </summary>
         /// <param name="FileName">Путь к файлу</param>
+        /// <param name="Force"></param>
         public void SerializeAspect(string FileName, bool Force = false)
         {
             SerializeAspect(WorkingAspect, FileName, Force);
@@ -88,26 +87,25 @@ namespace AspectCore
         /// <summary>
         /// Чтение дерева из файла
         /// </summary>
-        public PointOfInterest DeserializeAspect(string FileName)
+        public PointOfInterest DeserializeAspect(string FileName, ParserWrapper _parserWrapper)
         {
             try
             {
                 XmlDocument Doc = new XmlDocument();
                 Doc.LoadXml(File.ReadAllText(FileName));
-                if (Doc == null)
-                    return null;
                 if (Doc.DocumentElement.Attributes != null && Doc.DocumentElement.Attributes.Count != 0)
                     foreach (XmlAttribute attr in Doc.DocumentElement.Attributes)
                         if (attr.Name == "Version")
                         {
                             if (attr.InnerText == "2")
                                 return AspectFileV2Reader.BuildTreeFromXML(Doc.DocumentElement.ChildNodes[0]);
-                            //Next versions here
+                            if (attr.InnerText == "3")
+                                return AspectFileV3Reader.BuildTreeFromXML(Doc.DocumentElement.ChildNodes[0], _parserWrapper);
                         }
                 //default = version 1
                 return AspectFileV1Reader.BuildTreeFromXML(Doc.DocumentElement);
             }
-            catch (Exception e)
+            catch (Exception)
             { }
             return null;
         }
@@ -136,6 +134,7 @@ namespace AspectCore
                 Result.Add(subNode.InnerText);
             return Result;
         }
+        //protected static 
     }
     internal class AspectFileV1Reader : AspectFileReader
     {
@@ -150,7 +149,7 @@ namespace AspectCore
             return result;
         }
 
-        private  static PointOfInterest ConvertXMLNodeToPointOfInterest(XmlNode Node)
+        private static PointOfInterest ConvertXMLNodeToPointOfInterest(XmlNode Node)
         {
             PointOfInterest Result = new PointOfInterest();
             Result.FileName = TryFindValue(Node, "FileName");
@@ -271,57 +270,116 @@ namespace AspectCore
             return Result;
         }
     }
+    internal class AspectFileV3Reader : AspectFileReader
+    {
+        public static PointOfInterest BuildTreeFromXML(XmlNode Node, ParserWrapper _parserWrapper)
+        {
+            PointOfInterest Result = new PointOfInterest();
+            Result.FileName = TryFindValue(Node, "FileName");
+            Result.Name = Node.Attributes["Name"]?.InnerText;
+            Result.Note = TryFindValue(Node, "Note");
+            Result.Text = TryFindValue(Node, "Text");
+
+            dynamic Lexer = _parserWrapper.GetLexer(Result.FileName ?? "")?.Scanner ?? new CommonLexer.Scanner();
+
+            XmlNode CTX = TryFindNode(Node, "OCtx");
+            if (CTX != null)
+                Result.Context = TryReadOuterContext(CTX, Lexer);
+
+            XmlNode InnerCTX = TryFindNode(Node, "ICtx");
+            if (InnerCTX != null)
+                Result.InnerContext = TryReadInnerContext(InnerCTX, Lexer);
+
+            XmlNode Items = TryFindNode(Node, "Items");
+            if (Items != null)
+            {
+                Result.Items = new List<PointOfInterest>();
+                foreach (XmlNode subNode in Items)
+                    Result.Items.Add(BuildTreeFromXML(subNode, _parserWrapper));
+            }
+            return Result;
+        }
+        private static List<string> TokenizeString(string Str, dynamic Lexer)
+        {
+            List<string> Result = new List<string>();
+            if (string.IsNullOrWhiteSpace(Str))
+                return Result;
+
+            //Warning - hardcoded constants. May be wrong.
+            int EOF = Lexer is CommonLexer.Scanner ? 0 : 3;
+            Lexer.SetSource(Str, 0);
+            while (Lexer.yylex() != EOF) //0 == EOF
+                Result.Add(Lexer.yytext);
+            return Result;
+        }
+        private static List<OuterContextNode> TryReadOuterContext(XmlNode Node, dynamic Lexer)
+        {
+            List<OuterContextNode> Result = new List<OuterContextNode>();
+            foreach (XmlNode subNode in Node)
+                Result.Add(TryReadOuterContextNode(subNode, Lexer));
+            return Result;
+        }
+        private static OuterContextNode TryReadOuterContextNode(XmlNode Node, dynamic Lexer)
+        {
+            OuterContextNode Result = new OuterContextNode();
+            Result.Type = Node.Attributes["Type"]?.InnerText;
+            Result.Name = TokenizeString(Node.InnerText, Lexer);
+            return Result;
+        }
+        private static List<InnerContextNode> TryReadInnerContext(XmlNode Node, dynamic Lexer)
+        {
+            List<InnerContextNode> Result = new List<InnerContextNode>();
+            foreach (XmlNode subNode in Node.ChildNodes)
+                Result.Add(TryReadInnerContextNode(subNode, Lexer));
+            return Result;
+        }
+        private static InnerContextNode TryReadInnerContextNode(XmlNode Node, dynamic Lexer)
+        {
+            InnerContextNode Result = new InnerContextNode();
+            Result.Name = new List<string>();
+            Result.Type = Node.Attributes["Type"]?.InnerText;
+            Result.Name = TokenizeString(Node.InnerText, Lexer);
+            return Result;
+        }
+    }
     internal class AspectFileBuilder
     {
         public static XmlElement BuildXMLTree(PointOfInterest AspectTree, XmlDocument Doc)
         {
             XmlElement Root = Doc.CreateElement("AspectFile");
             XmlAttribute Ver = Doc.CreateAttribute("Version");
-            Ver.InnerText = "2";
+            Ver.InnerText = "3";
             Root.Attributes.Append(Ver);
             Root.AppendChild(BuildPoint(AspectTree, Doc));
             return Root;
         }
         private static XmlNode BuildInnerContext(List<InnerContextNode> IC, XmlDocument Doc)
         {
-            XmlElement ICElement = Doc.CreateElement("InnerContext");
+            XmlElement ICElement = Doc.CreateElement("ICtx");
             foreach (InnerContextNode i in IC)
                 ICElement.AppendChild(BuildInnerContextNode(i, Doc));
             return ICElement;
         }
         private static XmlNode BuildInnerContextNode(InnerContextNode IN, XmlDocument Doc)
         {
-            XmlElement icNode = Doc.CreateElement("InnerContextItem");
+            XmlElement icNode = Doc.CreateElement("i");
             XmlAttribute icNodeType = Doc.CreateAttribute("Type");
             icNodeType.InnerText = IN.Type;
             icNode.Attributes.Append(icNodeType);
-            foreach (string str in IN.Name)
-            {
-                XmlElement s = Doc.CreateElement("string");
-                s.InnerText = str;
-                icNode.AppendChild(s);
-            }
-            if (IN.SubNodes != null)
-                foreach (InnerContextNode IN2 in IN.SubNodes)
-                    icNode.AppendChild(BuildInnerContextNode(IN2, Doc));
+            icNode.InnerText = string.Join(" ", IN.Name);
             return icNode;
         }
 
         private static XmlNode BuildOuterContext(List<OuterContextNode> OC, XmlDocument Doc)
         {
-            XmlElement OCElement = Doc.CreateElement("OuterContext");
+            XmlElement OCElement = Doc.CreateElement("OCtx");
             foreach (OuterContextNode o in OC)
             {
-                XmlElement ocNode = Doc.CreateElement("OuterContextItem");
+                XmlElement ocNode = Doc.CreateElement("i");
                 XmlAttribute OcNodeType = Doc.CreateAttribute("Type");
                 OcNodeType.InnerText = o.Type;
                 ocNode.Attributes.Append(OcNodeType);
-                foreach (string str in o.Name)
-                {
-                    XmlElement s = Doc.CreateElement("string");
-                    s.InnerText = str;
-                    ocNode.AppendChild(s);
-                }
+                ocNode.InnerText = string.Join(" ", o.Name);
                 OCElement.AppendChild(ocNode);
             }
             return OCElement;
@@ -329,11 +387,11 @@ namespace AspectCore
 
         private static XmlNode BuildPoint(PointOfInterest Point, XmlDocument Doc)
         {
-            XmlElement Result = Doc.CreateElement("PointOfInterest");
+            XmlElement Result = Doc.CreateElement("Node");
             if (!string.IsNullOrWhiteSpace(Point.Name))
             {
-                XmlElement Name = Doc.CreateElement("Name");
-                Result.AppendChild(Name);
+                XmlAttribute Name = Doc.CreateAttribute("Name");
+                Result.Attributes.Append(Name);
                 Name.InnerText = Point.Name;
             }
             if (!string.IsNullOrWhiteSpace(Point.FileName))
@@ -359,7 +417,7 @@ namespace AspectCore
                 Result.AppendChild(BuildOuterContext(Point.Context, Doc));
             if (Point.InnerContext != null && Point.InnerContext.Count != 0)
                 Result.AppendChild(BuildInnerContext(Point.InnerContext, Doc));
-            if (Point.Items != null)
+            if (Point.Items != null && Point.Items.Count != 0)
             {
                 XmlElement Items = Doc.CreateElement("Items");
                 foreach (PointOfInterest p in Point.Items)

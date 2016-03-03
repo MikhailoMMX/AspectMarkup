@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  BLUEGENE
-//  DateTime: 25.08.2015 17:34:31
+//  DateTime: 23.11.2015 20:39:48
 //  UserName: MikhailoMMX
-//  GPLEX input file <LWLexer.lex - 25.08.2015 17:34:30>
+//  GPLEX input file <LWLexer.lex - 23.11.2015 20:39:48>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: unicode, parser, stack, minimize
@@ -125,7 +125,7 @@ namespace LWParser
         
         enum Result {accept, noMatch, contextFound};
 
-        const int maxAccept = 43;
+        const int maxAccept = 44;
         const int initial = 1;
         const int eofNum = 0;
         const int goStart = -1;
@@ -170,8 +170,8 @@ namespace LWParser
         }
     };
 
-    static int[] startState = new int[] {1, 44, 47, 48, 49, 51, 
-        52, 54, 0};
+    static int[] startState = new int[] {1, 45, 48, 49, 50, 52, 
+        54, 56, 0};
 
 #region TwoLevelCharacterMap
     //
@@ -1388,7 +1388,7 @@ namespace LWParser
             return MapC(code);
     }
 
-    static Table[] NxS = new Table[55] {
+    static Table[] NxS = new Table[57] {
 /* NxS[   0] */ new Table(0, 0, 0, null),
 /* NxS[   1] */ new Table(11, 20, 9, new sbyte[] {10, 9, 9, 9, 11, 12, 
           13, 9, 4, 9, -1, 4, -1, 2, 3, 4, 5, 6, 7, 8}),
@@ -1443,25 +1443,27 @@ namespace LWParser
 /* NxS[  35] */ new Table(21, 1, -1, new sbyte[] {35}),
 /* NxS[  36] */ new Table(21, 1, -1, new sbyte[] {36}),
 /* NxS[  37] */ new Table(0, 0, -1, null),
-/* NxS[  38] */ new Table(4, 1, -1, new sbyte[] {39}),
+/* NxS[  38] */ new Table(0, 0, -1, null),
 /* NxS[  39] */ new Table(0, 0, -1, null),
 /* NxS[  40] */ new Table(0, 0, -1, null),
 /* NxS[  41] */ new Table(0, 0, -1, null),
 /* NxS[  42] */ new Table(0, 0, -1, null),
 /* NxS[  43] */ new Table(0, 0, -1, null),
-/* NxS[  44] */ new Table(1, 6, -1, new sbyte[] {45, 29, -1, 30, 31, 46}),
-/* NxS[  45] */ new Table(1, 3, -1, new sbyte[] {33, -1, 34}),
-/* NxS[  46] */ new Table(5, 1, -1, new sbyte[] {32}),
-/* NxS[  47] */ new Table(21, 1, -1, new sbyte[] {35}),
-/* NxS[  48] */ new Table(21, 1, -1, new sbyte[] {36}),
-/* NxS[  49] */ new Table(3, 1, -1, new sbyte[] {50}),
-/* NxS[  50] */ new Table(1, 1, -1, new sbyte[] {37}),
-/* NxS[  51] */ new Table(4, 1, -1, new sbyte[] {38}),
-/* NxS[  52] */ new Table(22, 7, -1, new sbyte[] {53, -1, -1, -1, -1, -1, 
-          40}),
-/* NxS[  53] */ new Table(22, 7, -1, new sbyte[] {42, -1, -1, -1, -1, -1, 
+/* NxS[  44] */ new Table(0, 0, -1, null),
+/* NxS[  45] */ new Table(1, 6, -1, new sbyte[] {46, 29, -1, 30, 31, 47}),
+/* NxS[  46] */ new Table(1, 3, -1, new sbyte[] {33, -1, 34}),
+/* NxS[  47] */ new Table(5, 1, -1, new sbyte[] {32}),
+/* NxS[  48] */ new Table(21, 1, -1, new sbyte[] {35}),
+/* NxS[  49] */ new Table(21, 1, -1, new sbyte[] {36}),
+/* NxS[  50] */ new Table(3, 1, -1, new sbyte[] {51}),
+/* NxS[  51] */ new Table(1, 1, -1, new sbyte[] {37}),
+/* NxS[  52] */ new Table(22, 6, -1, new sbyte[] {53, -1, -1, -1, -1, 38}),
+/* NxS[  53] */ new Table(22, 6, -1, new sbyte[] {40, -1, -1, -1, -1, 39}),
+/* NxS[  54] */ new Table(22, 7, -1, new sbyte[] {55, -1, -1, -1, -1, -1, 
           41}),
-/* NxS[  54] */ new Table(5, 1, -1, new sbyte[] {43}),
+/* NxS[  55] */ new Table(22, 7, -1, new sbyte[] {43, -1, -1, -1, -1, -1, 
+          42}),
+/* NxS[  56] */ new Table(5, 1, -1, new sbyte[] {44}),
     };
 
 int NextState() {
@@ -1997,15 +1999,18 @@ ReturnToLastState();
 { }
             break;
         case 40:
-ReturnToLastState();
+{ }
             break;
         case 41:
-{ }
+ReturnToLastState();
             break;
         case 42:
 { }
             break;
         case 43:
+{ }
+            break;
+        case 44:
 ReturnToLastState();
             break;
         default:

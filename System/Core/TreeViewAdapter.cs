@@ -64,12 +64,12 @@ namespace AspectCore
             manager.isFileSaved = false;
         }
 
-        public void ReadAspectFile(string path)
+        public void ReadAspectFile(string path, ParserWrapper _parserWrapper)
         {
             ClearAspect();
             if (File.Exists(path))
             {
-                manager.WorkingAspect = manager.DeserializeAspect(path);
+                manager.WorkingAspect = manager.DeserializeAspect(path, _parserWrapper);
                 manager.WorkingDir = Path.GetDirectoryName(path) + "\\";
                 manager.isFileSaved = true;
                 RebuildTree();
