@@ -153,6 +153,11 @@ Sign  [[:IsPunctuation:][:IsSymbol:]]
 	yylval.type_Token = new Token(yytext, yylloc);
 	return (int)Tokens.tkDirectiveHeader;
 }
+"where"  {
+    yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens.tkDirectiveHeader;
+}
 "initialization"  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);

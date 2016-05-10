@@ -16,7 +16,7 @@ Rule tkDefs : @"var" | @"const" | @"label"
 Rule tkClassVisModifier : @"internal" | @"private" | @"protected" | @"public" 
 Rule tkMethod : @"procedure" | @"function" | @"constructor" | @"destructor"
 Rule tkDirective : @"forward" | @"external"
-Rule tkDirectiveHeader : @"virtual" | @"override" | @"reintroduce" | @"extensionmethod"
+Rule tkDirectiveHeader : @"virtual" | @"override" | @"reintroduce" | @"extensionmethod" | @"where"
 Rule tkInitFinal: @"initialization" | @"finalization"
 Rule tkInterf: @"interface"
 Rule tkImpl: @"implementation"
@@ -70,7 +70,7 @@ Rule Defs :				[@tkDefs|@"type"] List1(FieldOrClass)
 Rule FieldOrClass:		#Field | #Class
 					
 Rule Directive: 		@tkDirective @Any* ";"
-Rule DirectiveHeader:	@tkDirectiveHeader ";"
+Rule DirectiveHeader:	@tkDirectiveHeader @Any* ";"
 
 Rule InitFinal :		@tkInitFinal CodeToken*
 Rule CodeToken: 		AnyExcept(tkInitFinal, "end", tkCodeOpen) | Block

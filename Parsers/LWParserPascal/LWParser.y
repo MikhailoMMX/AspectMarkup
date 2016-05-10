@@ -81,11 +81,12 @@
 %type <type_PAS_TreeNode> _ANY8
 %type <type_PAS_TreeNode> _ANY9
 %type <type_PAS_TreeNode> _ANY10
+%type <type_PAS_TreeNode> _ANY11
 %type <type_PAS_TreeNode> _
-%type <type_PAS_TreeNode> _11
 %type <type_PAS_TreeNode> _12
 %type <type_PAS_TreeNode> _13
 %type <type_PAS_TreeNode> _14
+%type <type_PAS_TreeNode> _15
 %type <type_PAS_TreeNode> __ANY8_list
 %type <type_PAS_TreeNode> __class_opt
 %type <type_PAS_TreeNode> _InterfNode_list
@@ -93,6 +94,7 @@
 %type <type_PAS_TreeNode> _Params_opt
 %type <type_PAS_TreeNode> _DirectiveHeader_list
 %type <type_PAS_TreeNode> __ANY9_list
+%type <type_PAS_TreeNode> __ANY10_list
 %type <type_PAS_TreeNode> _CodeToken_list
 
 
@@ -686,7 +688,7 @@ Params :
 	}
   ;
 Block :
-    tkCodeOpen _11 _end 
+    tkCodeOpen _12 _end 
 	{
 		$$ = new Block(new List<string>(), @1.Merge(@3));
         @$ = $$.Location;
@@ -695,7 +697,7 @@ Block :
 	}
   ;
 Attribute :
-    _Sopen _12 _Sclose 
+    _Sopen _13 _Sclose 
 	{
 		$$ = new Attribute(new List<string>(), @1.Merge(@3));
         @$ = $$.Location;
@@ -794,7 +796,7 @@ Tk2 :
 	}
   ;
 Program :
-    _Program_set _13 __ANY8_list 
+    _Program_set _14 __ANY8_list 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@3));
         @$ = $$.Location;
@@ -1040,7 +1042,7 @@ ClassMethodBody :
 	}
   ;
 Defs :
-    _14 _Defs_set 
+    _15 _Defs_set 
 	{
 		$$ = new Defs(new List<string>(), @1.Merge(@2));
         @$ = $$.Location;
@@ -1076,11 +1078,12 @@ Directive :
 	}
   ;
 DirectiveHeader :
-    tkDirectiveHeader _Scolon 
+    tkDirectiveHeader __ANY10_list _Scolon 
 	{
-		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@3));
         @$ = $$.Location;
 		$$.AddValue($1);
+		$$.AddValue($2);
 
 	}
   ;
@@ -1094,7 +1097,7 @@ InitFinal :
 	}
   ;
 CodeToken :
-    _ANY10 { $$ = new PAS_TreeNode();
+    _ANY11 { $$ = new PAS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
@@ -1454,6 +1457,168 @@ _ANY10 :
 		$$.AddItem($1);
 
 	}
+	| tkCodeOpen 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkDefs 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkClassVisModifier 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkMethod 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkDirective 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkDirectiveHeader 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkInitFinal 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| tkImpl 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _class 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _interface 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _record 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Ropen 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Rclose 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _end 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sopen 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sclose 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Dot 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _type 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+  ;
+_ANY11 :
+    LetterDigits 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| Sign 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
 	| tkDefs 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
@@ -1606,30 +1771,30 @@ _ :
 
 	}
   ;
-_11 :
-    { $$ = new PAS_TreeNode();
-    if (CurrentLocationSpan == null)
-        CurrentLocationSpan = new LexLocation(1,0,1,0); 
-    
-}
-	| _11 _ANY6 { $$ = new PAS_TreeNode();
-    if (CurrentLocationSpan == null)
-        CurrentLocationSpan = new LexLocation(1,0,1,0); 
-    
-}
-	| _11 Block { $$ = new PAS_TreeNode();
-    if (CurrentLocationSpan == null)
-        CurrentLocationSpan = new LexLocation(1,0,1,0); 
-    
-}
-  ;
 _12 :
     { $$ = new PAS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
-	| _12 _ANY7 
+	| _12 _ANY6 { $$ = new PAS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+	| _12 Block { $$ = new PAS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+  ;
+_13 :
+    { $$ = new PAS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+	| _13 _ANY7 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
         @$ = $$.Location;
@@ -1637,7 +1802,7 @@ _12 :
 		$$.AddValue($2);
 
 	}
-	| _12 Attribute 
+	| _13 Attribute 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
         @$ = $$.Location;
@@ -1646,7 +1811,7 @@ _12 :
 
 	}
   ;
-_13 :
+_14 :
     Block _Dot 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
@@ -1660,7 +1825,7 @@ _13 :
     
 }
   ;
-_14 :
+_15 :
     tkDefs 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@1));
@@ -1781,6 +1946,23 @@ __ANY9_list :
     
 }
 	| __ANY9_list _ANY9 
+	{
+		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddValue($2);
+		$$.AddSubItems($1);
+		$$.AddSubItems($2);
+
+	}
+  ;
+__ANY10_list :
+    { $$ = new PAS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+	| __ANY10_list _ANY10 
 	{
 		$$ = new PAS_TreeNode(new List<string>(), @1.Merge(@2));
         @$ = $$.Location;

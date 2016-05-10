@@ -91,7 +91,6 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{3101741e-4e25-4c84-8824-c7d0ab7922d7}</Project>
       <Name>Core</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
