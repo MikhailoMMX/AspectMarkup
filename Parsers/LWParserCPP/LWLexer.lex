@@ -8,10 +8,11 @@ newline [\r\n]+
 
 LetterDigits  [[:IsLetterOrDigit:]_&]*
 Sign  [[:IsPunctuation:][:IsSymbol:]]
-DIRECTIVE #[^\r\n]*
+
 
 %x SKIPDIRECTIVE
 %x Anon1
+%x Anon2
 %x Anon3
 %x Anon4
 %x Anon5
@@ -23,8 +24,8 @@ DIRECTIVE #[^\r\n]*
 "//" {
 	GoToSkipState(Anon1);
 }
-{DIRECTIVE} {
-	ProcessDirectiveInNonSkipState(yytext);
+"#" {
+	GoToSkipState(Anon2);
 }
 "/*" {
 	GoToSkipState(Anon3);
@@ -39,13 +40,12 @@ DIRECTIVE #[^\r\n]*
 	GoToSkipState(Anon6);
 }
 <SKIPDIRECTIVE> {
-{DIRECTIVE} {
-	ProcessDirectiveInSkipState(yytext);
-}
 "//" {
 	GoToSkipState(Anon1);
 }
-
+"#" {
+	GoToSkipState(Anon2);
+}
 "/*" {
 	GoToSkipState(Anon3);
 }
@@ -85,11 +85,6 @@ DIRECTIVE #[^\r\n]*
 	yylval.type_Token = new Token(yytext, yylloc);
 	return (int)Tokens._Scolon;
 }
-"enum"  {
-    yylval = new ValueType();
-	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._enum;
-}
 {LetterDigits}  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
@@ -106,7 +101,12 @@ DIRECTIVE #[^\r\n]*
     ReturnToLastState(); }
 
 } //end of Anon1
+<Anon2> {
+	{newline} { 
+    
+    ReturnToLastState(); }
 
+} //end of Anon2
 <Anon3> {
 	"*/" { 
     

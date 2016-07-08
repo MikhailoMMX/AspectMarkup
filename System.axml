@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-16"?>
 <AspectFile Version="3">
-  <Node>
+  <Node NL="0" NG="0">
     <Items>
-      <Node Name="LP Генератор">
+      <Node Name="LP Генератор" NL="0" NG="0">
         <Items>
-          <Node Name="Предварительные действия">
+          <Node Name="Предварительные действия" NL="0" NG="0">
             <Items>
-              <Node Name="AddPredefinedEntities">
+              <Node Name="AddPredefinedEntities" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void AddPredefinedEntities()</Text>
                 <OCtx>
@@ -17,7 +17,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="AddSourceEntitiesToSymbolTable">
+              <Node Name="AddSourceEntitiesToSymbolTable" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void AddSourceEntitiesToSymbolTable(SourceFile source)</Text>
                 <OCtx>
@@ -30,9 +30,9 @@
               </Node>
             </Items>
           </Node>
-          <Node Name="Проверки">
+          <Node Name="Проверки" NL="0" NG="0">
             <Items>
-              <Node Name="CheckExistenceOfUsedNames">
+              <Node Name="CheckExistenceOfUsedNames" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void CheckExistenceOfUsedNames()</Text>
                 <OCtx>
@@ -43,7 +43,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="CheckList">
+              <Node Name="CheckList" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void CheckList(List&lt;SubRulePart&gt; list, LexLocation location)</Text>
                 <OCtx>
@@ -54,7 +54,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="CheckList">
+              <Node Name="CheckList" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void CheckList(List&lt;string&gt; list, LexLocation location)</Text>
                 <OCtx>
@@ -65,7 +65,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="CheckOrAddPredefinedName">
+              <Node Name="CheckOrAddPredefinedName" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void CheckOrAddPredefinedName(string name, LexLocation location)</Text>
                 <OCtx>
@@ -78,9 +78,9 @@
               </Node>
             </Items>
           </Node>
-          <Node Name="Упрощения">
+          <Node Name="Упрощения" NL="0" NG="0">
             <Items>
-              <Node Name="SimplifyTokenOnlyRules">
+              <Node Name="SimplifyTokenOnlyRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void SimplifyTokenOnlyRules()</Text>
                 <OCtx>
@@ -91,7 +91,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="MarkRulesWithoutNode">
+              <Node Name="MarkRulesWithoutNode" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void MarkRulesWithoutNode()</Text>
                 <OCtx>
@@ -102,7 +102,7 @@
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="MarkUnnamedRules">
+              <Node Name="MarkUnnamedRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void MarkUnnamedRules()</Text>
                 <OCtx>
@@ -115,9 +115,9 @@
               </Node>
             </Items>
           </Node>
-          <Node Name="Однородные наборы">
+          <Node Name="Однородные наборы" NL="0" NG="0">
             <Items>
-              <Node Name="Класс SubRuleNonTermList">
+              <Node Name="Класс SubRuleNonTermList" NL="0" NG="0">
                 <FileName>\system\parsergenerator\classes.cs</FileName>
                 <Note>Унаследованное от базового класса поле Name хранит имя нетерминала, описывающего подузлы.
 Дополнительно вводятся поля для хранения разделителя и возможности удаления последнего подузла.</Note>
@@ -129,7 +129,7 @@
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="Separator">
+                  <Node Name="Separator" NL="0" NG="0">
                     <FileName>\System\parsergenerator\Classes.cs</FileName>
                     <Note>Хранит строковое представление разделителя между элементами однородного набора.
 Если строка пустая - разделитель не используется.</Note>
@@ -142,7 +142,7 @@
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="CanBeEmpty">
+                  <Node Name="CanBeEmpty" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\Classes.cs</FileName>
                     <Note>True означает, что узел может содержать 0 подузлов, а значит удалять последний подузел можно.
 False - узел должен содержать хотя бы один подузел.</Note>
@@ -154,9 +154,9 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Грамматика">
+              <Node Name="Грамматика" NL="0" NG="0">
                 <Items>
-                  <Node Name="Ветка грамматики">
+                  <Node Name="Ветка грамматики" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Text>| 	UseNameValue tkList tkRoundOpen ExceptList tkRoundClose Repetition</Text>
                     <OCtx>
@@ -166,7 +166,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">Program</i>
                     </OCtx>
                   </Node>
-                  <Node Name="Лексема tkList">
+                  <Node Name="Лексема tkList" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Note>1 секция, объявление лексемы tkList.
 После изменения парсера может потеряться</Note>
@@ -177,7 +177,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">Program</i>
                     </OCtx>
                   </Node>
-                  <Node Name="TokenCommaList">
+                  <Node Name="TokenCommaList" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ParserGen.y</FileName>
                     <Text>TokenCommaList</Text>
                     <OCtx>
@@ -188,7 +188,7 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Класс UniformSetInfo">
+              <Node Name="Класс UniformSetInfo" NL="0" NG="0">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Содержит описание подузлов в данном узле, которые относятся к однородному набору</Note>
                 <Text>public class UniformSetInfo</Text>
@@ -199,7 +199,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Класс SourceEntityUniformSet">
+              <Node Name="Класс SourceEntityUniformSet" NL="0" NG="0">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Используется для хранения списка узлов, построенных по конструкции List. После добавления к родительскому узлу информация о нем переносится в поле UniformSet родительского узла, список узлов добавляется к родительскому узлу.</Note>
                 <Text>public class SourceEntityUniformSet:SourceEntity</Text>
@@ -210,9 +210,9 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Константы">
+              <Node Name="Константы" NL="0" NG="0">
                 <Items>
-                  <Node Name="Имя лексемы tkList0">
+                  <Node Name="Имя лексемы tkList0" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkList0 = "List0";</Text>
                     <OCtx>
@@ -223,7 +223,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                     <Items>
-                      <Node Name="Добавление к ключевым словам">
+                      <Node Name="Добавление к ключевым словам" NL="0" NG="0">
                         <FileName>\System\ParserGenerator\ParserGenPart.cs</FileName>
                         <Text>keywords.Add(StringConstants.tkList0, (int)Tokens.tkList);</Text>
                         <OCtx>
@@ -237,7 +237,7 @@ False - узел должен содержать хотя бы один поду
                       </Node>
                     </Items>
                   </Node>
-                  <Node Name="Имя лексемы tkList1">
+                  <Node Name="Имя лексемы tkList1" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkList1 = "List1";</Text>
                     <OCtx>
@@ -248,7 +248,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                     <Items>
-                      <Node Name="Добавление к ключевым словам">
+                      <Node Name="Добавление к ключевым словам" NL="0" NG="0">
                         <FileName>\System\ParserGenerator\ParserGenPart.cs</FileName>
                         <Text>keywords.Add(StringConstants.tkList1, (int)Tokens.tkList);</Text>
                         <OCtx>
@@ -262,7 +262,7 @@ False - узел должен содержать хотя бы один поду
                       </Node>
                     </Items>
                   </Node>
-                  <Node Name="Имя класса SourceEntityUniformSetClassName">
+                  <Node Name="Имя класса SourceEntityUniformSetClassName" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Note>Имя класса, использующегося для хранения узлов, построенных по конструкции List</Note>
                     <Text>public static string SourceEntityUniformSetClassName = "SourceEntityUniformSet";</Text>
@@ -274,7 +274,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Ошибка - недопустимо несколько вхождений List">
+                  <Node Name="Ошибка - недопустимо несколько вхождений List" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string MultipleListsNotAllowed = "Несколько вхождений List в одном правиле недопустимо";</Text>
                     <OCtx>
@@ -285,7 +285,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Ошибка - недопустимо повторение списка">
+                  <Node Name="Ошибка - недопустимо повторение списка" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string RepetitionAfterListNotAllowed = "Символ повторения после List недопустим";</Text>
                     <OCtx>
@@ -296,7 +296,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Суффикс имени для нового правила">
+                  <Node Name="Суффикс имени для нового правила" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string tkUniformSetSuffix = "_set";</Text>
                     <OCtx>
@@ -307,7 +307,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Действие для первой ветки правила">
+                  <Node Name="Действие для первой ветки правила" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string YActionForSet1 =</Text>
                     <OCtx>
@@ -318,7 +318,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Действие для второй ветки правила">
+                  <Node Name="Действие для второй ветки правила" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\StringConstants.cs</FileName>
                     <Text>public static string YActionForSet2 =</Text>
                     <OCtx>
@@ -329,7 +329,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Ошибка - неправильный первый параметр List">
+                  <Node Name="Ошибка - неправильный первый параметр List" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string WrongFirstParamInList = "В правиле {0} первым параметром в List должно быть имя правила";</Text>
                     <OCtx>
@@ -340,7 +340,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Ошибка - неправильный второй параметр List">
+                  <Node Name="Ошибка - неправильный второй параметр List" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\ErrorMessages.cs</FileName>
                     <Text>public static string WrongSecondParamInList = "В правиле {0} вторым параметром в List должна быть строка или имя лексемы";</Text>
                     <OCtx>
@@ -353,7 +353,7 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Метод обработки">
+              <Node Name="Метод обработки" NL="0" NG="0">
                 <FileName>\System\ParserGenerator\Engine.cs</FileName>
                 <Text>private void ReplaceUniformListsWithRules()</Text>
                 <OCtx>
@@ -364,7 +364,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="Основная часть во вспомогательном методе">
+                  <Node Name="Основная часть во вспомогательном методе" NL="0" NG="0">
                     <FileName>\system\parsergenerator\engine.cs</FileName>
                     <Text>private void ReplaceUniformListsWithRules(List&lt;SubRulePart&gt; branch, string Name, LexLocation Loc)</Text>
                     <OCtx>
@@ -375,7 +375,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Вызов в самом главном методе">
+                  <Node Name="Вызов в самом главном методе" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\Engine.cs</FileName>
                     <Text>ReplaceUniformListsWithRules();</Text>
                     <OCtx>
@@ -388,9 +388,9 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Дополнительные изменения">
+              <Node Name="Дополнительные изменения" NL="0" NG="0">
                 <Items>
-                  <Node Name="Генерация Union">
+                  <Node Name="Генерация Union" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\Generator.cs</FileName>
                     <Text>sbUnion.AppendFormat(StringConstants.YUnionEntry, StringConstants.SourceEntityUniformSetClassName);</Text>
                     <OCtx>
@@ -401,7 +401,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Генерация типов">
+                  <Node Name="Генерация типов" NL="0" NG="0">
                     <FileName>\System\ParserGenerator\Generator.cs</FileName>
                     <Text>sb.AppendFormat(StringConstants.YType, rd.Value.Type, rd.Key);</Text>
                     <OCtx>
@@ -416,9 +416,9 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Лексемы">
+          <Node Name="Лексемы" NL="0" NG="0">
             <Items>
-              <Node Name="DeclareInlinedTokens">
+              <Node Name="DeclareInlinedTokens" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void DeclareInlinedTokens()</Text>
                 <OCtx>
@@ -429,7 +429,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="InlineTokensInUnnamedSkips">
+              <Node Name="InlineTokensInUnnamedSkips" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void InlineTokensInUnnamedSkips()</Text>
                 <OCtx>
@@ -442,9 +442,9 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Нетерминал ANY">
+          <Node Name="Нетерминал ANY" NL="0" NG="0">
             <Items>
-              <Node Name="ConvertANYToRules">
+              <Node Name="ConvertANYToRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void ConvertANYToRules()</Text>
                 <OCtx>
@@ -457,9 +457,9 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Правила">
+          <Node Name="Правила" NL="0" NG="0">
             <Items>
-              <Node Name="ConvertComplexSubruleParts">
+              <Node Name="ConvertComplexSubruleParts" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void ConvertComplexSubruleParts()</Text>
                 <OCtx>
@@ -470,7 +470,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="ExpandRules">
+              <Node Name="ExpandRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void ExpandRules()</Text>
                 <OCtx>
@@ -483,9 +483,9 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Действия в правилах">
+          <Node Name="Действия в правилах" NL="0" NG="0">
             <Items>
-              <Node Name="AddActionsToRules">
+              <Node Name="AddActionsToRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void AddActionsToRules()</Text>
                 <OCtx>
@@ -496,7 +496,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="GeneratePredefinedRules">
+              <Node Name="GeneratePredefinedRules" NL="0" NG="0">
                 <FileName>\system\parsergenerator\engine.cs</FileName>
                 <Text>private void GeneratePredefinedRules()</Text>
                 <OCtx>
@@ -509,7 +509,7 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Ошибка: EscapeSymbol не один">
+          <Node Name="Ошибка: EscapeSymbol не один" NL="0" NG="0">
             <FileName>\Parsers\LWParserCS2\ParserDescriptor.lp</FileName>
             <Note>Не только апостроф, но и обратный слэш, который может экранировать апостроф</Note>
             <OCtx>
@@ -520,11 +520,11 @@ False - узел должен содержать хотя бы один поду
           </Node>
         </Items>
       </Node>
-      <Node Name="Ядро">
+      <Node Name="Ядро" NL="0" NG="0">
         <Items>
-          <Node Name="Доделать">
+          <Node Name="Доделать" NL="0" NG="0">
             <Items>
-              <Node Name="Сохранение при закрытии">
+              <Node Name="Сохранение при закрытии" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>Если файл еще не был сохранен - он потеряется при текущем условии
 Нужно реагировать на закрытие, приостанавливать процесс и показывать диалог.</Note>
@@ -537,7 +537,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="FIXME: ошибка при сохранении">
+              <Node Name="FIXME: ошибка при сохранении" NL="0" NG="0">
                 <FileName>\system\core\aspectmanager.cs</FileName>
                 <Note>Если дерево аспектов ни разу не сохранялось, не было открыто из файла, но к нему были добавлены узлы (например, импортом) - при сохранении может быть ошибка вида "невозможно получить доступ к файлу "C:\.axm"".</Note>
                 <Text>public void SerializeAspect(PointOfInterest subAspect, string FileName, bool Force = false)</Text>
@@ -549,7 +549,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="FIXME: пути к файлам при импорте/экспорте">
+              <Node Name="FIXME: пути к файлам при импорте/экспорте" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>При экспорте сохраняются относительные пути.
 Если после этого импортировать файл в другом месте или в пустом файле (когда не инициализирована переменная текущего пути к аспектному файлу), то возникают ошибки.</Note>
@@ -561,7 +561,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Разрешить привязку к пустой строке">
+              <Node Name="Разрешить привязку к пустой строке" NL="0" NG="0">
                 <FileName>\system\core\helpers\editpointhelper.cs</FileName>
                 <Note>Убрать возможность привязки к узлу+строке если курсор находится в пустой строке</Note>
                 <Text>if (ide.GetCurrentDocumentFileName() == "")</Text>
@@ -575,9 +575,9 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Интерфейсное">
+          <Node Name="Интерфейсное" NL="0" NG="0">
             <Items>
-              <Node Name="Перенос привязки в другой файл">
+              <Node Name="Перенос привязки в другой файл" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Text>private void изменитьФайлToolStripMenuItem_Click(object sender, EventArgs e)</Text>
                 <OCtx>
@@ -588,7 +588,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="Шаблон маски диалога">
+                  <Node Name="Шаблон маски диалога" NL="0" NG="0">
                     <FileName>\system\core\strings.cs</FileName>
                     <Text>public static string OFDChangeFileMask = "{0}-файл|*.{0}|Все файлы|*.*";</Text>
                     <OCtx>
@@ -600,7 +600,7 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Добавление узла в правильное место">
+              <Node Name="Добавление узла в правильное место" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Text>if (tvAspects.SelectedNode != null &amp;&amp; Adapter.GetPointByNode(tvAspects.SelectedNode).Context)</Text>
                 <OCtx>
@@ -611,7 +611,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="И папок">
+                  <Node Name="И папок" NL="0" NG="0">
                     <FileName>\System\Core\UI\AspectWindowPane.cs</FileName>
                     <Text>private void tsbAddFolder_Click(object sender, EventArgs e)</Text>
                     <OCtx>
@@ -624,9 +624,9 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Импорт/Экспорт">
+              <Node Name="Импорт/Экспорт" NL="0" NG="0">
                 <Items>
-                  <Node Name="Экспорт (сериализация)">
+                  <Node Name="Экспорт (сериализация)" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Text>public void SerializeAspect(PointOfInterest subAspect, string FileName, bool Force = false)</Text>
                     <OCtx>
@@ -637,7 +637,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Десериализация (Импорт)">
+                  <Node Name="Десериализация (Импорт)" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Text>public PointOfInterest DeserializeAspect(string FileName)</Text>
                     <OCtx>
@@ -648,7 +648,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Вызов экспорта">
+                  <Node Name="Вызов экспорта" NL="0" NG="0">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void ExportToolStripMenuItem_Click(object sender, EventArgs e)</Text>
                     <OCtx>
@@ -659,7 +659,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Вызов импорта">
+                  <Node Name="Вызов импорта" NL="0" NG="0">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void ImportToolStripMenuItem_Click(object sender, EventArgs e)</Text>
                     <OCtx>
@@ -670,7 +670,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Разрешаем перетаскивать файлы">
+                  <Node Name="Разрешаем перетаскивать файлы" NL="0" NG="0">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>private void tvAspects_DragEnter(object sender, DragEventArgs e)</Text>
                     <OCtx>
@@ -681,7 +681,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Обработка перетаскивания">
+                  <Node Name="Обработка перетаскивания" NL="0" NG="0">
                     <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                     <Text>else if (e.Data.GetDataPresent(DataFormats.FileDrop))</Text>
                     <OCtx>
@@ -694,7 +694,7 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Отображение процента сходства">
+              <Node Name="Отображение процента сходства" NL="0" NG="0">
                 <FileName>\system\core\ui\fmselectpoint.cs</FileName>
                 <Text>lbCandidates.Items.Add(string.Format(Pattern, ((float)node.TotalMatch/TreeSearchOptions.Equility).ToString("F2"), node.TreeNode.Context[0].Type, string.Join(" ",node.TreeNode.Context[0].Name)));</Text>
                 <OCtx>
@@ -705,11 +705,85 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
+              <Node Name="Отмена действий" NL="0" NG="0">
+                <Items>
+                  <Node Name="Главный класс UndoEngine" NL="0" NG="0">
+                    <FileName>\System\Core\UndoEngine.cs</FileName>
+                    <Text>public class UndoEngine</Text>
+                    <OCtx>
+                      <i Type="ClassOrNamespace">public class UndoEngine</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                    <ICtx>
+                      <i Type="Field">private Stack &lt; UndoUnit &gt; UndoStack = new Stack &lt; UndoUnit &gt; ( )</i>
+                      <i Type="Field">private Stack &lt; UndoUnit &gt; RedoStack = new Stack &lt; UndoUnit &gt; ( )</i>
+                      <i Type="Method">private UndoUnit CreateUndoUnit ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
+                      <i Type="Method">public void SavePointState ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
+                      <i Type="Method">private UndoUnit CreateReverseUndoAction ( UndoUnit unit )</i>
+                      <i Type="Method">public UndoUnit Undo ( )</i>
+                      <i Type="Method">public UndoUnit Redo ( )</i>
+                      <i Type="Method">public void Clear ( )</i>
+                      <i Type="Method">public bool HasUndoActions ( )</i>
+                      <i Type="Method">public bool HasRedoActions ( )</i>
+                    </ICtx>
+                  </Node>
+                </Items>
+              </Node>
+              <Node Name="Добавление/Перепривязка" NL="0" NG="0">
+                <Items>
+                  <Node Name="Добавление точки" NL="0" NG="0">
+                    <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
+                    <Text>private void tsbAddPoint_Click(object sender, EventArgs e)</Text>
+                    <OCtx>
+                      <i Type="Method">private void tsbAddPoint_Click ( object sender , EventArgs e )</i>
+                      <i Type="ClassOrNamespace">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Изменение привязки" NL="0" NG="0">
+                    <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
+                    <Text>private void изменитьПривязкуToolStripMenuItem_Click(object sender, EventArgs e)</Text>
+                    <OCtx>
+                      <i Type="Method">private void изменитьПривязкуToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                      <i Type="ClassOrNamespace">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Переход к коду" NL="0" NG="0">
+                    <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
+                    <Text>private void перейтиККодуToolStripMenuItem_Click(object sender, EventArgs e)</Text>
+                    <OCtx>
+                      <i Type="Method">private void перейтиККодуToolStripMenuItem_Click ( object sender , EventArgs e )</i>
+                      <i Type="ClassOrNamespace">public partial class AspectWindowPane : UserControl , IAspectWindow</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="Место фактического добавления/изменения" NL="0" NG="0">
+                    <FileName>\System\Core\UI\FmAddPoint.cs</FileName>
+                    <Text>private void bOk_Click(object sender, EventArgs e)</Text>
+                    <OCtx>
+                      <i Type="Method">private void bOk_Click ( object sender , EventArgs e )</i>
+                      <i Type="ClassOrNamespace">public partial class fmAddPoint : Form</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                </Items>
+              </Node>
             </Items>
           </Node>
-          <Node Name="Внутренний контекст и привязка к промежуточным узлам">
+          <Node Name="Внутренний контекст и привязка к промежуточным узлам" NL="0" NG="0">
             <Items>
-              <Node Name="Поле в PointOfInterest">
+              <Node Name="Поле в PointOfInterest" NL="0" NG="0">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Убедиться, что сохраняется и читается</Note>
                 <Text>public List&lt;InnerContextNode&gt; InnerContext;</Text>
@@ -721,7 +795,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="Тип поля - InnerContextNode">
+                  <Node Name="Тип поля - InnerContextNode" NL="0" NG="0">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>public class InnerContextNode</Text>
                     <OCtx>
@@ -736,7 +810,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">[ XmlIgnore ] public bool SubNodesSpecified</i>
                     </ICtx>
                   </Node>
-                  <Node Name="Заполнение поля">
+                  <Node Name="Заполнение поля" NL="0" NG="0">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>public void ApplyInnerContext()</Text>
                     <OCtx>
@@ -747,7 +821,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                   </Node>
-                  <Node Name="Выбор структуры поля">
+                  <Node Name="Выбор структуры поля" NL="0" NG="0">
                     <FileName>\system\core\classes.cs</FileName>
                     <Text>//Вариант</Text>
                     <OCtx>
@@ -760,7 +834,7 @@ False - узел должен содержать хотя бы один поду
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Учет контекста при поиске">
+              <Node Name="Учет контекста при поиске" NL="0" NG="0">
                 <FileName>\system\core\treesearchengine.cs</FileName>
                 <OCtx>
                   <i Type="">private static void ProcessInnerContext ( TreeSearchResult Result , PointOfInterest Point )</i>
@@ -770,7 +844,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Включение привязки в интерфейсе">
+              <Node Name="Включение привязки в интерфейсе" NL="0" NG="0">
                 <FileName>\System\Core\UI\FmAddPoint.cs</FileName>
                 <Note>Проверка уникальности узла. Если узел не уникален - внутренний контекст запоминается</Note>
                 <Text>public partial class fmAddPoint : Form</Text>
@@ -781,7 +855,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Структура дерева в парсере Паскаля">
+              <Node Name="Структура дерева в парсере Паскаля" NL="0" NG="0">
                 <FileName>\Parsers\LWParserPascal\ParserDescriptor.lp</FileName>
                 <Note>Готово</Note>
                 <Text>Rule Defs :				[@tkDefs|@"type"] List1(FieldOrClass)</Text>
@@ -791,7 +865,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Доделать: поиск с учетом промежуточных узлов">
+              <Node Name="Доделать: поиск с учетом промежуточных узлов" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
                 <Note>Поиск узла в дереве аспектов должен учитывать привязку не только к листу дерева разбора, но и к промежуточным узлам.</Note>
                 <Text>PointOfInterest pt = EditPointHelper.FindPointUnderCursor(ide, treeManager);</Text>
@@ -803,7 +877,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Ограничение на внутренний контекст">
+              <Node Name="Ограничение на внутренний контекст" NL="0" NG="0">
                 <FileName>\system\core\classes.cs</FileName>
                 <Note>Пока - линейный список из не более чем 10 элементов.</Note>
                 <Text>public void ApplyInnerContext()</Text>
@@ -815,7 +889,7 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
                 <Items>
-                  <Node Name="Константа MaxInnerContectCount">
+                  <Node Name="Константа MaxInnerContectCount" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Text>public const int MaxInnerContectCount = 10;</Text>
                     <OCtx>
@@ -830,11 +904,11 @@ False - узел должен содержать хотя бы один поду
               </Node>
             </Items>
           </Node>
-          <Node Name="Поиск">
+          <Node Name="Поиск" NL="0" NG="0">
             <Items>
-              <Node Name="Движок поиска">
+              <Node Name="Движок поиска" NL="0" NG="0">
                 <Items>
-                  <Node Name="Главный класс TreeSearchEngine">
+                  <Node Name="Главный класс TreeSearchEngine" NL="0" NG="0">
                     <FileName>\system\core\treesearchengine.cs</FileName>
                     <Text>public class TreeSearchEngine</Text>
                     <OCtx>
@@ -844,7 +918,7 @@ False - узел должен содержать хотя бы один поду
                       </i>
                     </OCtx>
                     <Items>
-                      <Node Name="Главный метод поиска FindPointInTree">
+                      <Node Name="Главный метод поиска FindPointInTree" NL="0" NG="0">
                         <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                         <Text>public TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)</Text>
                         <OCtx>
@@ -857,7 +931,7 @@ False - узел должен содержать хотя бы один поду
                       </Node>
                     </Items>
                   </Node>
-                  <Node Name="Сравнение объектов, класс TreeSearchComparer">
+                  <Node Name="Сравнение объектов, класс TreeSearchComparer" NL="0" NG="0">
                     <FileName>\system\core\treesearchengine.cs</FileName>
                     <Note>Класс TreeSearchComparer реализует набор методов для четкого и нечеткого сравнения строк, списков строк.</Note>
                     <Text>private static class TreeSearchComparer</Text>
@@ -872,7 +946,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">public bool ListsEqual ( List &lt; List &lt; string &gt; &gt; L1 , List &lt; List &lt; string &gt; &gt; L2 )</i>
                     </ICtx>
                     <Items>
-                      <Node Name="Класс LevenshteinSimilarity">
+                      <Node Name="Класс LevenshteinSimilarity" NL="0" NG="0">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Реализуем методы, возвращающие степень похожести для строк, имен (списков строк), контекстов (списков списков строк)</Note>
                         <Text>private static class LevenshteinSimilarity</Text>
@@ -890,7 +964,7 @@ False - узел должен содержать хотя бы один поду
                           <i Type="">public static int GetSimilarity ( string S1 , string S2 )</i>
                         </ICtx>
                       </Node>
-                      <Node Name="Класс JaroWinklerSimilarity">
+                      <Node Name="Класс JaroWinklerSimilarity" NL="0" NG="0">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Содержит метод, вычисляющий степень похожести двух строк.</Note>
                         <Text>private static class JaroWinklerSimilarity</Text>
@@ -908,7 +982,7 @@ False - узел должен содержать хотя бы один поду
                           <i Type="">public static int Similarity ( string S1 , string S2 )</i>
                         </ICtx>
                       </Node>
-                      <Node Name="Ключ для словаря">
+                      <Node Name="Ключ для словаря" NL="0" NG="0">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Так как степень похожести строк вычисляется часто, имеет смысл запоминать результаты вычисления в словаре.
 Данный класс хранит пару строк и используется в качестве ключа для методов вычисления степени похожести пары строк.
@@ -925,7 +999,7 @@ False - узел должен содержать хотя бы один поду
                       </Node>
                     </Items>
                   </Node>
-                  <Node Name="Поиск текстовой строки TextSearch">
+                  <Node Name="Поиск текстовой строки TextSearch" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Класс инициализируется текстом текущего файла и содержит метод для нечеткого поиска строки-образца в заданном диапазоне. Возвращает номер наиболее похожей строки и степень ее похожести.</Note>
                     <Text>internal class TextSearch</Text>
@@ -943,7 +1017,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">private List &lt; List &lt; string &gt; &gt; TokenizeStrings ( string [ ] Array , int start , int end )</i>
                     </ICtx>
                   </Node>
-                  <Node Name="Опции поиска TreeSearchOptions">
+                  <Node Name="Опции поиска TreeSearchOptions" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Text>internal static class TreeSearchOptions</Text>
                     <OCtx>
@@ -960,7 +1034,7 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">public const int MaxDistanceDifference = 5</i>
                     </ICtx>
                   </Node>
-                  <Node Name="Класс результата TreeSearchResult">
+                  <Node Name="Класс результата TreeSearchResult" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Хранит массив элементов результата.
 Умеет сортировать массив в соответствии с заданными весами компонентовм.
@@ -988,7 +1062,7 @@ TODO: отсечение слишком непохожих результато�
                       <i Type="">public void Sort ( int NameWeight , int OuterCtxWeight , int InnerCtxWeight , int TextWeight )</i>
                     </ICtx>
                   </Node>
-                  <Node Name="Элемент результата TreeSearchResultNode">
+                  <Node Name="Элемент результата TreeSearchResultNode" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Хранит узел дерева и степень похожести его компонентов на искомый узел</Note>
                     <Text>internal class TreeSearchResultNode</Text>
@@ -1008,10 +1082,9 @@ TODO: отсечение слишком непохожих результато�
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Доделать">
+              <Node Name="Доделать" NL="0" NG="0">
                 <Items>
-                  <Node Name="Протестировать все" />
-                  <Node Name="Чувствительность к регистру">
+                  <Node Name="Чувствительность к регистру" NL="0" NG="0">
                     <FileName>\System\Core\TreeSearchEngine.cs</FileName>
                     <Note>Если исходный язык нечувствительный к регистру - учесть это при сравнении</Note>
                     <Text>public static int Similarity(string S1, string S2)</Text>
@@ -1024,7 +1097,7 @@ TODO: отсечение слишком непохожих результато�
                       </i>
                     </OCtx>
                     <Items>
-                      <Node Name="Добавить в интерфейс парсера информацию о регистре">
+                      <Node Name="Добавить в интерфейс парсера информацию о регистре" NL="0" NG="0">
                         <FileName>\System\Core\Classes.cs</FileName>
                         <Text>public abstract class LightweightParserBase</Text>
                         <OCtx>
@@ -1045,11 +1118,74 @@ TODO: отсечение слишком непохожих результато�
                   </Node>
                 </Items>
               </Node>
+              <Node Name="Сохранение метрики похожести" NL="0" NG="0">
+                <Items>
+                  <Node Name="Вычисление констант NearL/G" NL="0" NG="0">
+                    <FileName>\system\core\treesearchengine.cs</FileName>
+                    <Note>Множества TreeL/G получены, осталось вычислить степени похожести имен и найти наиболее похожее</Note>
+                    <Text>public static void GetNearLG(PointOfInterest TreeRoot, PointOfInterest point, out float NearL, out float NearG)</Text>
+                    <OCtx>
+                      <i Type="Method">public static void GetNearLG ( PointOfInterest TreeRoot , PointOfInterest point , out float NearL , out float NearG )</i>
+                      <i Type="ClassOrNamespace">public class TreeSearchEngine</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="GetNeighbours" NL="0" NG="0">
+                    <FileName>\system\core\treesearchengine.cs</FileName>
+                    <Note>Получение множества соседей.
+Используется для разделения множества всех узлов на два множества - локальные и глобальные узлы по отношению к искомому</Note>
+                    <Text>private static HashSet&lt;PointOfInterest&gt; GetNeighbours(PointOfInterest TreeRoot, PointOfInterest point)</Text>
+                    <OCtx>
+                      <i Type="Method">private static HashSet &lt; PointOfInterest &gt; GetNeighbours ( PointOfInterest TreeRoot , PointOfInterest point )</i>
+                      <i Type="ClassOrNamespace">public class TreeSearchEngine</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="GetMaxSimilarityByName" NL="0" NG="0">
+                    <FileName>\system\core\treesearchengine.cs</FileName>
+                    <Note>Вычисляет метрику имени для наиболее похожего узла в заданном множестве</Note>
+                    <Text>private static float GetMaxSimilarityByName(TreeSearchResult Nodes, PointOfInterest point)</Text>
+                    <OCtx>
+                      <i Type="Method">private static float GetMaxSimilarityByName ( TreeSearchResult Nodes , PointOfInterest point )</i>
+                      <i Type="ClassOrNamespace">public class TreeSearchEngine</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="NearL" NL="0" NG="0">
+                    <FileName>\system\core\classes.cs</FileName>
+                    <Text>public float NearL = 0;</Text>
+                    <OCtx>
+                      <i Type="Field">public float NearL = 0</i>
+                      <i Type="ClassOrNamespace">public class PointOfInterest : ISerializable</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                  <Node Name="NearG" NL="0" NG="0">
+                    <FileName>\system\core\classes.cs</FileName>
+                    <Text>public float NearG = 0;</Text>
+                    <OCtx>
+                      <i Type="Field">public float NearG = 0</i>
+                      <i Type="ClassOrNamespace">public class PointOfInterest : ISerializable</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
+                      </i>
+                    </OCtx>
+                  </Node>
+                </Items>
+              </Node>
             </Items>
           </Node>
-          <Node Name="Парсеры">
+          <Node Name="Парсеры" NL="0" NG="0">
             <Items>
-              <Node Name="Главный классParserWrapper">
+              <Node Name="Главный классParserWrapper" NL="0" NG="0">
                 <FileName>\System\Core\ParserWrapper.cs</FileName>
                 <Text>public class ParserWrapper</Text>
                 <OCtx>
@@ -1073,35 +1209,9 @@ TODO: отсечение слишком непохожих результато�
               </Node>
             </Items>
           </Node>
-          <Node Name="Отмена действий">
+          <Node Name="Хранение синтаксических деревьев" NL="0" NG="0">
             <Items>
-              <Node Name="Главный класс UndoEngine">
-                <FileName>\System\Core\UndoEngine.cs</FileName>
-                <Text>public class UndoEngine</Text>
-                <OCtx>
-                  <i Type="ClassOrNamespace">public class UndoEngine</i>
-                  <i Type="ClassOrNamespace">namespace AspectCore</i>
-                  <i Type="CS_TreeNode">
-                  </i>
-                </OCtx>
-                <ICtx>
-                  <i Type="Field">private Stack &lt; UndoUnit &gt; UndoStack = new Stack &lt; UndoUnit &gt; ( )</i>
-                  <i Type="Field">private Stack &lt; UndoUnit &gt; RedoStack = new Stack &lt; UndoUnit &gt; ( )</i>
-                  <i Type="Method">private UndoUnit CreateUndoUnit ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
-                  <i Type="Method">public void SavePointState ( PointOfInterest point , PointOfInterest parent , ActionKind kind , PointOfInterest newParent = null )</i>
-                  <i Type="Method">private UndoUnit CreateReverseUndoAction ( UndoUnit unit )</i>
-                  <i Type="Method">public UndoUnit Undo ( )</i>
-                  <i Type="Method">public UndoUnit Redo ( )</i>
-                  <i Type="Method">public void Clear ( )</i>
-                  <i Type="Method">public bool HasUndoActions ( )</i>
-                  <i Type="Method">public bool HasRedoActions ( )</i>
-                </ICtx>
-              </Node>
-            </Items>
-          </Node>
-          <Node Name="Хранение синтаксических деревьев">
-            <Items>
-              <Node Name="Главный класс TreeManager">
+              <Node Name="Главный класс TreeManager" NL="0" NG="0">
                 <FileName>\System\Core\TreeManager.cs</FileName>
                 <Text>public class TreeManager</Text>
                 <OCtx>
@@ -1125,9 +1235,9 @@ TODO: отсечение слишком непохожих результато�
               </Node>
             </Items>
           </Node>
-          <Node Name="Интеграция в IDE">
+          <Node Name="Интеграция в IDE" NL="0" NG="0">
             <Items>
-              <Node Name="Интерфейс IDEInterop">
+              <Node Name="Интерфейс IDEInterop" NL="0" NG="0">
                 <FileName>\System\Core\IDEInterop.cs</FileName>
                 <Text>public class IDEInterop</Text>
                 <OCtx>
@@ -1151,11 +1261,11 @@ TODO: отсечение слишком непохожих результато�
               </Node>
             </Items>
           </Node>
-          <Node Name="Хранение дерева аспектов AXML">
+          <Node Name="Хранение дерева аспектов AXML" NL="0" NG="0">
             <Items>
-              <Node Name="Реализация чтения: по версиям">
+              <Node Name="Реализация чтения: по версиям" NL="0" NG="0">
                 <Items>
-                  <Node Name="AspectFileReader">
+                  <Node Name="AspectFileReader" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Note>Базовый класс</Note>
                     <Text>internal class AspectFileReader</Text>
@@ -1171,7 +1281,7 @@ TODO: отсечение слишком непохожих результато�
                       <i Type="Method">protected static List &lt; string &gt; TryReadListOfStrings ( XmlNode Node )</i>
                     </ICtx>
                   </Node>
-                  <Node Name="AspectFileV1Reader">
+                  <Node Name="AspectFileV1Reader" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Note>Чтение первой версии XML</Note>
                     <Text>internal class AspectFileV1Reader : AspectFileReader</Text>
@@ -1188,7 +1298,7 @@ TODO: отсечение слишком непохожих результато�
                       <i Type="Method">private static List &lt; InnerContextNode &gt; TryReadInnerContext ( XmlNode Node )</i>
                     </ICtx>
                   </Node>
-                  <Node Name="AspectFileV2Reader">
+                  <Node Name="AspectFileV2Reader" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Note>Чтение второй версии XML</Note>
                     <Text>internal class AspectFileV2Reader : AspectFileReader</Text>
@@ -1206,7 +1316,7 @@ TODO: отсечение слишком непохожих результато�
                       <i Type="Method">private static InnerContextNode TryReadInnerContextNode ( XmlNode Node )</i>
                     </ICtx>
                   </Node>
-                  <Node Name="AspectFileV3Reader">
+                  <Node Name="AspectFileV3Reader" NL="0" NG="0">
                     <FileName>\system\core\aspectmanager.cs</FileName>
                     <Note>Чтение третьей версии XML</Note>
                     <Text>internal class AspectFileV3Reader : AspectFileReader</Text>
@@ -1226,7 +1336,7 @@ TODO: отсечение слишком непохожих результато�
                   </Node>
                 </Items>
               </Node>
-              <Node Name="Реализация записи: AspectFileBuilder">
+              <Node Name="Реализация записи: AspectFileBuilder" NL="0" NG="0">
                 <FileName>\system\core\aspectmanager.cs</FileName>
                 <Note>Класс, сохраняющий дерево аспектов в XML текущей версии</Note>
                 <Text>internal class AspectFileBuilder</Text>
@@ -1244,7 +1354,7 @@ TODO: отсечение слишком непохожих результато�
                   <i Type="Method">private static XmlNode BuildPoint ( PointOfInterest Point , XmlDocument Doc )</i>
                 </ICtx>
               </Node>
-              <Node Name="Чтение / Выбор версии">
+              <Node Name="Чтение / Выбор версии" NL="0" NG="0">
                 <FileName>\system\core\aspectmanager.cs</FileName>
                 <Text>if (attr.Name == "Version")</Text>
                 <OCtx>
@@ -1255,9 +1365,9 @@ TODO: отсечение слишком непохожих результато�
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Опасные места">
+              <Node Name="Опасные места" NL="0" NG="0">
                 <Items>
-                  <Node Name="Жестко зашитые константы EOF">
+                  <Node Name="Жестко зашитые константы EOF" NL="0" NG="0">
                     <FileName>\System\Core\AspectManager.cs</FileName>
                     <Note>Для Standalone лексера (CommonLexer) EOF == 0.
 Если для лексера есть парсер, то лексемы определены в парсере и там EOF == 3.

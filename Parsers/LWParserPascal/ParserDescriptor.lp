@@ -2,7 +2,7 @@
 %CaseInsensitive
 
 Skip Begin "//"
-Skip Begin "#"
+//Skip Begin "#"
 Skip Begin "{" End "}"
 Skip Begin "/*" End "*/"
 Skip BeginEnd "'" EscapeSymbol "'"
@@ -21,12 +21,12 @@ Rule tkInitFinal: @"initialization" | @"finalization"
 Rule tkInterf: @"interface"
 Rule tkImpl: @"implementation"
 
-Rule Params : @"(" [@Any|@Params]* @")"
+Rule Params : @"(" [@Any|@Params]* @")" | @"where" @Tk2* ";"
 Rule @Block : tkCodeOpen [Any | Block]* "end"
 Rule Attribute : @"[" [@Any | @Attribute]* @"]"
 
 Rule Tk: @LetterDigits | @Sign | @Params | @"."
-Rule Tk2: @LetterDigits | @Sign | @Params | @"." | @tkMethod | @"type" | @"[" |@"]"
+Rule Tk2: @LetterDigits | @Sign | @Params | @"." | @tkMethod | @"type" | @"[" |@"]" | @"label"
 
 Rule Program :		List0(ProgramNode) [#Block "." | "end" "."] Any* 
 
@@ -53,7 +53,8 @@ Rule InterfNode:		#Defs
 						| #error
 
 Rule Field : 			@Tk @Tk2* ";"
-Rule Class : 			@Tk @Tk2* @tkClassOpen @Params? List0(ClassNode) "end" ";"
+						| @"record" #Field* "end" @Tk2* ";"
+Rule Class : 			@Tk @Tk2* @tkClassOpen @Params* List0(ClassNode) "end" ";"
 	
 Rule Method: 			@MethodHeader #MethodBody
 Rule MethodHeader: 		@"class"? @tkMethod @Tk2* ";" @DirectiveHeader*

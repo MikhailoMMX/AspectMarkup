@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  BLUEGENE
-// DateTime: 23.11.2015 20:39:48
+// DateTime: 08.07.2016 1:40:31
 // UserName: MikhailoMMX
-// Input file <LWParser.y - 23.11.2015 20:39:48>
+// Input file <LWParser.y - 08.07.2016 1:36:02>
 
 // options: no-lines gplex
 
@@ -21,7 +21,7 @@ using AspectCore;
 namespace LWParser
 {
 public enum Tokens {error=2,EOF=3,LetterDigits=4,Sign=5,tkClassNamespace=6,
-    _Copen=7,_Cclose=8,_Scolon=9};
+    _Copen=7,_Cclose=8,_Scolon=9,_enum=10};
 
 public partial class ValueType
 { 
@@ -31,6 +31,7 @@ public partial class ValueType
   public ClassOrNamespace type_ClassOrNamespace;
   public Field type_Field;
   public Method type_Method;
+  public Enum type_Enum;
   public SourceEntityUniformSet type_SourceEntityUniformSet;
 
 }
@@ -59,70 +60,102 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[25];
-  private static State[] states = new State[30];
+  private static Rule[] rules = new Rule[38];
+  private static State[] states = new State[48];
   private static string[] nonTerms = new string[] {
       "Program", "_ANY", "Block", "Tk", "ProgramNode", "ClassOrNamespace", "Field", 
-      "Method", "_ANY7", "_", "_ProgramNode_list", "_Tk_list", "$accept", };
+      "Method", "Enum", "_ANY7", "_ANY8", "_", "_ProgramNode_list", "_Tk_list", 
+      "__Scolon_opt", "__ANY8_list", "$accept", };
 
   static Parser() {
-    states[0] = new State(-21,new int[]{-1,1,-11,3}, new int[]{1,0});
+    states[0] = new State(-30,new int[]{-1,1,-13,3}, new int[]{1,0});
     states[1] = new State(new int[]{3,2},new int[]{}, new int[]{1,1});
     states[2] = new State(-1,new int[]{}, new int[]{1,2});
-    states[3] = new State(new int[]{2,14,3,-8,6,-23,9,-23,4,-23,5,-23,7,-23},new int[]{-5,4,-6,5,-12,6,-7,12,-8,13}, new int[]{8,1});
-    states[4] = new State(-22,new int[]{}, new int[]{22,2});
-    states[5] = new State(-9,new int[]{}, new int[]{9,1});
-    states[6] = new State(new int[]{6,7,9,19,4,17,5,18,7,21},new int[]{-4,15,-3,20,-9,16}, new int[]{13,1,14,1,15,1});
-    states[7] = new State(-23,new int[]{-12,8}, new int[]{13,2});
-    states[8] = new State(new int[]{7,9,4,17,5,18},new int[]{-4,15,-9,16}, new int[]{13,3});
-    states[9] = new State(-21,new int[]{-11,10}, new int[]{13,4});
-    states[10] = new State(new int[]{8,11,2,14,6,-23,9,-23,4,-23,5,-23,7,-23},new int[]{-5,4,-6,5,-12,6,-7,12,-8,13}, new int[]{13,5});
-    states[11] = new State(-13,new int[]{}, new int[]{13,6});
-    states[12] = new State(-10,new int[]{}, new int[]{10,1});
-    states[13] = new State(-11,new int[]{}, new int[]{11,1});
-    states[14] = new State(-12,new int[]{}, new int[]{12,1});
-    states[15] = new State(-24,new int[]{}, new int[]{24,2});
-    states[16] = new State(-7,new int[]{}, new int[]{7,1});
-    states[17] = new State(-16,new int[]{}, new int[]{16,1});
-    states[18] = new State(-17,new int[]{}, new int[]{17,1});
-    states[19] = new State(-14,new int[]{}, new int[]{14,2});
-    states[20] = new State(-15,new int[]{}, new int[]{15,2});
-    states[21] = new State(-18,new int[]{-10,22}, new int[]{6,1});
-    states[22] = new State(new int[]{8,23,4,26,5,27,6,28,9,29,7,21},new int[]{-2,24,-3,25}, new int[]{6,2});
-    states[23] = new State(-6,new int[]{}, new int[]{6,3});
-    states[24] = new State(-19,new int[]{}, new int[]{19,2});
-    states[25] = new State(-20,new int[]{}, new int[]{20,2});
-    states[26] = new State(-2,new int[]{}, new int[]{2,1});
-    states[27] = new State(-3,new int[]{}, new int[]{3,1});
-    states[28] = new State(-4,new int[]{}, new int[]{4,1});
-    states[29] = new State(-5,new int[]{}, new int[]{5,1});
+    states[3] = new State(new int[]{2,17,3,-9,6,-32,9,-32,10,-32,4,-32,5,-32,7,-32},new int[]{-5,4,-6,5,-14,6,-7,14,-8,15,-9,16}, new int[]{9,1});
+    states[4] = new State(-31,new int[]{}, new int[]{31,2});
+    states[5] = new State(-10,new int[]{}, new int[]{10,1});
+    states[6] = new State(new int[]{6,7,9,22,10,25,4,20,5,21,7,38},new int[]{-4,18,-3,23,-10,19}, new int[]{15,1,16,1,17,1,18,1});
+    states[7] = new State(-32,new int[]{-14,8}, new int[]{15,2});
+    states[8] = new State(new int[]{7,9,4,20,5,21},new int[]{-4,18,-10,19}, new int[]{15,3});
+    states[9] = new State(-30,new int[]{-13,10}, new int[]{15,4});
+    states[10] = new State(new int[]{8,11,2,17,6,-32,9,-32,10,-32,4,-32,5,-32,7,-32},new int[]{-5,4,-6,5,-14,6,-7,14,-8,15,-9,16}, new int[]{15,5});
+    states[11] = new State(new int[]{9,13,2,-34,6,-34,10,-34,4,-34,5,-34,7,-34,3,-34,8,-34},new int[]{-15,12}, new int[]{15,6});
+    states[12] = new State(-15,new int[]{}, new int[]{15,7});
+    states[13] = new State(-35,new int[]{}, new int[]{35,1});
+    states[14] = new State(-11,new int[]{}, new int[]{11,1});
+    states[15] = new State(-12,new int[]{}, new int[]{12,1});
+    states[16] = new State(-13,new int[]{}, new int[]{13,1});
+    states[17] = new State(-14,new int[]{}, new int[]{14,1});
+    states[18] = new State(-33,new int[]{}, new int[]{33,2});
+    states[19] = new State(-8,new int[]{}, new int[]{8,1});
+    states[20] = new State(-19,new int[]{}, new int[]{19,1});
+    states[21] = new State(-20,new int[]{}, new int[]{20,1});
+    states[22] = new State(-16,new int[]{}, new int[]{16,2});
+    states[23] = new State(new int[]{9,13,2,-34,6,-34,10,-34,4,-34,5,-34,7,-34,3,-34,8,-34},new int[]{-15,24}, new int[]{17,2});
+    states[24] = new State(-17,new int[]{}, new int[]{17,3});
+    states[25] = new State(-32,new int[]{-14,26}, new int[]{18,2});
+    states[26] = new State(new int[]{7,27,4,20,5,21},new int[]{-4,18,-10,19}, new int[]{18,3});
+    states[27] = new State(-36,new int[]{-16,28}, new int[]{18,4});
+    states[28] = new State(new int[]{8,29,4,32,5,33,6,34,7,35,9,36,10,37},new int[]{-11,31}, new int[]{18,5});
+    states[29] = new State(new int[]{9,13,2,-34,6,-34,10,-34,4,-34,5,-34,7,-34,3,-34,8,-34},new int[]{-15,30}, new int[]{18,6});
+    states[30] = new State(-18,new int[]{}, new int[]{18,7});
+    states[31] = new State(-37,new int[]{}, new int[]{37,2});
+    states[32] = new State(-21,new int[]{}, new int[]{21,1});
+    states[33] = new State(-22,new int[]{}, new int[]{22,1});
+    states[34] = new State(-23,new int[]{}, new int[]{23,1});
+    states[35] = new State(-24,new int[]{}, new int[]{24,1});
+    states[36] = new State(-25,new int[]{}, new int[]{25,1});
+    states[37] = new State(-26,new int[]{}, new int[]{26,1});
+    states[38] = new State(-27,new int[]{-12,39}, new int[]{7,1});
+    states[39] = new State(new int[]{8,40,4,43,5,44,6,45,9,46,10,47,7,38},new int[]{-2,41,-3,42}, new int[]{7,2});
+    states[40] = new State(-7,new int[]{}, new int[]{7,3});
+    states[41] = new State(-28,new int[]{}, new int[]{28,2});
+    states[42] = new State(-29,new int[]{}, new int[]{29,2});
+    states[43] = new State(-2,new int[]{}, new int[]{2,1});
+    states[44] = new State(-3,new int[]{}, new int[]{3,1});
+    states[45] = new State(-4,new int[]{}, new int[]{4,1});
+    states[46] = new State(-5,new int[]{}, new int[]{5,1});
+    states[47] = new State(-6,new int[]{}, new int[]{6,1});
 
     for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
-    rules[1] = new Rule(-13, new int[]{-1,3});
+    rules[1] = new Rule(-17, new int[]{-1,3});
     rules[2] = new Rule(-2, new int[]{4});
     rules[3] = new Rule(-2, new int[]{5});
     rules[4] = new Rule(-2, new int[]{6});
     rules[5] = new Rule(-2, new int[]{9});
-    rules[6] = new Rule(-3, new int[]{7,-10,8});
-    rules[7] = new Rule(-4, new int[]{-9});
-    rules[8] = new Rule(-1, new int[]{-11});
-    rules[9] = new Rule(-5, new int[]{-6});
-    rules[10] = new Rule(-5, new int[]{-7});
-    rules[11] = new Rule(-5, new int[]{-8});
-    rules[12] = new Rule(-5, new int[]{2});
-    rules[13] = new Rule(-6, new int[]{-12,6,-12,7,-11,8});
-    rules[14] = new Rule(-7, new int[]{-12,9});
-    rules[15] = new Rule(-8, new int[]{-12,-3});
-    rules[16] = new Rule(-9, new int[]{4});
-    rules[17] = new Rule(-9, new int[]{5});
-    rules[18] = new Rule(-10, new int[]{});
-    rules[19] = new Rule(-10, new int[]{-10,-2});
-    rules[20] = new Rule(-10, new int[]{-10,-3});
-    rules[21] = new Rule(-11, new int[]{});
-    rules[22] = new Rule(-11, new int[]{-11,-5});
-    rules[23] = new Rule(-12, new int[]{});
-    rules[24] = new Rule(-12, new int[]{-12,-4});
+    rules[6] = new Rule(-2, new int[]{10});
+    rules[7] = new Rule(-3, new int[]{7,-12,8});
+    rules[8] = new Rule(-4, new int[]{-10});
+    rules[9] = new Rule(-1, new int[]{-13});
+    rules[10] = new Rule(-5, new int[]{-6});
+    rules[11] = new Rule(-5, new int[]{-7});
+    rules[12] = new Rule(-5, new int[]{-8});
+    rules[13] = new Rule(-5, new int[]{-9});
+    rules[14] = new Rule(-5, new int[]{2});
+    rules[15] = new Rule(-6, new int[]{-14,6,-14,7,-13,8,-15});
+    rules[16] = new Rule(-7, new int[]{-14,9});
+    rules[17] = new Rule(-8, new int[]{-14,-3,-15});
+    rules[18] = new Rule(-9, new int[]{-14,10,-14,7,-16,8,-15});
+    rules[19] = new Rule(-10, new int[]{4});
+    rules[20] = new Rule(-10, new int[]{5});
+    rules[21] = new Rule(-11, new int[]{4});
+    rules[22] = new Rule(-11, new int[]{5});
+    rules[23] = new Rule(-11, new int[]{6});
+    rules[24] = new Rule(-11, new int[]{7});
+    rules[25] = new Rule(-11, new int[]{9});
+    rules[26] = new Rule(-11, new int[]{10});
+    rules[27] = new Rule(-12, new int[]{});
+    rules[28] = new Rule(-12, new int[]{-12,-2});
+    rules[29] = new Rule(-12, new int[]{-12,-3});
+    rules[30] = new Rule(-13, new int[]{});
+    rules[31] = new Rule(-13, new int[]{-13,-5});
+    rules[32] = new Rule(-14, new int[]{});
+    rules[33] = new Rule(-14, new int[]{-14,-4});
+    rules[34] = new Rule(-15, new int[]{});
+    rules[35] = new Rule(-15, new int[]{9});
+    rules[36] = new Rule(-16, new int[]{});
+    rules[37] = new Rule(-16, new int[]{-16,-11});
   }
 
   protected override void Initialize() {
@@ -174,7 +207,16 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 
 	}
         break;
-      case 6: // Block -> _Copen, _, _Cclose
+      case 6: // _ANY -> _enum
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 7: // Block -> _Copen, _, _Cclose
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-3].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -182,7 +224,7 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 
 	}
         break;
-      case 7: // Tk -> _ANY7
+      case 8: // Tk -> _ANY7
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -190,7 +232,7 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 
 	}
         break;
-      case 8: // Program -> _ProgramNode_list
+      case 9: // Program -> _ProgramNode_list
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -198,7 +240,7 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 		root = CurrentSemanticValue.type_CS_TreeNode;
 	}
         break;
-      case 9: // ProgramNode -> ClassOrNamespace
+      case 10: // ProgramNode -> ClassOrNamespace
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -206,7 +248,7 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 errBegin = CurrentLocationSpan;
 	}
         break;
-      case 10: // ProgramNode -> Field
+      case 11: // ProgramNode -> Field
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -214,7 +256,7 @@ errBegin = CurrentLocationSpan;
 errBegin = CurrentLocationSpan;
 	}
         break;
-      case 11: // ProgramNode -> Method
+      case 12: // ProgramNode -> Method
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -222,7 +264,15 @@ errBegin = CurrentLocationSpan;
 errBegin = CurrentLocationSpan;
 	}
         break;
-      case 12: // ProgramNode -> error
+      case 13: // ProgramNode -> Enum
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Enum);
+errBegin = CurrentLocationSpan;
+	}
+        break;
+      case 14: // ProgramNode -> error
 {
         CurrentLocationSpan = new LexLocation(errBegin.EndLine, errBegin.EndColumn, LocationStack[LocationStack.Depth-1].StartLine, LocationStack[LocationStack.Depth-1].StartColumn);
         CS_TreeNode err = new CS_TreeNode((Scanner as Scanner).errorMsg, CurrentLocationSpan);
@@ -230,19 +280,19 @@ errBegin = CurrentLocationSpan;
         errBegin = CurrentLocationSpan;
     }
         break;
-      case 13: // ClassOrNamespace -> _Tk_list, tkClassNamespace, _Tk_list, _Copen, 
-               //                     _ProgramNode_list, _Cclose
+      case 15: // ClassOrNamespace -> _Tk_list, tkClassNamespace, _Tk_list, _Copen, 
+               //                     _ProgramNode_list, _Cclose, __Scolon_opt
 {
-		CurrentSemanticValue.type_ClassOrNamespace = new ClassOrNamespace(new List<string>(), LocationStack[LocationStack.Depth-6].Merge(LocationStack[LocationStack.Depth-1]));
+		CurrentSemanticValue.type_ClassOrNamespace = new ClassOrNamespace(new List<string>(), LocationStack[LocationStack.Depth-7].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_ClassOrNamespace.Location;
-		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-6].type_CS_TreeNode);
-		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-5].type_Token);
-		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-4].type_CS_TreeNode);
-		CurrentSemanticValue.type_ClassOrNamespace.AddSubItems(ValueStack[ValueStack.Depth-2].type_CS_TreeNode);
+		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-7].type_CS_TreeNode);
+		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-6].type_Token);
+		CurrentSemanticValue.type_ClassOrNamespace.AddValue(ValueStack[ValueStack.Depth-5].type_CS_TreeNode);
+		CurrentSemanticValue.type_ClassOrNamespace.AddSubItems(ValueStack[ValueStack.Depth-3].type_CS_TreeNode);
 
 	}
         break;
-      case 14: // Field -> _Tk_list, _Scolon
+      case 16: // Field -> _Tk_list, _Scolon
 {
 		CurrentSemanticValue.type_Field = new Field(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_Field.Location;
@@ -250,15 +300,25 @@ errBegin = CurrentLocationSpan;
 
 	}
         break;
-      case 15: // Method -> _Tk_list, Block
+      case 17: // Method -> _Tk_list, Block, __Scolon_opt
 {
-		CurrentSemanticValue.type_Method = new Method(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+		CurrentSemanticValue.type_Method = new Method(new List<string>(), LocationStack[LocationStack.Depth-3].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_Method.Location;
-		CurrentSemanticValue.type_Method.AddValue(ValueStack[ValueStack.Depth-2].type_CS_TreeNode);
+		CurrentSemanticValue.type_Method.AddValue(ValueStack[ValueStack.Depth-3].type_CS_TreeNode);
 
 	}
         break;
-      case 16: // _ANY7 -> LetterDigits
+      case 18: // Enum -> _Tk_list, _enum, _Tk_list, _Copen, __ANY8_list, _Cclose, __Scolon_opt
+{
+		CurrentSemanticValue.type_Enum = new Enum(new List<string>(), LocationStack[LocationStack.Depth-7].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_Enum.Location;
+		CurrentSemanticValue.type_Enum.AddValue(ValueStack[ValueStack.Depth-7].type_CS_TreeNode);
+		CurrentSemanticValue.type_Enum.AddValue(ValueStack[ValueStack.Depth-6].type_Token);
+		CurrentSemanticValue.type_Enum.AddValue(ValueStack[ValueStack.Depth-5].type_CS_TreeNode);
+
+	}
+        break;
+      case 19: // _ANY7 -> LetterDigits
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -267,7 +327,7 @@ errBegin = CurrentLocationSpan;
 
 	}
         break;
-      case 17: // _ANY7 -> Sign
+      case 20: // _ANY7 -> Sign
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -276,35 +336,89 @@ errBegin = CurrentLocationSpan;
 
 	}
         break;
-      case 18: // _ -> /* empty */
+      case 21: // _ANY8 -> LetterDigits
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 22: // _ANY8 -> Sign
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 23: // _ANY8 -> tkClassNamespace
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 24: // _ANY8 -> _Copen
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 25: // _ANY8 -> _Scolon
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 26: // _ANY8 -> _enum
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 27: // _ -> /* empty */
 { CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 19: // _ -> _, _ANY
+      case 28: // _ -> _, _ANY
 { CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 20: // _ -> _, Block
+      case 29: // _ -> _, Block
 { CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 21: // _ProgramNode_list -> /* empty */
+      case 30: // _ProgramNode_list -> /* empty */
 { CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 22: // _ProgramNode_list -> _ProgramNode_list, ProgramNode
+      case 31: // _ProgramNode_list -> _ProgramNode_list, ProgramNode
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
@@ -315,14 +429,48 @@ errBegin = CurrentLocationSpan;
 
 	}
         break;
-      case 23: // _Tk_list -> /* empty */
+      case 32: // _Tk_list -> /* empty */
 { CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 24: // _Tk_list -> _Tk_list, Tk
+      case 33: // _Tk_list -> _Tk_list, Tk
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_CS_TreeNode);
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_CS_TreeNode);
+		CurrentSemanticValue.type_CS_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_CS_TreeNode);
+		CurrentSemanticValue.type_CS_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-1].type_CS_TreeNode);
+
+	}
+        break;
+      case 34: // __Scolon_opt -> /* empty */
+{ CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+        break;
+      case 35: // __Scolon_opt -> _Scolon
+{
+		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;
+		CurrentSemanticValue.type_CS_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_CS_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 36: // __ANY8_list -> /* empty */
+{ CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+        break;
+      case 37: // __ANY8_list -> __ANY8_list, _ANY8
 {
 		CurrentSemanticValue.type_CS_TreeNode = new CS_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
         CurrentLocationSpan = CurrentSemanticValue.type_CS_TreeNode.Location;

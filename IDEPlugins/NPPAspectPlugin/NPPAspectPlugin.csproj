@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NPPAspectPlugin</RootNamespace>
     <AssemblyName>NPPAspectPlugin</AssemblyName>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\System\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -39,7 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <Optimize>false</Optimize>
     <OutputPath>..\..\System\bin\</OutputPath>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

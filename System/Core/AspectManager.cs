@@ -279,6 +279,8 @@ namespace AspectCore
             Result.Name = Node.Attributes["Name"]?.InnerText;
             Result.Note = TryFindValue(Node, "Note");
             Result.Text = TryFindValue(Node, "Text");
+            float.TryParse(Node.Attributes["NL"]?.InnerText, out Result.NearL);
+            float.TryParse(Node.Attributes["NG"]?.InnerText, out Result.NearG);
 
             dynamic Lexer = _parserWrapper.GetLexer(Result.FileName ?? "")?.Scanner ?? new CommonLexer.Scanner();
 
@@ -424,6 +426,14 @@ namespace AspectCore
                     Items.AppendChild(BuildPoint(p, Doc));
                 Result.AppendChild(Items);
             }
+
+            XmlAttribute NearLAttr = Doc.CreateAttribute("NL");
+            XmlAttribute NearGAttr = Doc.CreateAttribute("NG");
+            NearLAttr.InnerText = Point.NearL.ToString();
+            NearGAttr.InnerText = Point.NearG.ToString();
+            Result.Attributes.Append(NearLAttr);
+            Result.Attributes.Append(NearGAttr);
+
             return Result;
         }
     }

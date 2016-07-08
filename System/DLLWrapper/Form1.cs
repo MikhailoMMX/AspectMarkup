@@ -214,5 +214,13 @@ namespace DLLWrapper
         {
             
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                AspectManager.SerializeAspect(saveFileDialog1.FileName);
+            }
+        }
     }
 }

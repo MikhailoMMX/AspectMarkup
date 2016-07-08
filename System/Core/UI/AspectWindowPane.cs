@@ -7,10 +7,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
-using AspectCore;
 using AspectCore.Helpers;
 using AspectCore.UI;
 
@@ -18,10 +19,10 @@ namespace AspectCore
 {
     public partial class AspectWindowPane : UserControl, IAspectWindow
     {
-        AspectCore.IDEInterop ide;
-        AspectCore.TreeManager treeManager = new TreeManager();
-        AspectCore.AspectManager Manager = new AspectCore.AspectManager();
-        AspectCore.TreeViewAdapter Adapter;
+        IDEInterop ide;
+        TreeManager treeManager = new TreeManager();
+        AspectManager Manager = new AspectCore.AspectManager();
+        TreeViewAdapter Adapter;
         int OldCursor = -2;
         FmEditNote fmEditNote = new FmEditNote();
         FmSelectPoint fmSelectPoint;
@@ -34,6 +35,8 @@ namespace AspectCore
             {
                 this.ide = ide;
                 KeyboardShortcutHelper.control = this;
+                //Hardcoded language
+                //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
                 InitializeComponent();
                 Adapter = new AspectCore.TreeViewAdapter(Manager, tvAspects);
                 fmSelectPoint = new FmSelectPoint(ide, treeManager);
@@ -339,16 +342,30 @@ namespace AspectCore
                 string fileName = Manager.GetFullFilePath(pt.FileName);
                 PointOfInterest Tree = ide.IsDocumentOpen(fileName) ? treeManager.GetTree(fileName, ide.GetDocument(fileName)) : treeManager.GetTree(fileName);
                 TreeSearchResult Search = TreeSearchEngine.FindPointInTree(Tree, pt, treeManager.GetText(fileName));
-                if (Search.Singular)
+                if (Search.Count == 0)
+                    SetStatus(string.Format(Strings.CannotFindPoint, pt.Name));
+                else if (Search.Singular && (ModifierKeys != Keys.Control))
                 {
+                    //update point anchor if similarity != 1
                     string path = Manager.GetFullFilePath(pt.FileName);
                     ide.NavigateToFileAndPosition(path, Search[0].Location.StartLine, Search[0].Location.StartColumn);
                     SetStatus("");
                 }
-                else if (Search.Count == 0)
-                    SetStatus(string.Format(Strings.CannotFindPoint, pt.Name));
                 else
                 {
+                    if (Search.Count >= 2)
+                    {
+                        float near = Math.Max(pt.NearG, pt.NearL);
+                        float threshold = (near + 4) / 5; //hardcoded
+                        if (Search._result[0].TotalMatch > threshold*TreeSearchOptions.Equility && Search._result[1].TotalMatch < threshold * TreeSearchOptions.Equility)
+                        {
+                            string path = Manager.GetFullFilePath(pt.FileName);
+                            ide.NavigateToFileAndPosition(path, Search[0].Location.StartLine, Search[0].Location.StartColumn);
+                            SetStatus("");
+                            return;
+                        }
+                    }
+
                     fmSelectPoint.Launch(Search, pt);
                     SetStatus("");
                 }
@@ -503,7 +520,6 @@ namespace AspectCore
 
         private void tsbRemovePoint_Click(object sender, EventArgs e)
         {
-            
             try
             {
                 if (tvAspects.SelectedNode != null)

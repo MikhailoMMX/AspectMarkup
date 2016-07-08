@@ -36,7 +36,8 @@ namespace AspectCore.Helpers
         /// <returns></returns>
         public static List<PointOfInterest> FindPointUnderCursor(IDEInterop ide, TreeManager treeManager)
         {
-            PointOfInterest root = ParseCurrentTextDocument(ide, treeManager);
+            string SourceText = ide.GetCurrentTextDocument();
+            PointOfInterest root = treeManager.GetTree(ide.GetCurrentDocumentFileName(), SourceText);
             LexLocation loc = ide.GetCursorPosition();
             string Text = ide.GetLine(loc.StartLine);
             List<PointOfInterest> Points = TreeSearchEngine.FindPointByLocation(root, loc.StartLine, loc.StartColumn);
@@ -50,22 +51,12 @@ namespace AspectCore.Helpers
                 p2.ApplyInnerContext();
                 p2.Items = new List<PointOfInterest>();
                 Result.Add(p2);
+                TreeSearchEngine.SetNearLG(root, pt, SourceText, out p2.NearL, out p2.NearG);
             }
 
             int len = loc.StartLine == loc.EndLine ? loc.EndColumn - loc.StartColumn : Text.Length - loc.StartColumn;
             Result[0].Name = GetCurrentWord(Text, loc.StartColumn, len);
             return Result;
-        }
-
-        /// <summary>
-        /// Возвращает корень дерева разобранного открытого в редакторе файла, с еще не сохраненными изменениями
-        /// </summary>
-        /// <param name="dte"></param>
-        /// <param name="Wrapper"></param>
-        /// <returns></returns>
-        public static PointOfInterest ParseCurrentTextDocument(IDEInterop ide, TreeManager treeManager)
-        {
-            return treeManager.GetTree(ide.GetCurrentDocumentFileName(), ide.GetCurrentTextDocument());
         }
 
         /// <summary>

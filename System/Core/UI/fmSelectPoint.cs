@@ -18,7 +18,9 @@ namespace AspectCore.UI
         private PointOfInterest _point;
         private string Pattern = "{0,-4} {1,-15} {2,-30}";
         private string _type = "Тип узла";
+        private string _typeEn = "Type";
         private string _name = "Имя узла";
+        private string _nameEn = "Name";
         private string _dist = "%";
 
         public FmSelectPoint(IDEInterop ide, TreeManager treeManager)
@@ -31,7 +33,10 @@ namespace AspectCore.UI
         private void BuildList()
         {
             lbCandidates.SelectedIndexChanged -= lbCandidates_SelectedIndexChanged;
-            label1.Text = string.Format(Pattern, _dist, _type, _name);
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" || true) //hardcoded
+                label1.Text = string.Format(Pattern, _dist, _typeEn, _nameEn);
+            else
+                label1.Text = string.Format(Pattern, _dist, _type, _name);
             lOldPointInfo.Text = string.Format(Pattern, 1.ToString("F2"), _point.Context[0].Type, string.Join(" ", _point.Context[0].Name));
 
             lbCandidates.Items.Clear();
@@ -80,7 +85,11 @@ namespace AspectCore.UI
             if (lbCandidates.SelectedIndex < 0)
                 return;
             PointOfInterest currentPoint = _search[lbCandidates.SelectedIndex];
+            PointOfInterest TreeRoot = _treeManager.GetTree(currentPoint.FileName, true);
+            TreeSearchEngine.SetNearLG(TreeRoot, currentPoint, _treeManager.GetText(currentPoint.FileName), out _point.NearL, out _point.NearG);
             _point.Context = currentPoint.Context;
+            _point.InnerContext = currentPoint.InnerContext;
+            _point.Text = _ide.GetCurrentLine().Trim();
             Hide();
         }
     }

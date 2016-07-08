@@ -8,7 +8,8 @@ namespace AspectCore
 {
     public class Strings
     {
-        public static string ToolWindowTitle = "Окно аспектов";
+        //public static string ToolWindowTitle = "Окно аспектов";
+        public static string ToolWindowTitle = "Concern tree";
 
         public static string CanNotCreateWindow = "Невозможно создать окно";
         public static string NoParsers = "Парсеры не загружены";

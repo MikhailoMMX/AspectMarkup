@@ -1,10 +1,4 @@
-%Extension "lex"
-%Namespace LWLex
-
-Skip Begin "/*" End "*/"
-Skip Begin "//"
-
-Rule Program: A B
-Rule B: "b1" "b2"
-Rule A: C
-Rule C: B "c"
+Token Text [^[:IsWhiteSpace:]=]+|=
+Rule Program: Text* #Chapter2*
+Rule Chapter2: "==" @Text* "==" Text* #Chapter3*
+Rule Chapter3: "===" @Text* "===" Text*

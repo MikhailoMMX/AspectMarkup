@@ -13,6 +13,8 @@ cd Parsers\LWCommentParser
 call _generateParser.bat
 cd ..\..\Parsers\LWParserCS2
 call _generateParser.bat
+cd ..\..\Parsers\LWParserCPP
+call _generateParser.bat
 cd ..\..\Parsers\LWParserJava
 call _generateParser.bat
 cd ..\..\Parsers\LWParserLex

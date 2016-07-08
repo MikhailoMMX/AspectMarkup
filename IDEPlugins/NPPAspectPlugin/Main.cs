@@ -65,7 +65,9 @@ namespace NPPAspectPlugin
                 RegistryKey rk = null;
                 string Path = "";
                 //may fail on 32-bit windows?
-                rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
+                rk = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
+                if (rk == null)
+                    rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
                 if (rk != null)
                     Path = (string)rk.GetValue("Install_Dir");
                 else
@@ -98,7 +100,7 @@ namespace NPPAspectPlugin
 
                 NppTbData _nppTbData = new NppTbData();
                 _nppTbData.hClient = frmMyDlg.Handle;
-                _nppTbData.pszName = windowName;
+                _nppTbData.pszName = frmMyDlg.Text;
                 _nppTbData.dlgID = idMyDlg;
                 _nppTbData.uMask = NppTbMsg.DWS_DF_CONT_RIGHT | NppTbMsg.DWS_ICONTAB | NppTbMsg.DWS_ICONBAR;
                 _nppTbData.hIconTab = (uint)tbIcon.Handle;

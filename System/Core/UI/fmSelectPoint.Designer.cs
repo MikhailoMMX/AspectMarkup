@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmSelectPoint));
             this.lbCandidates = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lOldPointInfo = new System.Windows.Forms.Label();
@@ -37,39 +38,24 @@
             // 
             // lbCandidates
             // 
-            this.lbCandidates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbCandidates.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            resources.ApplyResources(this.lbCandidates, "lbCandidates");
             this.lbCandidates.FormattingEnabled = true;
-            this.lbCandidates.ItemHeight = 16;
-            this.lbCandidates.Location = new System.Drawing.Point(0, 34);
             this.lbCandidates.Name = "lbCandidates";
-            this.lbCandidates.Size = new System.Drawing.Size(707, 84);
-            this.lbCandidates.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.lbCandidates, resources.GetString("lbCandidates.ToolTip"));
             this.lbCandidates.SelectedIndexChanged += new System.EventHandler(this.lbCandidates_SelectedIndexChanged);
             this.lbCandidates.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbCandidates_MouseDoubleClick);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Тип, имя";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // lOldPointInfo
             // 
-            this.lOldPointInfo.AutoSize = true;
-            this.lOldPointInfo.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lOldPointInfo.Location = new System.Drawing.Point(0, 18);
+            resources.ApplyResources(this.lOldPointInfo, "lOldPointInfo");
             this.lOldPointInfo.Name = "lOldPointInfo";
-            this.lOldPointInfo.Size = new System.Drawing.Size(72, 16);
-            this.lOldPointInfo.TabIndex = 2;
-            this.lOldPointInfo.Text = "OldPoint";
-            this.toolTip1.SetToolTip(this.lOldPointInfo, "Имя и тип сохраненной точки");
+            this.toolTip1.SetToolTip(this.lOldPointInfo, resources.GetString("lOldPointInfo.ToolTip"));
             // 
             // toolTip1
             // 
@@ -77,14 +63,13 @@
             // 
             // FmSelectPoint
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 118);
             this.Controls.Add(this.lOldPointInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCandidates);
             this.Name = "FmSelectPoint";
-            this.Text = "Фрагмент кода потерян, выберите точку для перепривязки...";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmSelectPoint_FormClosing);
             this.ResumeLayout(false);

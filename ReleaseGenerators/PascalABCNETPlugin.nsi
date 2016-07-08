@@ -10,9 +10,6 @@ InstallDir "$PROGRAMFILES\PascalABC.NET"
 ;Get installation folder from registry if available
 InstallDirRegKey HKCU ${REGDIR} ""
 
-; Request application privileges for Windows Vista
-RequestExecutionLevel admin
-
 ShowInstDetails show
 
 ;Page components

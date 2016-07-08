@@ -175,7 +175,9 @@ namespace MMX.AspectVSPackage
                 RegistryKey rk = null;
                 string Path = "";
                 //may fail on 32-bit windows?
-                rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
+                rk = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
+                if (rk == null)
+                    rk = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("Software\\AspectCore");
                 if (rk != null)
                     Path = (string)rk.GetValue("Install_Dir");
                 else

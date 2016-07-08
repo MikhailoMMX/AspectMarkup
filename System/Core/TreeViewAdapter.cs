@@ -76,6 +76,13 @@ namespace AspectCore
             }
         }
 
+        private void UpdateNodeImage(TreeNode Node)
+        {
+            PointOfInterest Point = NodesToPoints[Node];
+            if (Point != null)
+                UpdateNodeImage(Node, Point);
+        }
+
         private void UpdateNodeImage(TreeNode Node, PointOfInterest pt)
         {
             //0 - Empty, 1 - Aspect, 2 - Folder, 3 - Note
@@ -131,6 +138,7 @@ namespace AspectCore
             {
                 rootNode.Nodes.Insert(pos, newNode);
                 NodesToPoints[rootNode].Items.Insert(pos, pt);
+                UpdateNodeImage(rootNode);
             }
             else
             {
@@ -164,7 +172,7 @@ namespace AspectCore
             else
             {
                 NodesToPoints[Node.Parent].Items.Remove(point);
-                UpdateNodeImage(Node.Parent, NodesToPoints[Node.Parent]);
+                UpdateNodeImage(Node.Parent);
             }
             Node.Remove();
 
@@ -177,7 +185,7 @@ namespace AspectCore
             {
                 newParent.Nodes.Insert(newPos, Node);
                 NodesToPoints[newParent].Items.Insert(newPos, point);
-                UpdateNodeImage(newParent, NodesToPoints[newParent]);
+                UpdateNodeImage(newParent);
             }
             manager.isFileSaved = false;
         }
@@ -204,15 +212,10 @@ namespace AspectCore
             //!Aspect UndoWhenUpdateAnchor
             undoEngine.SavePointState(point, null, ActionKind.Edit);
 
-            point.Name = newAnchor.Name;
-            point.Note = newAnchor.Note;
-            point.Text = newAnchor.Text;
-            point.FileName = newAnchor.FileName;
-            point.Context = newAnchor.Context;
-            point.InnerContext = newAnchor.InnerContext;
+            point.ApplyChanges(newAnchor);
             Node.Text = point.Name;
             Node.ToolTipText = point.Note;
-            UpdateNodeImage(Node, newAnchor);
+            UpdateNodeImage(Node);
             manager.isFileSaved = false;
         }
 
@@ -223,12 +226,16 @@ namespace AspectCore
         public void RemoveNode(TreeNode Node)
         {
             //!Aspect UndoWhenRemoveNode
-            PointOfInterest parent;
+            PointOfInterest ParentPoint;
+            TreeNode ParentNode = null;
             if (Node.Parent != null)
-                parent = NodesToPoints[Node.Parent];
+            {
+                ParentNode = Node.Parent;
+                ParentPoint = NodesToPoints[Node.Parent];
+            }
             else
-                parent = manager.WorkingAspect;
-            undoEngine.SavePointState(NodesToPoints[Node], parent, ActionKind.Remove);
+                ParentPoint = manager.WorkingAspect;
+            undoEngine.SavePointState(NodesToPoints[Node], ParentPoint, ActionKind.Remove);
 
             if (Node.Parent == null)
                 manager.WorkingAspect.Items.RemoveAt(treeView.Nodes.IndexOf(Node));
@@ -237,6 +244,8 @@ namespace AspectCore
             Node.Remove();
             removeNodeFromDictionary(Node);
             manager.isFileSaved = false;
+            if (ParentNode != null)
+                UpdateNodeImage(ParentNode);
         }
 
         /// <summary>

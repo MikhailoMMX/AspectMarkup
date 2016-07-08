@@ -1,4 +1,4 @@
-%Extension "cs"
+%Extension "c" "cpp" "h"
 %CaseSensitive
 %Preprocessor Define="define" Undef="undef" IfDef="if" ElIf="elif" Else="else" End="endif"
 
@@ -14,19 +14,17 @@ Token Sign [[:IsPunctuation:][:IsSymbol:]]
 
 Rule tkClassNamespace : @"class" | @"namespace"
 Rule @Block : "{" [Any | Block]* "}"
-Rule Tk : @AnyExcept(tkClassNamespace, "{", "}", ";", "enum")
+Rule Tk : @AnyExcept(tkClassNamespace, "{", "}", ";")
 
 Rule Program :			#ProgramNode*
 Rule ProgramNode:	 	#ClassOrNamespace
 						| #Field
 						| #Method
-						| #Enum
 						| #error
 
-Rule ClassOrNamespace :	@Tk* @tkClassNamespace @Tk* "{" #ProgramNode* "}" ";"?
+Rule ClassOrNamespace :	@Tk* @tkClassNamespace @Tk* "{" #ProgramNode* "}"
 Rule Field :			@Tk* ";"
-Rule Method	:			@Tk* Block ";"?
-Rule Enum :				@Tk* @"enum" @Tk* "{" Any* "}" ";"?
+Rule Method	:			@Tk* Block
 
 //На все про все 20 минут
 //Начиная с создания папки для проекта, заканчивая готовым и работающим парсером

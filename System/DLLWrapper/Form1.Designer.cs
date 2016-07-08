@@ -36,6 +36,8 @@
             this.bReparseText = new System.Windows.Forms.Button();
             this.tvParsedPoints = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -128,11 +130,22 @@
             this.splitContainer1.TabIndex = 2;
             this.splitContainer1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(398, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(153, 32);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Сохранить как разметку";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 491);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.bReparseText);
             this.Controls.Add(this.statusStrip1);
@@ -162,6 +175,8 @@
         private System.Windows.Forms.Button bReparseText;
         private System.Windows.Forms.TreeView tvParsedPoints;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

@@ -18,8 +18,8 @@ namespace MMX.AspectVSPackage.Helpers
                 IVsOutputWindow outputWindow = AspectPackage.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
 
                 Guid guidGeneral = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.GeneralPane_guid;
-                int hr = outputWindow.CreatePane(guidGeneral, AspectCore.Strings.ToolWindowTitle, 1, 0);
-                hr = outputWindow.GetPane(guidGeneral, out pane);
+                outputWindow.CreatePane(guidGeneral, AspectCore.Strings.ToolWindowTitle, 1, 0);
+                outputWindow.GetPane(guidGeneral, out pane);
             }
             pane.OutputString(Message+Environment.NewLine);
         }

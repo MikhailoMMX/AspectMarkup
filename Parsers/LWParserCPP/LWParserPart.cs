@@ -4,30 +4,30 @@ using QUT.Gppg;
 
 namespace LWParser
 {
-    public class CS_TreeNode : SourceEntity
+    public class C_TreeNode : SourceEntity
     {
-        public CS_TreeNode(List<string> Value, LexLocation Location)
+        public C_TreeNode(List<string> Value, LexLocation Location)
         {
             this.Value = Value;
             this.Location = Location;
         }
-        public CS_TreeNode(string Value, LexLocation Location)
+        public C_TreeNode(string Value, LexLocation Location)
         {
             this.Value = new List<string>();
             this.Value.Add(Value);
             this.Location = Location;
         }
-        public CS_TreeNode()
+        public C_TreeNode()
         {
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public virtual void Accept(CS_Visitor v)
+        public virtual void Accept(C_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public class ClassOrNamespace : CS_TreeNode
+    public class ClassOrNamespace : C_TreeNode
     {
         public ClassOrNamespace(List<string> Value, LexLocation Location)
         {
@@ -45,12 +45,12 @@ namespace LWParser
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public override void Accept(CS_Visitor v)
+        public override void Accept(C_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public class Field : CS_TreeNode
+    public class Field : C_TreeNode
     {
         public Field(List<string> Value, LexLocation Location)
         {
@@ -68,12 +68,12 @@ namespace LWParser
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public override void Accept(CS_Visitor v)
+        public override void Accept(C_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public class Method : CS_TreeNode
+    public class Method : C_TreeNode
     {
         public Method(List<string> Value, LexLocation Location)
         {
@@ -91,35 +91,12 @@ namespace LWParser
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public override void Accept(CS_Visitor v)
+        public override void Accept(C_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public class Enum : CS_TreeNode
-    {
-        public Enum(List<string> Value, LexLocation Location)
-        {
-            this.Value = Value;
-            this.Location = Location;
-        }
-        public Enum(string Value, LexLocation Location)
-        {
-            this.Value = new List<string>();
-            this.Value.Add(Value);
-            this.Location = Location;
-        }
-        public Enum()
-        {
-            this.Value = new List<string>();
-            this.Location = new LexLocation();
-        }
-        public override void Accept(CS_Visitor v)
-        {
-            v.Visit(this);
-        }
-    }
-    public class Token : CS_TreeNode
+    public class Token : C_TreeNode
     {
         public Token(List<string> Value, LexLocation Location)
         {
@@ -137,18 +114,17 @@ namespace LWParser
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public override void Accept(CS_Visitor v)
+        public override void Accept(C_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public interface CS_Visitor
+    public interface C_Visitor
     {
-       void Visit(CS_TreeNode _CS_TreeNode);
+       void Visit(C_TreeNode _C_TreeNode);
        void Visit(ClassOrNamespace _ClassOrNamespace);
        void Visit(Field _Field);
        void Visit(Method _Method);
-       void Visit(Enum _Enum);
        void Visit(Token _Token);
 
     }
@@ -175,11 +151,11 @@ namespace LWParser
     }
     public partial class LightweightScanner : ILightWeightScanner
     {
-        public string[] LanguageID { get { return new string[] { "cs" }; } }
+        public string[] LanguageID { get { return new string[] { "c", "cpp", "h" }; } }
     }
     public partial class LightweightParser : LightweightParserBase
     {
-        public override string[] LanguageID { get { return new string[] { "cs" }; } }
+        public override string[] LanguageID { get { return new string[] { "c", "cpp", "h" }; } }
     }
 
 
@@ -220,10 +196,10 @@ namespace LWParser
         {
             OpenBraceStack.Push(OpenBraceCount);
             OpenBraceCount = 1;
-            //int tmp = yy_top_state();
-            //yy_pop_state();
+            int tmp = yy_top_state();
+            yy_pop_state();
             yy_push_state(state);
-            //yy_push_state(tmp);
+            yy_push_state(tmp);
         }
         public void ReturnToLastState()
         {
@@ -252,12 +228,12 @@ namespace LWParser
             int space = input.IndexOf(' ');
             if (space == -1)
             {
-                directive = input.Substring(1);
+                directive = input;
                 param = "";
             }
             else
             {
-                directive = input.Substring(1, space);
+                directive = input.Substring(0, space);
                 param = input.Substring(space + 1);
             }
         }

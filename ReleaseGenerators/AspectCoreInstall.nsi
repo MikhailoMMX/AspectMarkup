@@ -41,6 +41,7 @@ Section "AspectCore"
   CreateDirectory "$INSTDIR\Parsers"
   SetOutPath "$INSTDIR\Parsers"
   File "..\System\bin\LWParserCS2.dll"
+  File "..\System\bin\LWParserCPP.dll"
   File "..\System\bin\LWParserYacc.dll"
   File "..\System\bin\LWParserPascal.dll"
   File "..\System\bin\LWParserXML.dll"
@@ -50,12 +51,17 @@ Section "AspectCore"
   CreateDirectory "$INSTDIR\ParserSources"
   SetOutPath "$INSTDIR\ParserSources"
   File /oname=CSharp.lp "..\Parsers\LWParserCS2\ParserDescriptor.lp"
+  File /oname=CPP.lp "..\Parsers\LWParserCPP\ParserDescriptor.lp"
   File /oname=Java.lp "..\Parsers\LWParserJava\ParserDescriptor.lp"
   File /oname=PascalABCNET.lp "..\Parsers\LWParserPascal\ParserDescriptor.lp"
   File /oname=XML.lp "..\Parsers\LWParserXML\ParserDescriptor.lp"
   File /oname=Yacc.lp "..\Parsers\LWParserYacc\ParserDescriptor.lp"  
   File /oname=LightParse.lp "..\Parsers\LWParserLP\ParserDescriptor.lp"  
 
+  CreateDirectory "$INSTDIR\en"
+  SetOutPath "$INSTDIR\en"
+  File "..\System\bin\en\AspectCore.resources.dll"
+  
   SetOutPath $INSTDIR
   File "..\System\bin\AspectCore.dll"
   File "..\System\bin\DLLWrapper.exe"
@@ -80,16 +86,19 @@ Section "Uninstall"
 
   ; Remove files and uninstaller
   Delete $INSTDIR\AspectCore.dll
+  Delete $INSTDIR\en\AspectCore.resources.dll
   Delete $INSTDIR\DLLWrapper.exe
   Delete $INSTDIR\ParserGenerator.exe
   Delete $INSTDIR\Gppg.exe
   Delete $INSTDIR\Parsers\LWParserCS2.dll
+  Delete $INSTDIR\Parsers\LWParserCPP.dll
   Delete $INSTDIR\Parsers\LWParserYacc.dll
   Delete $INSTDIR\Parsers\LWParserPascal.dll
   Delete $INSTDIR\Parsers\LWParserXML.dll
   Delete $INSTDIR\Parsers\LWParserJava.dll
   Delete $INSTDIR\Parsers\LWParserLP.dll
   Delete $INSTDIR\ParserSources\CSharp.lp
+  Delete $INSTDIR\ParserSources\CPP.lp
   Delete $INSTDIR\ParserSources\Java.lp
   Delete $INSTDIR\ParserSources\PascalABCNET.lp
   Delete $INSTDIR\ParserSources\XML.lp

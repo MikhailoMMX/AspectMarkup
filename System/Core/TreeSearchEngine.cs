@@ -49,6 +49,23 @@ namespace AspectCore
             result.Sort();
             return result;
         }
+
+        public static TreeSearchResult FindPointInTree2(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)
+        {
+            TreeSearchResult result = InitializeResultFromTree(TreeRoot, Point.Context[0].Type);
+            ProcessNames(result, Point);
+            ProcessOuterContext(result, Point);
+            ProcessInnerContext(result, Point);
+            ProcessText(result, Point, SourceText);
+            result.Sort();
+            if (result._result.Count >= 2 && result._result[0].TotalMatch == TreeSearchOptions.Equility && result._result[1].TotalMatch != TreeSearchOptions.Equility)
+            {
+                result._result.RemoveRange(1, result._result.Count - 1);
+                result.Singular = true;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Поиск точки в дереве аспектов.
         /// Выполняется по имени (нулевому элементу контекста), требуется строгое соответствие имени.
@@ -125,6 +142,41 @@ namespace AspectCore
         }
 
         /// <summary>
+        /// Возвращает константы NearG и NearL для заданного узла в дереве
+        /// </summary>
+        /// <param name="TreeRoot"></param>
+        /// <param name="point"></param>
+        /// <param name="NearL"></param>
+        /// <param name="NearG"></param>
+        public static void SetNearLG(PointOfInterest TreeRoot, PointOfInterest point, string Text, out float NearL, out float NearG)
+        {
+            NearL = 0;
+            NearG = 0;
+            if (TreeRoot == null || point == null)
+                return;
+            //В TreeG записываем все потенциально искомые узлы
+            TreeSearchResult TreeG = InitializeResultFromTree(TreeRoot, point.Context[0]?.Type);
+            TreeSearchResult TreeL = new TreeSearchResult();
+
+            //Переписываем в TreeL соседние узлы, удаляем их из TreeG (Point тоже удаляем)
+            HashSet<PointOfInterest> Neighbours = GetNeighbours(TreeRoot, point);
+            for (int i = 0; i < TreeG._result.Count;)
+                if (TreeG._result[i].TreeNode == point)
+                    TreeG._result.RemoveAt(i);
+                else if (Neighbours.Contains(TreeG._result[i].TreeNode))
+                {
+                    TreeL._result.Add(TreeG._result[i]);
+                    TreeG._result.RemoveAt(i);
+                }
+                else
+                    ++i;
+
+            //Находим метрику для наиболее похожих имен узлов в двух множествах
+            NearL = GetMaxSimilarityByName(TreeL, point, Text);
+            NearG = GetMaxSimilarityByName(TreeG, point, Text);
+        }
+
+        /// <summary>
         /// Создает первоначальный объект результата поиска, заполняя его всеми узлами заданного типа из заданного дерева
         /// </summary>
         /// <param name="TreeRoot"></param>
@@ -139,6 +191,53 @@ namespace AspectCore
             foreach (PointOfInterest point in TreeRoot.Items)
                 result._result.AddRange(InitializeResultFromTree(point, Type)._result);
             return result;
+        }
+
+        /// <summary>
+        /// Возвращает множество соседних узлов (исключая сам узел point) в дереве TreeRoot
+        /// </summary>
+        /// <param name="TreeRoot"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private static HashSet<PointOfInterest> GetNeighbours(PointOfInterest TreeRoot, PointOfInterest point)
+        {
+            if (TreeRoot == null || point == null)
+                return null;
+            HashSet<PointOfInterest> Result = new HashSet<PointOfInterest>();
+            if (TreeRoot.Items == null || TreeRoot.Items.Count == 0)
+                return Result;
+            if (TreeRoot.Items.Contains(point))
+            {
+                Result.UnionWith(TreeRoot.Items);
+                Result.Remove(point);
+            }
+            else
+                foreach (PointOfInterest pt in TreeRoot.Items)
+                    Result.UnionWith(GetNeighbours(pt, point));
+            return Result;
+        }
+
+        /// <summary>
+        /// Возвращает величину похожести имени для самого похожего узла в множестве
+        /// </summary>
+        /// <param name="Nodes"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private static float GetMaxSimilarityByName(TreeSearchResult Nodes, PointOfInterest point, string Text)
+        {
+            if (Nodes.Count == 0)
+                return 0;
+
+            int maxSim = 0;
+            foreach (TreeSearchResultNode node in Nodes._result)
+            {
+                int sim = TreeSearchComparer.TokenListsSimilarity(point.Context[0].Name, node.TreeNode.Context[0].Name);
+                if (sim > maxSim)
+                    maxSim = sim;
+            }
+
+            //ProcessSearchResult(Nodes, point, Text);
+            return (float)maxSim / TreeSearchOptions.Equility;
         }
 
         /// <summary>
@@ -305,7 +404,7 @@ namespace AspectCore
             if (Line == point.Location.StartLine)
                 Col = point.Location.StartColumn;
             else
-                Col = ts.GetFirstCharAtLine(Line);
+                Col = ts.GetFirstCharPosAtLine(Line);
             return new LexLocation(Line, Col, Line, Col);
         }
 
@@ -744,6 +843,13 @@ namespace AspectCore
             _wText = 1;
             _result = _result.OrderByDescending(x => x.NameMatch + x.OuterContextMatch + x.InnerContextMatch + x.TextStringMatch).ToList();
         }
+
+        public float GetNodeSimilarity(int index)
+        {
+            if (index < 0 || index >= _result.Count)
+                    return 0;
+            return (float)_result[index].TotalMatch / TreeSearchOptions.Equility;
+        }
         /// <summary>
         /// Сортирует массив результатов с заданными весами компонентов
         /// </summary>
@@ -1067,7 +1173,7 @@ namespace AspectCore
                                 SimToken = TreeSearchComparer.TokenListsSimilarity(L1[i - 1 + prefix].Name, L2[j - 1 + prefix].Name);
                             double DReplace = 1 - ((double)SimToken) / TreeSearchOptions.Equility; //расстояние, от 0 до 1
                             if (SimToken != TreeSearchOptions.Equility)
-                                DReplace = DReplace * (TreeSearchOptions.MaxCostReplaceToken - TreeSearchOptions.MinCostReplaceToken) + TreeSearchOptions.MinCostReplaceToken;
+                                DReplace = DReplace * TreeSearchOptions.CostReplaceToken;
                             //DToken содержит вес замены лексемы. 0 - лексемы совпадают, значение на отрезке от MinCost до MaxCost - не совпадают
                             D[i, j] = Math.Min(
                                 D[i - 1, j] + TreeSearchOptions.CostInsertRemoveToken,
@@ -1081,7 +1187,7 @@ namespace AspectCore
                     Dist = D[L1Len, L2Len];
                 }
                 //максимальное расстояние для пары списков такой длины
-                int MaxDist = MinLen * Math.Min(TreeSearchOptions.MaxCostReplaceToken, TreeSearchOptions.CostInsertRemoveToken * 2) + (MaxLen-MinLen) * TreeSearchOptions.CostInsertRemoveToken;
+                int MaxDist = MinLen * Math.Min(TreeSearchOptions.CostReplaceToken, TreeSearchOptions.CostInsertRemoveToken * 2) + (MaxLen-MinLen) * TreeSearchOptions.CostInsertRemoveToken;
 
                 //Нормированная степень похожести
                 return (int)((MaxDist - Dist) * TreeSearchOptions.Equility / MaxDist);
@@ -1195,8 +1301,6 @@ namespace AspectCore
                 _Similarity.Add(K, Sim);
                 return Sim;
             }
-
-
         }
     }
 
@@ -1222,7 +1326,7 @@ namespace AspectCore
             //если узел занимает одну строку - вычисляем похожесть для нее, возвращаем результат
             if (Loc.StartLine == Loc.EndLine)
             {
-                string Text = _lines[Loc.StartLine-1].Substring(Loc.StartColumn, Loc.EndColumn - Loc.StartColumn);
+                string Text = _lines[Loc.StartLine - 1];//.Substring(Loc.StartColumn, Loc.EndColumn - Loc.StartColumn);
                 List<string> TextTokens = TokenizeString(Text);
                 int Sim = TreeSearchComparer.TokenListsSimilarity(TextTokens, PatternTokens);
                 return new Pair<int, int>(Loc.StartLine, Sim);
@@ -1280,8 +1384,15 @@ namespace AspectCore
                 result.Add(TokenizeString(Array[i]));
             return result;
         }
-        public int GetFirstCharAtLine(int Line)
+        /// <summary>
+        /// Возращает позицию первого непробельного символа в строке.
+        /// </summary>
+        /// <param name="Line"></param>
+        /// <returns></returns>
+        public int GetFirstCharPosAtLine(int Line)
         {
+            if (Line <= 0 || Line > _lines.Length)
+                return 0;
             string str = _lines[Line - 1];
             return str.Length - str.TrimStart().Length;
         }
@@ -1325,13 +1436,9 @@ namespace AspectCore
         /// </summary>
         public const int CostInsertRemoveToken = 3;
         /// <summary>
-        /// Минимальная стоимость замены лексемы для несовпадающих лексем (Метрика Левенштейна)
+        /// Стоимость замены лексемы (Метрика Левенштейна)
         /// </summary>
-        public const int MinCostReplaceToken = CostInsertRemoveToken / 3;
-        /// <summary>
-        /// Максимальная стоимость замены лексемы (Метрика Левенштейна)
-        /// </summary>
-        public const int MaxCostReplaceToken = CostInsertRemoveToken * 2;
+        public const int CostReplaceToken = CostInsertRemoveToken * 2;
 
         public const int MaxInnerContectCount = 10;
 

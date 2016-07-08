@@ -151,10 +151,14 @@ namespace AspectCore
         /// Внутренний контекст.
         /// </summary>
         public List<InnerContextNode> InnerContext;
-        ///// <summary>
-        ///// Имя класса, экземпляром которого был возвращенный парсером узел
-        ///// </summary>
-        //public string ParserClassName;
+        /// <summary>
+        /// Степень похожести имени самого похожего соседнего узла
+        /// </summary>
+        public float NearL = 0;
+        /// <summary>
+        /// Степень похожести имени самого похожего не-соседнего узла
+        /// </summary>
+        public float NearG = 0;
 
         /// <summary>
         /// Проверка принадлежности точки с указанными координатами данной сущности
@@ -222,6 +226,8 @@ namespace AspectCore
             this.Text = Point.Text;
             this.Context = Point.Context;
             this.InnerContext = Point.InnerContext;
+            this.NearL = Point.NearL;
+            this.NearG = Point.NearG;
         }
         /// <summary>
         /// Создает новый экземпляр, содержащий копию всех полей, кроме Items.
@@ -239,6 +245,8 @@ namespace AspectCore
             result.Text = Text;
             result.Location = Location;
             result.InnerContext = InnerContext;
+            result.NearG = NearG;
+            result.NearL = NearL;
             foreach (OuterContextNode c in Context)
                 result.Context.Add(new OuterContextNode(c.Name, c.Type));
             return result;

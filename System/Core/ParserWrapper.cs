@@ -130,7 +130,6 @@ namespace AspectCore
                                 scanners.Add(id, scanner);
                                 parsers.Add(id, parser);
                                 GlobalData.traceAction("Загружен парсер для файлов " + id);
-                                return true;
                             }
                             else
                                 if (ReplaceExisting)
@@ -138,7 +137,6 @@ namespace AspectCore
                                     scanners[id] = scanner;
                                     parsers[id] = parser;
                                     GlobalData.traceAction("Перезагружен парсер для файлов " + id);
-                                    return true;
                                 }
                                 else
                                     GlobalData.traceAction("Парсер для файлов " + id + " был загружен ранее, пропускаем");

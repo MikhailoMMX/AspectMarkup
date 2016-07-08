@@ -66,10 +66,10 @@ namespace AspectCore
             Parse(Filename, Text, DateTime.Now);
             return FilenameToTree[Filename];
         }
-        public PointOfInterest GetTree(string Filename)
+        public PointOfInterest GetTree(string Filename, bool AlwaysUseCached = false)
         {
             if (FilenameToTree.ContainsKey(Filename))
-                if (File.GetLastWriteTime(Filename) == FilenameToDateTime[Filename])
+                if (AlwaysUseCached || File.GetLastWriteTime(Filename) == FilenameToDateTime[Filename])
                     return FilenameToTree[Filename];
             Parse(Filename, File.ReadAllText(Filename, Encoding.Default), File.GetLastWriteTime(Filename));
             return FilenameToTree[Filename];

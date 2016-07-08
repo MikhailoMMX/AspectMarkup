@@ -111,6 +111,7 @@ namespace NPPAspectPlugin
             int len = Win32.SendMessage(_sciHandle, SciMsg.SCI_GETLINE, lineIndex-1, buf).ToInt32();
             byte[] bytes = new byte[len];
             Marshal.Copy(buf, bytes, 0, bytes.Length);
+            Marshal.FreeHGlobal(buf);
             return _SciEncoding.GetString(bytes, 0, len);
         }
         public override string GetCurrentLine()

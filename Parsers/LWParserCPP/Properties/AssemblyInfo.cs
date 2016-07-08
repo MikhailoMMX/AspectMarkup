@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NPPAspectPlugin")]
+[assembly: AssemblyTitle("LWParserCS2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NPPAspectPlugin")]
-[assembly: AssemblyCopyright("Copyright © MikhailoMMX 2015")]
+[assembly: AssemblyProduct("LWParserCS2")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,4 +20,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("31492674-6fe0-485c-91f0-2e17244588ff")]
+[assembly: Guid("59751cf0-169c-4888-a4d3-59a06e1d1803")]
