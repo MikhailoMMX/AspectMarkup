@@ -1,4 +1,4 @@
-%namespace LWLex
+%namespace LWParser
 %using AspectCore;
 
 %visibility public
@@ -6,57 +6,39 @@
 
 newline [\r\n]+
 
+Number  	[0-9]+
+NL 		[\r\n]+
+Other 		[^0-9\r\n[:IsWhiteSpace:]]+
 
 
 %x SKIPDIRECTIVE
-%x Anon1
-%x Anon2
 
 
 %%
 
-"/*" {
-	GoToSkipState(Anon1);
-}
-"//" {
-	GoToSkipState(Anon2);
-}
 <SKIPDIRECTIVE> {
-"/*" {
-	GoToSkipState(Anon1);
-}
-"//" {
-	GoToSkipState(Anon2);
-}
 
 }
-"b1"  {
+"."  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._b1;
+	return (int)Tokens._Dot;
 }
-"b2"  {
+{Number}  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._b2;
+	return (int)Tokens.Number;
 }
-"c"  {
+{NL}  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._c;
+	return (int)Tokens.NL;
 }
-<Anon1> {
-	"*/" { 
-    
-    ReturnToLastState(); }
-
-} //end of Anon1
-<Anon2> {
-	{newline} { 
-    
-    ReturnToLastState(); }
-
-} //end of Anon2
+{Other}  {
+    yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens.Other;
+}
 
 
 

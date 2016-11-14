@@ -106,7 +106,7 @@ namespace AspectCore
         {
             if (pt == null)
                 return null;
-            TreeNode result = new TreeNode(pt.Name);
+            TreeNode result = new TreeNode(pt.Title);
             result.ToolTipText = pt.Note;
             UpdateNodeImage(result, pt);
             NodesToPoints.Add(result, pt);
@@ -200,7 +200,7 @@ namespace AspectCore
             //!Aspect UndoWhenRenameNode
             undoEngine.SavePointState(NodesToPoints[Node], null, ActionKind.Edit);
 
-            NodesToPoints[Node].Name = newName;
+            NodesToPoints[Node].Title = newName;
             Node.Text = newName;
             manager.isFileSaved = false;
         }
@@ -213,7 +213,7 @@ namespace AspectCore
             undoEngine.SavePointState(point, null, ActionKind.Edit);
 
             point.ApplyChanges(newAnchor);
-            Node.Text = point.Name;
+            Node.Text = point.Title;
             Node.ToolTipText = point.Note;
             UpdateNodeImage(Node);
             manager.isFileSaved = false;
@@ -315,7 +315,7 @@ namespace AspectCore
                 //Редактировали
                 TreeNode node = FindNodeByValue(action.OriginalPointRef);
                 action.OriginalPointRef.ApplyChanges(action.OriginalPointContent);
-                node.Text = action.OriginalPointRef.Name;
+                node.Text = action.OriginalPointRef.Title;
                 node.ToolTipText = action.OriginalPointRef.Note;
             }
             manager.isFileSaved = false;

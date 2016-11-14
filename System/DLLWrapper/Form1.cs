@@ -103,7 +103,7 @@ namespace DLLWrapper
                 tvParsedPoints.Nodes.Clear();
 
                 CurrentFile = filename;
-                tbEditor.Text = ConvertNewLines(System.IO.File.ReadAllText(CurrentFile));
+                tbEditor.Text = ConvertNewLines(System.IO.File.ReadAllText(CurrentFile, Encoding.Default));
                 bReparseText.Enabled = true;
 
                 ParseText();
@@ -221,6 +221,47 @@ namespace DLLWrapper
             {
                 AspectManager.SerializeAspect(saveFileDialog1.FileName);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<string> h1 = new List<string>();
+            List<string> h2 = new List<string>();
+            //h1.Add("string");
+            //h1.Add("GetLine");
+            //h1.Add("int");
+            //h1.Add("LineIndex");
+
+            //h2.Add("bool");
+            //h2.Add("IsDocumentOpen");
+            //h2.Add("string");
+            //h2.Add("FileName");
+
+            //public void WriteMetadataAndIL(PdbWriter pdbWriterOpt, Stream metadataStream, Stream ilStream, out MetadataSizes metadataSizes)
+            //public void WriteMetadataAndIL(PdbWriter pdbWriterOpt, Stream metadataStream, Stream ilStream, out MetadataSizes metadataSizes)
+
+            //private static uint GetManagedResourceOffset(ManagedResource resource, BlobWriter resourceWriter)
+            //private static uint GetManagedResourceOffset(ManagedResource resource, BlobBuilder resourceWriter)
+
+            h1.Add("public");
+            h1.Add("static");
+            h1.Add("uint");
+            h1.Add("GetManagedResourceOffset");
+            h1.Add("ManagedResource");
+            h1.Add("resource");
+            h1.Add("BlobWriter");
+            h1.Add("resourceWriter");
+
+            h2.Add("public");
+            h2.Add("static");
+            h2.Add("uint");
+            h2.Add("GetManagedResourceOffset");
+            h2.Add("ManagedResource");
+            h2.Add("resource");
+            h2.Add("BlobBuilder");
+            h2.Add("resourceWriter");
+
+            MessageBox.Show(TreeSearchComparer.LevenshteinSimilarity.Similarity(h1, h2).ToString());
         }
     }
 }

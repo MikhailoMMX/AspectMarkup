@@ -37,7 +37,7 @@ namespace ParserTester
             {
                 listBox1.Items.Clear();
                 DirectoryInfo di = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
-                FileInfo[] Files = di.GetFiles("*.pas", SearchOption.AllDirectories);
+                FileInfo[] Files = di.GetFiles("*.cs", SearchOption.AllDirectories);
                 foreach (FileInfo fi in Files)
                 {
                     string msgFile = "Файл: \"" + fi.FullName + "\" ";

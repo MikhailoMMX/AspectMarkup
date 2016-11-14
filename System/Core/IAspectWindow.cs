@@ -51,7 +51,7 @@ namespace AspectCore
         /// </summary>
         /// <param name="FileName">Полный путь к сборке с парсером</param>
         /// <returns>True, если парсер был загружен, иначе False</returns>
-        bool LoadParserFromFile(string FileName);
+        //bool LoadParserFromFile(string FileName);
 
         /// <summary>
         /// Возвращает имя текущего аспектного файла (.axml)

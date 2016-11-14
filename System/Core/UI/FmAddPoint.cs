@@ -50,7 +50,7 @@ namespace AspectCore
                 AnchorPoints = new List<PointOfInterest>();
                 return;
             }
-            tbPointName.Text = points[0].Name;
+            tbPointName.Text = points[0].Title;
             tbNote.Text = points[0].Note;
             if (AnchorPoints[0].Context == null)
                 AnchorPoints[0].Context = new List<OuterContextNode>();
@@ -76,7 +76,7 @@ namespace AspectCore
                 AnchorPoints.Clear();
                 AnchorPoints.Add(ResultPoint);
             }
-            AnchorPoints[0].Name = tbPointName.Text;
+            AnchorPoints[0].Title = tbPointName.Text;
             AnchorPoints[0].Note = tbNote.Text;
             if (PointIndex  != -1)
                 AnchorPoints[0].Text = "";

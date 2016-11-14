@@ -41,7 +41,6 @@
             resources.ApplyResources(this.lbCandidates, "lbCandidates");
             this.lbCandidates.FormattingEnabled = true;
             this.lbCandidates.Name = "lbCandidates";
-            this.toolTip1.SetToolTip(this.lbCandidates, resources.GetString("lbCandidates.ToolTip"));
             this.lbCandidates.SelectedIndexChanged += new System.EventHandler(this.lbCandidates_SelectedIndexChanged);
             this.lbCandidates.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbCandidates_MouseDoubleClick);
             // 
@@ -49,7 +48,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // lOldPointInfo
             // 
@@ -68,10 +66,12 @@
             this.Controls.Add(this.lOldPointInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCandidates);
+            this.KeyPreview = true;
             this.Name = "FmSelectPoint";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmSelectPoint_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmSelectPoint_KeyDown);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FmSelectPoint_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

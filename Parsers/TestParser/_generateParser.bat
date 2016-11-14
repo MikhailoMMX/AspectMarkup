@@ -11,3 +11,5 @@ GOTO EXIT
 PAUSE
 
 :EXIT
+
+pause

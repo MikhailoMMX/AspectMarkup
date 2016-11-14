@@ -20,7 +20,7 @@ namespace AspectCore.UI
         private string _type = "Тип узла";
         private string _typeEn = "Type";
         private string _name = "Имя узла";
-        private string _nameEn = "Name";
+        private string _nameEn = "Title";
         private string _dist = "%";
 
         public FmSelectPoint(IDEInterop ide, TreeManager treeManager)
@@ -33,15 +33,16 @@ namespace AspectCore.UI
         private void BuildList()
         {
             lbCandidates.SelectedIndexChanged -= lbCandidates_SelectedIndexChanged;
-            if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en" || true) //hardcoded
-                label1.Text = string.Format(Pattern, _dist, _typeEn, _nameEn);
-            else
+            //if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en") //hardcoded
+            //    label1.Text = string.Format(Pattern, _dist, _typeEn, _nameEn);
+            //else
                 label1.Text = string.Format(Pattern, _dist, _type, _name);
             lOldPointInfo.Text = string.Format(Pattern, 1.ToString("F2"), _point.Context[0].Type, string.Join(" ", _point.Context[0].Name));
 
             lbCandidates.Items.Clear();
-            foreach (TreeSearchResultNode node in _search._result)
-                lbCandidates.Items.Add(string.Format(Pattern, ((float)node.TotalMatch/TreeSearchOptions.Equility).ToString("F2"), node.TreeNode.Context[0].Type, string.Join(" ",node.TreeNode.Context[0].Name)));
+            for (int i = 0; i< _search.Count; ++i)
+            //foreach (TreeSearchResultNode node in _search._result)
+                lbCandidates.Items.Add(string.Format(Pattern, ((float)_search.GetTotalMatch(i)/TreeSearchOptions.Equility).ToString("F2"), _search._result[i].TreeNode.Context[0].Type, string.Join(" ", _search._result[i].TreeNode.Context[0].Name)));
             lbCandidates.SelectedIndexChanged += lbCandidates_SelectedIndexChanged;
         }
 
@@ -91,6 +92,18 @@ namespace AspectCore.UI
             _point.InnerContext = currentPoint.InnerContext;
             _point.Text = _ide.GetCurrentLine().Trim();
             Hide();
+        }
+
+        private void FmSelectPoint_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Hide();
+        }
+
+        private void FmSelectPoint_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Hide();
         }
     }
 }

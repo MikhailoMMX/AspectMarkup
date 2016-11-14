@@ -23,10 +23,13 @@
 %token <type_Token> tkClassNamespace
 %token <type_Token> _Copen
 %token <type_Token> _Cclose
+%token <type_Token> _Sopen
+%token <type_Token> _Sclose
 %token <type_Token> _Scolon
 %token <type_Token> _enum
 %type <type_CS_TreeNode> _ANY
 %type <type_CS_TreeNode> Block
+%type <type_CS_TreeNode> Attrib
 %type <type_CS_TreeNode> Tk
 %type <type_CS_TreeNode> Program
 %type <type_CS_TreeNode> ProgramNode
@@ -36,11 +39,13 @@
 %type <type_Enum> Enum
 %type <type_CS_TreeNode> _ANY7
 %type <type_CS_TreeNode> _ANY8
+%type <type_CS_TreeNode> _ANY9
 %type <type_CS_TreeNode> _
+%type <type_CS_TreeNode> _10
 %type <type_CS_TreeNode> _ProgramNode_list
 %type <type_CS_TreeNode> _Tk_list
 %type <type_CS_TreeNode> __Scolon_opt
-%type <type_CS_TreeNode> __ANY8_list
+%type <type_CS_TreeNode> __ANY9_list
 
 
 %%
@@ -63,6 +68,22 @@ _ANY :
 
 	}
 	| tkClassNamespace 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sopen 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sclose 
 	{
 		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
         @$ = $$.Location;
@@ -96,8 +117,15 @@ Block :
 
 	}
   ;
+Attrib :
+    _Sopen _10 _Sclose { $$ = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+  ;
 Tk :
-    _ANY7 
+    _ANY8 
 	{
 		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
         @$ = $$.Location;
@@ -143,6 +171,11 @@ errBegin = @$;
 		$$.AddItem($1);
 errBegin = @$;
 	}
+	| Attrib { $$ = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    errBegin = @$;
+}
 	| error 
     {
         @$ = new LexLocation(errBegin.EndLine, errBegin.EndColumn, @1.StartLine, @1.StartColumn);
@@ -182,7 +215,7 @@ Method :
 	}
   ;
 Enum :
-    _Tk_list _enum _Tk_list _Copen __ANY8_list _Cclose __Scolon_opt 
+    _Tk_list _enum _Tk_list _Copen __ANY9_list _Cclose __Scolon_opt 
 	{
 		$$ = new Enum(new List<string>(), @1.Merge(@7));
         @$ = $$.Location;
@@ -209,8 +242,82 @@ _ANY7 :
 		$$.AddItem($1);
 
 	}
+	| tkClassNamespace 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Copen 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Cclose 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Scolon 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _enum 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
   ;
 _ANY8 :
+    LetterDigits 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| Sign 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sopen 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sclose 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+  ;
+_ANY9 :
     LetterDigits 
 	{
 		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
@@ -236,6 +343,22 @@ _ANY8 :
 
 	}
 	| _Copen 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sopen 
+	{
+		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
+        @$ = $$.Location;
+		$$.AddValue($1);
+		$$.AddItem($1);
+
+	}
+	| _Sclose 
 	{
 		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@1));
         @$ = $$.Location;
@@ -272,6 +395,23 @@ _ :
     
 }
 	| _ Block { $$ = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+  ;
+_10 :
+    { $$ = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+	| _10 _ANY7 { $$ = new CS_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    
+}
+	| _10 Attrib { $$ = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
@@ -326,13 +466,13 @@ __Scolon_opt :
 
 	}
   ;
-__ANY8_list :
+__ANY9_list :
     { $$ = new CS_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
-	| __ANY8_list _ANY8 
+	| __ANY9_list _ANY9 
 	{
 		$$ = new CS_TreeNode(new List<string>(), @1.Merge(@2));
         @$ = $$.Location;

@@ -51,8 +51,8 @@ namespace MMX.AspectVSPackage.Helpers
         [DisplayName(Strings.SubAspectPropNameName)]
         public string Name
         {
-            get { return _point.Name; }
-            set { _point.Name = value; _node.Text = value; }
+            get { return _point.Title; }
+            set { _point.Title = value; _node.Text = value; }
         }
 
         [Description(Strings.SubAspectPropFileNameDescr)]

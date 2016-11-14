@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.2
 // Machine:  BLUEGENE
-// DateTime: 23.11.2015 20:39:58
+// DateTime: 27.07.2016 16:23:40
 // UserName: MikhailoMMX
-// Input file <LWParser.y - 23.11.2015 20:39:58>
+// Input file <LWParser.y - 27.07.2016 16:23:39>
 
 // options: no-lines gplex
 
@@ -18,15 +18,18 @@ using System.Text;
 using QUT.Gppg;
 using AspectCore;
 
-namespace LWLex
+namespace LWParser
 {
-public enum Tokens {error=2,EOF=3,_b1=4,_b2=5,_c=6};
+public enum Tokens {error=2,EOF=3,Number=4,NL=5,Other=6,
+    _Dot=7};
 
 public partial class ValueType
 { 
   public SourceEntity type_SourceEntity;
-  public LEX_TreeNode type_LEX_TreeNode;
+  public TXT_TreeNode type_TXT_TreeNode;
   public Token type_Token;
+  public Text type_Text;
+  public Header type_Header;
   public SourceEntityUniformSet type_SourceEntityUniformSet;
 
 }
@@ -55,30 +58,81 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 #pragma warning disable 649
   private static Dictionary<int, string> aliases;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[6];
-  private static State[] states = new State[10];
+  private static Rule[] rules = new Rule[31];
+  private static State[] states = new State[35];
   private static string[] nonTerms = new string[] {
-      "Program", "B", "A", "C", "$accept", };
+      "Program", "Text", "Header", "TkStart", "NotDot", "_ANY", "_ANY1", "_ANY2", 
+      "_ANY3", "_", "_4", "_5", "__ANY_list", "__ANY1_list", "$accept", };
 
   static Parser() {
-    states[0] = new State(new int[]{4,5},new int[]{-1,1,-3,3,-4,7,-2,8}, new int[]{1,0});
+    states[0] = new State(-18,new int[]{-1,1,-10,3}, new int[]{1,0});
     states[1] = new State(new int[]{3,2},new int[]{}, new int[]{1,1});
     states[2] = new State(-1,new int[]{}, new int[]{1,2});
-    states[3] = new State(new int[]{4,5},new int[]{-2,4}, new int[]{2,1});
-    states[4] = new State(-2,new int[]{}, new int[]{2,2});
-    states[5] = new State(new int[]{5,6},new int[]{}, new int[]{3,1});
-    states[6] = new State(-3,new int[]{}, new int[]{3,2});
-    states[7] = new State(-4,new int[]{}, new int[]{4,1});
-    states[8] = new State(new int[]{6,9},new int[]{}, new int[]{5,1});
-    states[9] = new State(-5,new int[]{}, new int[]{5,2});
+    states[3] = new State(new int[]{5,6,2,7,6,16,7,17,4,18,3,-2},new int[]{-2,4,-3,5,-4,8,-8,15,-12,31}, new int[]{2,1});
+    states[4] = new State(-19,new int[]{}, new int[]{19,2});
+    states[5] = new State(-20,new int[]{}, new int[]{20,2});
+    states[6] = new State(-21,new int[]{}, new int[]{21,2});
+    states[7] = new State(-22,new int[]{}, new int[]{22,2});
+    states[8] = new State(-27,new int[]{-13,9}, new int[]{3,1});
+    states[9] = new State(new int[]{5,10,4,12,6,13,7,14},new int[]{-6,11}, new int[]{3,2});
+    states[10] = new State(-3,new int[]{}, new int[]{3,3});
+    states[11] = new State(-28,new int[]{}, new int[]{28,2});
+    states[12] = new State(-8,new int[]{}, new int[]{8,1});
+    states[13] = new State(-9,new int[]{}, new int[]{9,1});
+    states[14] = new State(-10,new int[]{}, new int[]{10,1});
+    states[15] = new State(-6,new int[]{}, new int[]{6,1});
+    states[16] = new State(-14,new int[]{}, new int[]{14,1});
+    states[17] = new State(-15,new int[]{}, new int[]{15,1});
+    states[18] = new State(new int[]{7,21,4,29,6,30,5,-23},new int[]{-11,19,-5,22,-9,28}, new int[]{4,1,25,1});
+    states[19] = new State(new int[]{5,20},new int[]{}, new int[]{4,2});
+    states[20] = new State(-4,new int[]{}, new int[]{4,3});
+    states[21] = new State(-25,new int[]{}, new int[]{25,2});
+    states[22] = new State(-29,new int[]{-14,23}, new int[]{24,1});
+    states[23] = new State(new int[]{4,25,6,26,7,27,5,-24},new int[]{-7,24}, new int[]{24,2});
+    states[24] = new State(-30,new int[]{}, new int[]{30,2});
+    states[25] = new State(-11,new int[]{}, new int[]{11,1});
+    states[26] = new State(-12,new int[]{}, new int[]{12,1});
+    states[27] = new State(-13,new int[]{}, new int[]{13,1});
+    states[28] = new State(-7,new int[]{}, new int[]{7,1});
+    states[29] = new State(-16,new int[]{}, new int[]{16,1});
+    states[30] = new State(-17,new int[]{}, new int[]{17,1});
+    states[31] = new State(new int[]{4,33,6,16,7,17},new int[]{-2,32,-4,8,-8,15}, new int[]{5,1});
+    states[32] = new State(-5,new int[]{}, new int[]{5,2});
+    states[33] = new State(new int[]{7,34,4,29,6,30,5,-23},new int[]{-11,19,-5,22,-9,28}, new int[]{26,2,4,1});
+    states[34] = new State(-26,new int[]{}, new int[]{26,3});
 
     for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
-    rules[1] = new Rule(-5, new int[]{-1,3});
-    rules[2] = new Rule(-1, new int[]{-3,-2});
-    rules[3] = new Rule(-2, new int[]{4,5});
-    rules[4] = new Rule(-3, new int[]{-4});
-    rules[5] = new Rule(-4, new int[]{-2,6});
+    rules[1] = new Rule(-15, new int[]{-1,3});
+    rules[2] = new Rule(-1, new int[]{-10});
+    rules[3] = new Rule(-2, new int[]{-4,-13,5});
+    rules[4] = new Rule(-2, new int[]{4,-11,5});
+    rules[5] = new Rule(-3, new int[]{-12,-2});
+    rules[6] = new Rule(-4, new int[]{-8});
+    rules[7] = new Rule(-5, new int[]{-9});
+    rules[8] = new Rule(-6, new int[]{4});
+    rules[9] = new Rule(-6, new int[]{6});
+    rules[10] = new Rule(-6, new int[]{7});
+    rules[11] = new Rule(-7, new int[]{4});
+    rules[12] = new Rule(-7, new int[]{6});
+    rules[13] = new Rule(-7, new int[]{7});
+    rules[14] = new Rule(-8, new int[]{6});
+    rules[15] = new Rule(-8, new int[]{7});
+    rules[16] = new Rule(-9, new int[]{4});
+    rules[17] = new Rule(-9, new int[]{6});
+    rules[18] = new Rule(-10, new int[]{});
+    rules[19] = new Rule(-10, new int[]{-10,-2});
+    rules[20] = new Rule(-10, new int[]{-10,-3});
+    rules[21] = new Rule(-10, new int[]{-10,5});
+    rules[22] = new Rule(-10, new int[]{-10,2});
+    rules[23] = new Rule(-11, new int[]{});
+    rules[24] = new Rule(-11, new int[]{-5,-14});
+    rules[25] = new Rule(-12, new int[]{4,7});
+    rules[26] = new Rule(-12, new int[]{-12,4,7});
+    rules[27] = new Rule(-13, new int[]{});
+    rules[28] = new Rule(-13, new int[]{-13,-6});
+    rules[29] = new Rule(-14, new int[]{});
+    rules[30] = new Rule(-14, new int[]{-14,-7});
   }
 
   protected override void Initialize() {
@@ -94,33 +148,262 @@ public partial class Parser: ShiftReduceParser<ValueType, LexLocation>
 #pragma warning disable 162, 1522
     switch (action)
     {
-      case 2: // Program -> A, B
-{ CurrentSemanticValue.type_LEX_TreeNode = new LEX_TreeNode();
+      case 2: // Program -> _
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+		root = CurrentSemanticValue.type_TXT_TreeNode;
+	}
+        break;
+      case 3: // Text -> TkStart, __ANY_list, NL
+{
+		CurrentSemanticValue.type_Text = new Text(new List<string>(), LocationStack[LocationStack.Depth-3].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_Text.Location;
+		CurrentSemanticValue.type_Text.AddValue(ValueStack[ValueStack.Depth-3].type_TXT_TreeNode);
+		CurrentSemanticValue.type_Text.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+
+	}
+        break;
+      case 4: // Text -> Number, _4, NL
+{
+		CurrentSemanticValue.type_Text = new Text(new List<string>(), LocationStack[LocationStack.Depth-3].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_Text.Location;
+		CurrentSemanticValue.type_Text.AddValue(ValueStack[ValueStack.Depth-3].type_Token);
+		CurrentSemanticValue.type_Text.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+
+	}
+        break;
+      case 5: // Header -> _5, Text
+{
+		CurrentSemanticValue.type_Header = new Header(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_Header.Location;
+		CurrentSemanticValue.type_Header.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_Header.AddValue(ValueStack[ValueStack.Depth-1].type_Text);
+		CurrentSemanticValue.type_Header.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+
+	}
+        break;
+      case 6: // TkStart -> _ANY2
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+
+	}
+        break;
+      case 7: // NotDot -> _ANY3
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+
+	}
+        break;
+      case 8: // _ANY -> Number
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 9: // _ANY -> Other
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 10: // _ANY -> _Dot
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 11: // _ANY1 -> Number
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 12: // _ANY1 -> Other
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 13: // _ANY1 -> _Dot
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 14: // _ANY2 -> Other
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 15: // _ANY2 -> _Dot
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 16: // _ANY3 -> Number
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 17: // _ANY3 -> Other
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-1].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Token);
+
+	}
+        break;
+      case 18: // _ -> /* empty */
+{ CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode();
+    if (CurrentLocationSpan == null)
+        CurrentLocationSpan = new LexLocation(1,0,1,0); 
+    errBegin = CurrentLocationSpan;
+}
+        break;
+      case 19: // _ -> _, Text
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Text);
+errBegin = CurrentLocationSpan;
+	}
+        break;
+      case 20: // _ -> _, Header
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-1].type_Header);
+errBegin = CurrentLocationSpan;
+	}
+        break;
+      case 21: // _ -> _, NL
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+errBegin = CurrentLocationSpan;
+	}
+        break;
+      case 22: // _ -> _, error
+{
+        CurrentLocationSpan = new LexLocation(errBegin.EndLine, errBegin.EndColumn, LocationStack[LocationStack.Depth-1].StartLine, LocationStack[LocationStack.Depth-1].StartColumn);
+        TXT_TreeNode err = new TXT_TreeNode((Scanner as Scanner).errorMsg, CurrentLocationSpan);
+        Errors.Add(err);
+        errBegin = CurrentLocationSpan;
+    }
+        break;
+      case 23: // _4 -> /* empty */
+{ CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 3: // B -> _b1, _b2
-{ CurrentSemanticValue.type_LEX_TreeNode = new LEX_TreeNode();
+      case 24: // _4 -> NotDot, __ANY1_list
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+
+	}
+        break;
+      case 25: // _5 -> Number, _Dot
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-2].type_Token);
+
+	}
+        break;
+      case 26: // _5 -> _5, Number, _Dot
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-3].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-3].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_Token);
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-3].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddItem(ValueStack[ValueStack.Depth-2].type_Token);
+
+	}
+        break;
+      case 27: // __ANY_list -> /* empty */
+{ CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 4: // A -> C
-{ CurrentSemanticValue.type_LEX_TreeNode = new LEX_TreeNode();
+      case 28: // __ANY_list -> __ANY_list, _ANY
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+
+	}
+        break;
+      case 29: // __ANY1_list -> /* empty */
+{ CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode();
     if (CurrentLocationSpan == null)
         CurrentLocationSpan = new LexLocation(1,0,1,0); 
     
 }
         break;
-      case 5: // C -> B, _c
-{ CurrentSemanticValue.type_LEX_TreeNode = new LEX_TreeNode();
-    if (CurrentLocationSpan == null)
-        CurrentLocationSpan = new LexLocation(1,0,1,0); 
-    
-}
+      case 30: // __ANY1_list -> __ANY1_list, _ANY1
+{
+		CurrentSemanticValue.type_TXT_TreeNode = new TXT_TreeNode(new List<string>(), LocationStack[LocationStack.Depth-2].Merge(LocationStack[LocationStack.Depth-1]));
+        CurrentLocationSpan = CurrentSemanticValue.type_TXT_TreeNode.Location;
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddValue(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-2].type_TXT_TreeNode);
+		CurrentSemanticValue.type_TXT_TreeNode.AddSubItems(ValueStack[ValueStack.Depth-1].type_TXT_TreeNode);
+
+	}
         break;
     }
 #pragma warning restore 162, 1522

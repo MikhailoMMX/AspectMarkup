@@ -14,6 +14,7 @@ Token Sign [[:IsPunctuation:][:IsSymbol:]]
 
 Rule tkClassNamespace : @"class" | @"namespace"
 Rule @Block : "{" [Any | Block]* "}"
+Rule Attrib : "[" [Any | Attrib]* "]"
 Rule Tk : @AnyExcept(tkClassNamespace, "{", "}", ";", "enum")
 
 Rule Program :			#ProgramNode*
@@ -21,6 +22,7 @@ Rule ProgramNode:	 	#ClassOrNamespace
 						| #Field
 						| #Method
 						| #Enum
+						| Attrib
 						| #error
 
 Rule ClassOrNamespace :	@Tk* @tkClassNamespace @Tk* "{" #ProgramNode* "}" ";"?

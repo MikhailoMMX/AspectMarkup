@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,31 +10,43 @@ namespace AspectCore
 {
     public class TreeManager
     {
-        ParserWrapper parserWrapper;
+        ParserWrapperPool parserWrapper;
 
-        Dictionary<string, PointOfInterest> FilenameToTree = new Dictionary<string, PointOfInterest>();
-        Dictionary<string, string> FilenameToText = new Dictionary<string, string>();
-        Dictionary<string, DateTime> FilenameToDateTime = new Dictionary<string, DateTime>();
+        ConcurrentDictionary<string, PointOfInterest> FilenameToTree = new ConcurrentDictionary<string, PointOfInterest>();
+        ConcurrentDictionary<string, string> FilenameToText = new ConcurrentDictionary<string, string>();
+        ConcurrentDictionary<string, DateTime> FilenameToDateTime = new ConcurrentDictionary<string, DateTime>();
         List<PointOfInterest> _LastTimeErrors;
+        List<string> parserIDs;
 
         public TreeManager(string ParsersPath = "")
         {
-            if (ParsersPath == "")
-                parserWrapper = new ParserWrapper();
-            else
-                parserWrapper = new ParserWrapper(Environment.CurrentDirectory);
+            //if (ParsersPath == "")
+                parserWrapper = new ParserWrapperPool();
+            //else
+            //parserWrapper = new ParserWrapper(Environment.CurrentDirectory);
+
+            ParserWrapper pw = parserWrapper.GetParserWrapper();
+            parserIDs = pw.GetParserIDs();
+            parserWrapper.ReleaseParserWrapper(pw);
         }
 
-        public ParserWrapper Parsers { get { return parserWrapper; } }
+        public ParserWrapper GetParserWrapper()
+        {
+            return parserWrapper.GetParserWrapper();
+        }
+        public void ReleaseParserWrapper(ParserWrapper pw)
+        {
+            parserWrapper.ReleaseParserWrapper(pw);
+        }
 
         public List<string> GetParserIDs()
         {
-            return parserWrapper.GetParserIDs();
+            return parserIDs;
         }
 
         public int GetParsersCount()
         {
-            return parserWrapper.GetParsersCount();
+            return parserIDs.Count();
         }
         public List<PointOfInterest> GetLastParseErrors()
         {
@@ -42,8 +55,10 @@ namespace AspectCore
 
         private void Parse(string Filename, string Text, DateTime ModifiedTime)
         {
-            PointOfInterest Point = parserWrapper.ParseText(Text, Filename);
-            _LastTimeErrors = parserWrapper.GetLastParseErrors();
+            ParserWrapper pw = parserWrapper.GetParserWrapper();
+            PointOfInterest Point = pw.ParseText(Text, Filename);
+            _LastTimeErrors = pw.GetLastParseErrors();
+            parserWrapper.ReleaseParserWrapper(pw);
             if (FilenameToTree.ContainsKey(Filename))
             {
                 FilenameToText[Filename] = Text;
@@ -52,9 +67,9 @@ namespace AspectCore
             }
             else
             {
-                FilenameToText.Add(Filename, Text);
-                FilenameToTree.Add(Filename, Point);
-                FilenameToDateTime.Add(Filename, ModifiedTime);
+                FilenameToText.AddOrUpdate(Filename, Text, (k,v) => v);
+                FilenameToTree.AddOrUpdate(Filename, Point, (k, v) => v);
+                FilenameToDateTime.AddOrUpdate(Filename, ModifiedTime, (k, v) => v);
             }
         }
 

@@ -6,9 +6,9 @@
 //
 //  GPLEX Version:  1.2.2
 //  Machine:  BLUEGENE
-//  DateTime: 23.11.2015 20:39:58
+//  DateTime: 27.07.2016 16:23:40
 //  UserName: MikhailoMMX
-//  GPLEX input file <LWLexer.lex - 23.11.2015 20:39:58>
+//  GPLEX input file <LWLexer.lex - 27.07.2016 16:23:39>
 //  GPLEX frame file <embedded resource>
 //
 //  Option settings: unicode, parser, stack, minimize
@@ -34,7 +34,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using AspectCore;
 
-namespace LWLex
+namespace LWParser
 {   
     /// <summary>
     /// Summary Canonical example of GPLEX automaton
@@ -125,14 +125,12 @@ namespace LWLex
         
         enum Result {accept, noMatch, contextFound};
 
-        const int maxAccept = 9;
-        const int initial = 10;
+        const int maxAccept = 4;
+        const int initial = 5;
         const int eofNum = 0;
         const int goStart = -1;
         const int INITIAL = 0;
         const int SKIPDIRECTIVE = 1;
-        const int Anon1 = 2;
-        const int Anon2 = 3;
 
 #region user code
 #endregion user code
@@ -166,53 +164,154 @@ namespace LWLex
         }
     };
 
-    static int[] startState = new int[] {10, 13, 15, 17, 0};
+    static int[] startState = new int[] {5, 6, 0};
 
-#region CompressedCharacterMap
+#region TwoLevelCharacterMap
     //
-    // There are 8 equivalence classes
-    // There are 2 character sequence regions
-    // There are 1 tables, 100 entries
-    // There are 1 runs, 0 singletons
-    // Decision tree depth is 1
+    // There are 5 equivalence classes
+    // There are 256 character sequence regions
+    // There are 6 tables, 1536 entries
     //
-    static sbyte[] mapC0 = new sbyte[100] {
-/*     '\0' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 
-/*   '\x10' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-/*   '\x20' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 
-/*      '0' */ 0, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-/*      '@' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-/*      'P' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-/*      '`' */ 0, 0, 3, 6 };
+    static sbyte[] mLo0 = new sbyte[256] {
+/*     '\0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 0, 0, 3, 4, 4, 
+/*   '\x10' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\x20' */ 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 
+/*      '0' */ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 
+/*      '@' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*      'P' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*      '`' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*      'p' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\x80' */ 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\x90' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xA0' */ 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xB0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xC0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xD0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xE0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/*   '\xF0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    static sbyte[] mLo1 = new sbyte[256] {
+/* '\u0100' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0110' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0120' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0130' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0140' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0150' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0160' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0170' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0180' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u0190' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01A0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01B0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01C0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01D0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01E0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u01F0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    static sbyte[] mLo22 = new sbyte[256] {
+/* '\u1600' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1610' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1620' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1630' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1640' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1650' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1660' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1670' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1680' */ 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1690' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16A0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16B0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16C0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16D0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16E0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u16F0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    static sbyte[] mLo24 = new sbyte[256] {
+/* '\u1800' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 
+/* '\u1810' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1820' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1830' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1840' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1850' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1860' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1870' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1880' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u1890' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18A0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18B0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18C0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18D0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18E0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u18F0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    static sbyte[] mLo32 = new sbyte[256] {
+/* '\u2000' */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 
+/* '\u2010' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2020' */ 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4, 0, 
+/* '\u2030' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2040' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2050' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 
+/* '\u2060' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2070' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2080' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u2090' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20A0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20B0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20C0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20D0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20E0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u20F0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    static sbyte[] mLo48 = new sbyte[256] {
+/* '\u3000' */ 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3010' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3020' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3030' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3040' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3050' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3060' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3070' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3080' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u3090' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30A0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30B0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30C0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30D0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30E0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+/* '\u30F0' */ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
 
-    static sbyte MapC(int code)
-    { // '\0' <= code <= '\U0010FFFF'
-      if (code < 100) // '\0' <= code <= 'c'
-        return mapC0[code - 0];
-      else // 'd' <= code <= '\U0010FFFF'
-        return (sbyte)0;
-    }
+    static sbyte[][] map = new sbyte[256][] {
+/* '\u00xx' */ mLo0, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u10xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo22, mLo1, mLo24, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u20xx' */ mLo32, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u30xx' */ mLo48, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u40xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u50xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u60xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u70xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u80xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\u90xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uA0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uB0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uC0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uD0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uE0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, 
+/* '\uF0xx' */ mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1, mLo1};
+
 #endregion
 
-    static Table[] NxS = new Table[18] {
+
+    static sbyte Map(int code)
+    { 
+        if (code <= 65535)
+            return map[code / 256][code % 256];
+        else
+            return (sbyte)4;
+    }
+
+    static Table[] NxS = new Table[7] {
 /* NxS[   0] */ new Table(0, 0, 0, null),
-/* NxS[   1] */ new Table(0, 0, -1, null),
-/* NxS[   2] */ new Table(0, 0, -1, null),
-/* NxS[   3] */ new Table(0, 0, -1, null),
-/* NxS[   4] */ new Table(0, 0, -1, null),
-/* NxS[   5] */ new Table(0, 0, -1, null),
+/* NxS[   1] */ new Table(4, 3, -1, new sbyte[] {4, -1, 4}),
+/* NxS[   2] */ new Table(2, 1, -1, new sbyte[] {2}),
+/* NxS[   3] */ new Table(3, 1, -1, new sbyte[] {3}),
+/* NxS[   4] */ new Table(4, 3, -1, new sbyte[] {4, -1, 4}),
+/* NxS[   5] */ new Table(1, 4, -1, new sbyte[] {1, 2, 3, 4}),
 /* NxS[   6] */ new Table(0, 0, -1, null),
-/* NxS[   7] */ new Table(0, 0, -1, null),
-/* NxS[   8] */ new Table(0, 0, -1, null),
-/* NxS[   9] */ new Table(7, 1, -1, new sbyte[] {9}),
-/* NxS[  10] */ new Table(6, 6, -1, new sbyte[] {1, -1, -1, 11, -1, 12}),
-/* NxS[  11] */ new Table(1, 2, -1, new sbyte[] {4, 5}),
-/* NxS[  12] */ new Table(4, 2, -1, new sbyte[] {2, 3}),
-/* NxS[  13] */ new Table(1, 1, -1, new sbyte[] {14}),
-/* NxS[  14] */ new Table(1, 2, -1, new sbyte[] {6, 7}),
-/* NxS[  15] */ new Table(2, 1, -1, new sbyte[] {16}),
-/* NxS[  16] */ new Table(1, 1, -1, new sbyte[] {8}),
-/* NxS[  17] */ new Table(7, 1, -1, new sbyte[] {9}),
     };
 
 int NextState() {
@@ -221,8 +320,8 @@ int NextState() {
     else
         unchecked {
             int rslt;
-            int idx = MapC(code) - NxS[state].min;
-            if (idx < 0) idx += 8;
+            int idx = Map(code) - NxS[state].min;
+            if (idx < 0) idx += 5;
             if ((uint)idx >= (uint)NxS[state].rng) rslt = NxS[state].dflt;
             else rslt = NxS[state].nxt[idx];
             return rslt;
@@ -649,35 +748,22 @@ int NextState() {
         case 1:
 yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._c;
+	return (int)Tokens._Dot;
             break;
         case 2:
 yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._b1;
+	return (int)Tokens.Number;
             break;
         case 3:
 yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
-	return (int)Tokens._b2;
+	return (int)Tokens.NL;
             break;
         case 4:
-GoToSkipState(Anon2);
-            break;
-        case 5:
-GoToSkipState(Anon1);
-            break;
-        case 6:
-GoToSkipState(Anon2);
-            break;
-        case 7:
-GoToSkipState(Anon1);
-            break;
-        case 8:
-ReturnToLastState();
-            break;
-        case 9:
-ReturnToLastState();
+yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens.Other;
             break;
         default:
             break;

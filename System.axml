@@ -522,7 +522,7 @@ False - узел должен содержать хотя бы один поду
       </Node>
       <Node Name="Ядро" NL="0" NG="0">
         <Items>
-          <Node Name="Доделать" NL="0" NG="0">
+          <Node Name="TODO" NL="0" NG="0">
             <Items>
               <Node Name="Сохранение при закрытии" NL="0" NG="0">
                 <FileName>\system\core\ui\aspectwindowpane.cs</FileName>
@@ -844,16 +844,28 @@ False - узел должен содержать хотя бы один поду
                   </i>
                 </OCtx>
               </Node>
-              <Node Name="Включение привязки в интерфейсе" NL="0" NG="0">
+              <Node Name="Включение привязки в интерфейсе" NL="-1" NG="0,1044922">
                 <FileName>\System\Core\UI\FmAddPoint.cs</FileName>
                 <Note>Проверка уникальности узла. Если узел не уникален - внутренний контекст запоминается</Note>
                 <Text>public partial class fmAddPoint : Form</Text>
                 <OCtx>
-                  <i Type="">public partial class fmAddPoint : Form</i>
-                  <i Type="">namespace AspectCore</i>
-                  <i Type="">
+                  <i Type="ClassOrNamespace">public partial class fmAddPoint : Form</i>
+                  <i Type="ClassOrNamespace">namespace AspectCore</i>
+                  <i Type="CS_TreeNode">
                   </i>
                 </OCtx>
+                <ICtx>
+                  <i Type="Field">public List &lt; PointOfInterest &gt; AnchorPoints</i>
+                  <i Type="Field">public TreeViewAdapter Adapter</i>
+                  <i Type="Field">public TreeNode Node</i>
+                  <i Type="Field">public bool IsAddNewNode</i>
+                  <i Type="Field">Action Callback</i>
+                  <i Type="Method">public fmAddPoint ( TreeViewAdapter Adapter )</i>
+                  <i Type="Method">public void SyncronizeControlsWithPoint ( List &lt; PointOfInterest &gt; points , TreeNode Node , bool IsAdd , Action CallBack )</i>
+                  <i Type="Method">public void SyncronizePointWithControls ( )</i>
+                  <i Type="Method">private void cbAddAnchorPoint_CheckedChanged ( object sender , EventArgs e )</i>
+                  <i Type="Method">private void bCancel_Click ( object sender , EventArgs e )</i>
+                </ICtx>
               </Node>
               <Node Name="Структура дерева в парсере Паскаля" NL="0" NG="0">
                 <FileName>\Parsers\LWParserPascal\ParserDescriptor.lp</FileName>
@@ -908,24 +920,36 @@ False - узел должен содержать хотя бы один поду
             <Items>
               <Node Name="Движок поиска" NL="0" NG="0">
                 <Items>
-                  <Node Name="Главный класс TreeSearchEngine" NL="0" NG="0">
+                  <Node Name="Главный класс TreeSearchEngine" NL="0,875" NG="0,4208984">
                     <FileName>\system\core\treesearchengine.cs</FileName>
                     <Text>public class TreeSearchEngine</Text>
                     <OCtx>
-                      <i Type="">public class TreeSearchEngine</i>
-                      <i Type="">namespace AspectCore</i>
-                      <i Type="">
+                      <i Type="ClassOrNamespace">public class TreeSearchEngine</i>
+                      <i Type="ClassOrNamespace">namespace AspectCore</i>
+                      <i Type="CS_TreeNode">
                       </i>
                     </OCtx>
+                    <ICtx>
+                      <i Type="Method">public static TreeSearchResult FindPointInTree ( PointOfInterest TreeRoot , PointOfInterest Point , string SourceText )</i>
+                      <i Type="Method">public static TreeSearchResult FindPointInTree2 ( PointOfInterest TreeRoot , PointOfInterest Point , string SourceText )</i>
+                      <i Type="Method">public static PointOfInterest FindPointInAspectTree ( PointOfInterest WorkingAspect , PointOfInterest Point )</i>
+                      <i Type="Method">public static List &lt; PointOfInterest &gt; FindPointByLocation ( PointOfInterest p , int line , int col )</i>
+                      <i Type="Method">public static void SetNearLG ( PointOfInterest TreeRoot , PointOfInterest point , string Text , out float NearL , out float NearG )</i>
+                      <i Type="Method">private static TreeSearchResult InitializeResultFromTree ( PointOfInterest TreeRoot , string Type )</i>
+                      <i Type="Method">private static HashSet &lt; PointOfInterest &gt; GetNeighbours ( PointOfInterest TreeRoot , PointOfInterest point )</i>
+                      <i Type="Method">private static float GetMaxSimilarityByName ( TreeSearchResult Nodes , PointOfInterest point , string Text )</i>
+                      <i Type="Method">private static void ProcessIDs ( TreeSearchResult Result , PointOfInterest Point , bool Full = false )</i>
+                      <i Type="Method">private static void ProcessHeaders ( TreeSearchResult Result , PointOfInterest Point , bool Full = false )</i>
+                    </ICtx>
                     <Items>
-                      <Node Name="Главный метод поиска FindPointInTree" NL="0" NG="0">
+                      <Node Name="Главный метод поиска FindPointInTree" NL="0,71875" NG="0,5791016">
                         <FileName>\System\Core\TreeSearchEngine.cs</FileName>
-                        <Text>public TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)</Text>
+                        <Text>public static TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)</Text>
                         <OCtx>
-                          <i Type="">public static TreeSearchResult FindPointInTree ( PointOfInterest TreeRoot , PointOfInterest Point , string SourceText )</i>
-                          <i Type="">public class TreeSearchEngine</i>
-                          <i Type="">namespace AspectCore</i>
-                          <i Type="">
+                          <i Type="Method">public static TreeSearchResult FindPointInTree ( PointOfInterest TreeRoot , PointOfInterest Point , string SourceText )</i>
+                          <i Type="ClassOrNamespace">public class TreeSearchEngine</i>
+                          <i Type="ClassOrNamespace">namespace AspectCore</i>
+                          <i Type="CS_TreeNode">
                           </i>
                         </OCtx>
                       </Node>
@@ -946,22 +970,22 @@ False - узел должен содержать хотя бы один поду
                       <i Type="">public bool ListsEqual ( List &lt; List &lt; string &gt; &gt; L1 , List &lt; List &lt; string &gt; &gt; L2 )</i>
                     </ICtx>
                     <Items>
-                      <Node Name="Класс LevenshteinSimilarity" NL="0" NG="0">
+                      <Node Name="Класс LevenshteinSimilarity" NL="0,8681641" NG="0,546875">
                         <FileName>\system\core\treesearchengine.cs</FileName>
                         <Note>Реализуем методы, возвращающие степень похожести для строк, имен (списков строк), контекстов (списков списков строк)</Note>
                         <Text>private static class LevenshteinSimilarity</Text>
                         <OCtx>
-                          <i Type="">private static class LevenshteinSimilarity</i>
-                          <i Type="">internal static class TreeSearchComparer</i>
-                          <i Type="">namespace AspectCore</i>
-                          <i Type="">
+                          <i Type="ClassOrNamespace">private static class LevenshteinSimilarity</i>
+                          <i Type="ClassOrNamespace">internal static class TreeSearchComparer</i>
+                          <i Type="ClassOrNamespace">namespace AspectCore</i>
+                          <i Type="CS_TreeNode">
                           </i>
                         </OCtx>
                         <ICtx>
-                          <i Type="">public static readonly int Equility = 1024</i>
-                          <i Type="">static readonly private struct Key</i>
-                          <i Type="">static Dictionary &lt; Key , int &gt; _Similarity = new Dictionary &lt; Key , int &gt; ( )</i>
-                          <i Type="">public static int GetSimilarity ( string S1 , string S2 )</i>
+                          <i Type="Field">static System . Collections . Concurrent . ConcurrentDictionary &lt; StringPairKey , int &gt; _Similarity = new System . Collections . Concurrent . ConcurrentDictionary &lt; StringPairKey , int &gt; ( )</i>
+                          <i Type="Method">public static int Similarity ( string S1 , string S2 )</i>
+                          <i Type="Method">public static int Similarity ( dynamic L1 , dynamic L2 )</i>
+                          <i Type="Method">public static void ClearDictionary ( )</i>
                         </ICtx>
                       </Node>
                       <Node Name="Класс JaroWinklerSimilarity" NL="0" NG="0">

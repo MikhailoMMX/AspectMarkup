@@ -55,7 +55,7 @@ namespace AspectCore.Helpers
             }
 
             int len = loc.StartLine == loc.EndLine ? loc.EndColumn - loc.StartColumn : Text.Length - loc.StartColumn;
-            Result[0].Name = GetCurrentWord(Text, loc.StartColumn, len);
+            Result[0].Title = GetCurrentWord(Text, loc.StartColumn, len);
             return Result;
         }
 
@@ -106,7 +106,7 @@ namespace AspectCore.Helpers
                 foreach (PointOfInterest pt in points)
                 {
                     pt.FileName = Manager.GetRelativePath(pt.FileName);
-                    pt.Name = OriginalPoint.Name;
+                    pt.Title = OriginalPoint.Title;
                     pt.Note = OriginalPoint.Note;
                     pt.Text = Text;
                 }

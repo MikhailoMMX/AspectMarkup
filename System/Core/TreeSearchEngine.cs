@@ -18,34 +18,40 @@ namespace AspectCore
         public static TreeSearchResult FindPointInTree(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)
         {
             TreeSearchResult result = InitializeResultFromTree(TreeRoot, Point.Context[0].Type);
-            ProcessNames(result, Point);
+            ProcessIDs(result, Point);
             if (result.Singular)
             {
                 FillLocationForSingularResult(result, SourceText, Point.Text);
                 return result;
             }
-            
+            ProcessHeaders(result, Point);
+            if (result.Singular)
+            {
+                FillLocationForSingularResult(result, SourceText, Point.Text);
+                return result;
+            }
+
             ProcessOuterContext(result, Point);
             if (result.Singular)
             {
                 FillLocationForSingularResult(result, SourceText, Point.Text);
                 return result;
             }
-            
+
             ProcessInnerContext(result, Point);
             if (result.Singular)
             {
                 FillLocationForSingularResult(result, SourceText, Point.Text);
                 return result;
             }
-            
+
             ProcessText(result, Point, SourceText);
             if (result.Singular)
             {
                 FillLocationForSingularResult(result, SourceText, Point.Text);
                 return result;
             }
-            
+
             result.Sort();
             return result;
         }
@@ -53,14 +59,18 @@ namespace AspectCore
         public static TreeSearchResult FindPointInTree2(PointOfInterest TreeRoot, PointOfInterest Point, string SourceText)
         {
             TreeSearchResult result = InitializeResultFromTree(TreeRoot, Point.Context[0].Type);
-            ProcessNames(result, Point);
-            ProcessOuterContext(result, Point);
-            ProcessInnerContext(result, Point);
-            ProcessText(result, Point, SourceText);
+            if (result._result.Count == 0)
+                return result;
+            ProcessIDs(result, Point, true);
+            ProcessHeaders(result, Point, true);
+            ProcessOuterContext(result, Point, true);
+            ProcessInnerContext(result, Point, true);
+            ProcessText(result, Point, SourceText, true);
             result.Sort();
-            if (result._result.Count >= 2 && result._result[0].TotalMatch == TreeSearchOptions.Equility && result._result[1].TotalMatch != TreeSearchOptions.Equility)
+            if (result.GetTotalMatch(0) == TreeSearchOptions.Equility &&
+                (result._result.Count == 1 || result._result.Count >= 2 && result.GetTotalMatch(1) != TreeSearchOptions.Equility))
             {
-                result._result.RemoveRange(1, result._result.Count - 1);
+                //result._result.RemoveRange(1, result._result.Count - 1);
                 result.Singular = true;
             }
             return result;
@@ -79,7 +89,7 @@ namespace AspectCore
             //получаем список всех узлов, без фильтрации по типу
             TreeSearchResult res = InitializeResultFromTree(WorkingAspect, "");
             //обрабатываем имена узлов
-            ProcessNames(res, Point);
+            ProcessHeaders(res, Point);
 
             if (res.Singular)
                 return res._result[0].TreeNode;
@@ -226,7 +236,7 @@ namespace AspectCore
         private static float GetMaxSimilarityByName(TreeSearchResult Nodes, PointOfInterest point, string Text)
         {
             if (Nodes.Count == 0)
-                return 0;
+                return -1;
 
             int maxSim = 0;
             foreach (TreeSearchResultNode node in Nodes._result)
@@ -241,12 +251,44 @@ namespace AspectCore
         }
 
         /// <summary>
-        /// Обрабатывает имена всех узлов из Result, заполняет компонент похожести имени.
+        /// Обрабатывает идентификаторы всех узлов из Result, заполняет компонент похожести идентификатора.
         /// Если по имени найден ровно один совпадающий узел - устанавливает флаг Singular, удаляет несовпадающие узлы из результата.
         /// </summary>
         /// <param name="Result"></param>
         /// <param name="Point"></param>
-        private static void ProcessNames(TreeSearchResult Result, PointOfInterest Point)
+        private static void ProcessIDs(TreeSearchResult Result, PointOfInterest Point, bool Full = false)
+        {
+            //пустой идентификатор похож на все непустые. Для совместимости со старыми версиями, где идентификатора не было.
+            if (string.IsNullOrWhiteSpace(Point.ID))
+            {
+                foreach (TreeSearchResultNode node in Result._result)
+                    node.NameMatch = TreeSearchOptions.Equility;
+                return;
+            }
+
+            List<TreeSearchResultNode> exactMatch = new List<TreeSearchResultNode>();
+            foreach (TreeSearchResultNode node in Result._result)
+                if (!string.IsNullOrWhiteSpace(node.TreeNode.ID))
+                {
+                    node.NameMatch = TreeSearchComparer.StringsSimilarity(node.TreeNode.ID, Point.ID);
+                    if (node.NameMatch == TreeSearchOptions.Equility)
+                        exactMatch.Add(node);
+                }
+            if (exactMatch.Count == 1 && !Full)
+                if ((exactMatch[0].TreeNode.Context[0]?.Type ?? "") == (Point.Context[0]?.Type ?? ""))
+                {
+                    Result.Singular = true;
+                    Result._result = exactMatch;
+                }
+        }
+
+        /// <summary>
+        /// Обрабатывает заголовки всех узлов из Result, заполняет компонент похожести заголовка.
+        /// Если по имени найден ровно один совпадающий узел - устанавливает флаг Singular, удаляет несовпадающие узлы из результата.
+        /// </summary>
+        /// <param name="Result"></param>
+        /// <param name="Point"></param>
+        private static void ProcessHeaders(TreeSearchResult Result, PointOfInterest Point, bool Full = false)
         {
             List<TreeSearchResultNode> exactMatch = new List<TreeSearchResultNode>();
             foreach (TreeSearchResultNode node in Result._result)
@@ -255,11 +297,11 @@ namespace AspectCore
                     int sim = 0;
                     if (string.IsNullOrWhiteSpace(Point.Context[0].Type) || node.TreeNode.Context[0].Type == Point.Context[0].Type)
                         sim = TreeSearchComparer.TokenListsSimilarity(node.TreeNode.Context[0].Name, Point.Context[0].Name);
-                    node.NameMatch = sim;
+                    node.HeaderMatch = sim;
                     if (sim == TreeSearchOptions.Equility)
                         exactMatch.Add(node);
                 }
-            if (exactMatch.Count == 1)
+            if (exactMatch.Count == 1 && !Full)
             {
                 Result.Singular = true;
                 Result._result = exactMatch;
@@ -271,7 +313,7 @@ namespace AspectCore
         /// </summary>
         /// <param name="Result"></param>
         /// <param name="Point"></param>
-        private static void ProcessOuterContext(TreeSearchResult Result, PointOfInterest Point)
+        private static void ProcessOuterContext(TreeSearchResult Result, PointOfInterest Point, bool Full = false)
         {
             List<TreeSearchResultNode> ExactMatch = new List<TreeSearchResultNode>();
             foreach (TreeSearchResultNode node in Result._result)
@@ -281,7 +323,7 @@ namespace AspectCore
                 if (Sim == TreeSearchOptions.Equility && node.NameMatch == TreeSearchOptions.Equility)
                     ExactMatch.Add(node);
             }
-            if (ExactMatch.Count == 1)
+            if (ExactMatch.Count == 1 && !Full)
             {
                 Result.Singular = true;
                 Result._result = ExactMatch;
@@ -294,8 +336,10 @@ namespace AspectCore
         /// </summary>
         /// <param name="Result"></param>
         /// <param name="Point"></param>
-        private static void ProcessInnerContext(TreeSearchResult Result, PointOfInterest Point)
+        private static void ProcessInnerContext(TreeSearchResult Result, PointOfInterest Point, bool Full = false)
         {
+            //return; //For testing, TODO remove
+
             List<TreeSearchResultNode> ExactMatchPair = new List<TreeSearchResultNode>();
             List<TreeSearchResultNode> ExactMatchThree = new List<TreeSearchResultNode>();
             List<List<string>> PointContext = ConvertInnerContextToList(Point);
@@ -311,12 +355,12 @@ namespace AspectCore
                 if (Sim == TreeSearchOptions.Equility && node.NameMatch == TreeSearchOptions.Equility && node.OuterContextMatch == TreeSearchOptions.Equility)
                     ExactMatchThree.Add(node);
             }
-            if (ExactMatchPair.Count == 1)
+            if (ExactMatchPair.Count == 1 && !Full)
             {
                 Result.Singular = true;
                 Result._result = ExactMatchPair;
             }
-            if (ExactMatchThree.Count == 1)
+            if (ExactMatchThree.Count == 1 && !Full)
             {
                 Result.Singular = true;
                 Result._result = ExactMatchThree;
@@ -331,7 +375,7 @@ namespace AspectCore
         /// <param name="Result"></param>
         /// <param name="Point"></param>
         /// <param name="Source"></param>
-        private static void ProcessText(TreeSearchResult Result, PointOfInterest Point, string Source)
+        private static void ProcessText(TreeSearchResult Result, PointOfInterest Point, string Source, bool Full = false)
         {
             List<TreeSearchResultNode> ExactMatch = new List<TreeSearchResultNode>();
             TextSearch ts = new TextSearch(Source);
@@ -343,7 +387,7 @@ namespace AspectCore
                         && node.OuterContextMatch == TreeSearchOptions.Equility && node.InnerContextMatch == TreeSearchOptions.Equility)
                     ExactMatch.Add(node);
             }
-            if (ExactMatch.Count == 1)
+            if (ExactMatch.Count == 1 && !Full)
             {
                 Result.Singular = true;
                 Result._result = ExactMatch;
@@ -820,16 +864,17 @@ namespace AspectCore
         public double SimilarityOf(int Index) 
         {
             TreeSearchResultNode Node = _result[Index];
-            int Total = Node.NameMatch * _wName + Node.OuterContextMatch * _wOuterCTX + Node.InnerContextMatch * _wInnerCTX + Node.TextStringMatch * _wText;
-            int wSum = _wName + _wOuterCTX + _wInnerCTX + _wText;
+            int Total = Node.NameMatch * _wHeader + Node.OuterContextMatch * _wOuterCTX + Node.InnerContextMatch * _wInnerCTX + Node.TextStringMatch * _wText;
+            int wSum = _wHeader + _wOuterCTX + _wInnerCTX + _wText;
             return (double)Total / wSum / TreeSearchOptions.Equility;
         }
         /// <summary>
         /// Количество элементов
         /// </summary>
         public int Count { get { return _result.Count; } }
-        private int _wName = 1;
-        private int _wOuterCTX = 1;
+        private int _wName = 4;
+        private int _wHeader = 1;
+        private int _wOuterCTX = 2;
         private int _wInnerCTX = 1;
         private int _wText = 1;
         /// <summary>
@@ -837,18 +882,26 @@ namespace AspectCore
         /// </summary>
         public void Sort()
         {
-            _wName = 1;
-            _wOuterCTX = 1;
-            _wInnerCTX = 1;
-            _wText = 1;
-            _result = _result.OrderByDescending(x => x.NameMatch + x.OuterContextMatch + x.InnerContextMatch + x.TextStringMatch).ToList();
+            _result = _result.OrderByDescending(x => x.NameMatch            * _wName
+                                                   + x.HeaderMatch          * _wHeader
+                                                   + x.OuterContextMatch    * _wOuterCTX
+                                                   + x.InnerContextMatch    * _wInnerCTX
+                                                   + x.TextStringMatch      * _wText
+                                               ).ToList();
         }
-
+        public void SetWeights(int NameWeight, int HeaderWeight, int OuterCtxWeight, int InnerCtxWeight, int TextWeight)
+        {
+            _wName = NameWeight;
+            _wHeader = HeaderWeight;
+            _wOuterCTX = OuterCtxWeight;
+            _wInnerCTX = InnerCtxWeight;
+            _wText = TextWeight;
+        }
         public float GetNodeSimilarity(int index)
         {
             if (index < 0 || index >= _result.Count)
                     return 0;
-            return (float)_result[index].TotalMatch / TreeSearchOptions.Equility;
+            return (float)GetTotalMatch(index) / TreeSearchOptions.Equility;
         }
         /// <summary>
         /// Сортирует массив результатов с заданными весами компонентов
@@ -857,17 +910,25 @@ namespace AspectCore
         /// <param name="OuterCtxWeight">Вес компонента внешнего контекста</param>
         /// <param name="InnerCtxWeight">Вес компонента внутреннего контекста</param>
         /// <param name="TextWeight">Вес компонента текстовой строки</param>
-        public void Sort(int NameWeight, int OuterCtxWeight, int InnerCtxWeight, int TextWeight)
+        public void Sort(int NameWeight, int HeaderWeight, int OuterCtxWeight, int InnerCtxWeight, int TextWeight)
         {
             _wName = NameWeight;
+            _wHeader = HeaderWeight;
             _wOuterCTX = OuterCtxWeight;
             _wInnerCTX = InnerCtxWeight;
             _wText = TextWeight;
-            _result = _result.OrderByDescending(x => x.NameMatch * NameWeight 
-                                                + x.OuterContextMatch * OuterCtxWeight
-                                                + x.InnerContextMatch * InnerCtxWeight 
-                                                + x.TextStringMatch * TextWeight
-                                         ).ToList();
+        }
+        public int GetTotalMatch(int index)
+        {
+            System.Diagnostics.Debug.Assert(index >= 0 && index < _result.Count);
+            TreeSearchResultNode node = _result[index];
+            int num = node.NameMatch         * _wName
+                    + node.HeaderMatch       * _wHeader
+                    + node.OuterContextMatch * _wOuterCTX
+                    + node.InnerContextMatch * _wInnerCTX
+                    + node.TextStringMatch   * _wText;
+            int denom = _wName + _wHeader + _wOuterCTX + _wInnerCTX + _wText;
+            return num / denom;
         }
     }
     /// <summary>
@@ -877,11 +938,12 @@ namespace AspectCore
     {
         public PointOfInterest TreeNode;
         internal int[] _match = new int[ArraySize];
-        internal const int ArraySize = 4;
+        internal const int ArraySize = 5;
         internal const int NameIndex = 0;
-        internal const int OuterContextIndex = 1;
-        internal const int InnerContextIndex = 2;
-        internal const int TextStringIndex = 3;
+        internal const int HeaderIndex = 1;
+        internal const int OuterContextIndex = 2;
+        internal const int InnerContextIndex = 3;
+        internal const int TextStringIndex = 4;
         public TreeSearchResultNode(PointOfInterest Point)
         {
             TreeNode = Point;
@@ -889,16 +951,17 @@ namespace AspectCore
                 _match[i] = TreeSearchOptions.Equility;
         }
         public int NameMatch { get { return _match[NameIndex]; } set { _match[NameIndex] = value; } }
+        public int HeaderMatch { get { return _match[HeaderIndex]; } set { _match[HeaderIndex] = value; } }
         public int OuterContextMatch { get { return _match[OuterContextIndex]; } set { _match[OuterContextIndex] = value; } }
         public int InnerContextMatch { get { return _match[InnerContextIndex]; } set { _match[InnerContextIndex] = value; } }
         public int TextStringMatch { get { return _match[TextStringIndex]; } set { _match[TextStringIndex] = value; } }
-        public int TotalMatch { get { return (_match[0] + _match[1] + _match[2] + _match[3]) / 4; } }
+        //public int TotalMatch { get { return (_match[0] + _match[1] + _match[2] + _match[3] + _match[4]) / 5; } }
     }
 
     /// <summary>
     /// Содержит набор методов для четкого и нечеткого сравнения строк и списков
     /// </summary>
-    internal static class TreeSearchComparer
+    public static class TreeSearchComparer
     {
         /// <summary>
         /// Сравнивает списки строк на равенство по содержимому
@@ -1041,16 +1104,15 @@ namespace AspectCore
             }
 
         }
-
         /// <summary>
         /// Реализация вычисления степени похожести строк и списков строк с использованием метрики Левенштейна
         /// </summary>
-        private static class LevenshteinSimilarity
+        public static class LevenshteinSimilarity
         {
             /// <summary>
             /// Словарь степеней похожести уже вычисленных пар строк
             /// </summary>
-            static Dictionary<StringPairKey, int> _Similarity = new Dictionary<StringPairKey, int>();
+            static System.Collections.Concurrent.ConcurrentDictionary<StringPairKey, int> _Similarity = new System.Collections.Concurrent.ConcurrentDictionary<StringPairKey, int>();
             /// <summary>
             /// Возвращает степень похожести двух строк
             /// </summary>
@@ -1116,7 +1178,7 @@ namespace AspectCore
                 //Нормированная степень похожести
                 int Sim = (MaxDist - Dist) * TreeSearchOptions.Equility / MaxDist;
 
-                _Similarity.Add(K, Sim);
+                _Similarity.AddOrUpdate(K, Sim, (k, v) => v);
                 return Sim;
             }
 
@@ -1443,7 +1505,7 @@ namespace AspectCore
         public const int MaxInnerContectCount = 10;
 
         //
-        public const int CostParserTypeMismatch = 1;     //стоимость несоответствия типов узлов
+        //public const int CostParserTypeMismatch = 1;     //стоимость несоответствия типов узлов
         public const int CostContextSizeMismatch = 2;    //стоимость несоответствия размера контекста
         public const float NameMismatchCutOff = 0.5f;    //Степень похожести, чтобы считать узел кандидатом к дальнейшему поиску
         public const int MinNameLength = 3;              //Минимальная длина имени, чтобы применять правило NameMismatchCutOff

@@ -308,9 +308,9 @@ namespace LWParser
                 }
             }
             else if (IsDirectiveDefine(directive))
-                DefinedNames.Add(param);
+                ;//DefinedNames.Add(param);
             else if (IsDirectiveUndef(directive))
-                DefinedNames.Remove(param);
+                ;// DefinedNames.Remove(param);
         }
 
         private void ProcessDirectiveInSkipState(string DirectiveText)
@@ -349,6 +349,15 @@ namespace LWParser
                 }
                 SkipStateStack.Pop();
             }
+        }
+        public void ResetState()
+        {
+            yy_clear_stack();
+            SkipStateStack.Clear();
+            EmbedFlagStack.Clear();
+            OpenBraceStack.Clear();
+            OpenBraceCount = 0;
+            BEGIN(INITIAL);
         }
 
     }
@@ -390,11 +399,13 @@ namespace LWParser
             _parser.Errors.Clear();
             bool success = _parser.Parse();
             ProcessTree();
+            SetNames(_parser.root);
             if (!success)
             {
                 _parser.root = new SourceEntity();
                 _parser.root.Items.Add(new SourceEntity(_scanner.errorMsg, _scanner.errorLoc));
             }
+            _scanner.ResetState();
             return success;
 
         }

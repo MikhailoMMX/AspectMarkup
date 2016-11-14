@@ -15,9 +15,13 @@ namespace AspectCore
         /// </summary>
         public LexLocation Location;
         /// <summary>
+        /// Имя (идентификатор) сущности
+        /// </summary>
+        public string Name;
+        /// <summary>
         /// Список лексем, являющийся именем данной сущности
         /// </summary>
-        public List<string> Value;
+        public List<string> Value;      //ToDo Rename to "Header"
         /// <summary>
         /// Дочерние сущности
         /// </summary>
@@ -132,7 +136,7 @@ namespace AspectCore
         /// Задается пользователем. Имя, отображаемое в дереве аспектов в среде разработки, задается пользователем.
         /// По-умолчанию предлагается конкатенация лексем из Value
         /// </summary>
-        public string Name;
+        public string Title;
         /// <summary>
         /// Возвращается парсером. Вложенные узлы.
         /// В дереве аспектов здесь хранятся дочерние узлы
@@ -142,6 +146,10 @@ namespace AspectCore
         /// Задается пользователем. Примечание, может содержать развернутое пояснение к узлу.
         /// </summary>
         public string Note;
+        /// <summary>
+        /// Имя узла. Генерируется парсером, содержит одну (главную) лексему-идентификатор. Может быть пустым.
+        /// </summary>
+        public string ID;
         /// <summary>
         /// Контекст, описывает путь от узла к корню дерева
         /// 0-й элемент - имя данного узла
@@ -221,7 +229,8 @@ namespace AspectCore
             this.FileName = Point.FileName;
             this.Items = Point.Items;
             this.Location = Point.Location;
-            this.Name = Point.Name;
+            this.ID = Point.ID;
+            this.Title = Point.Title;
             this.Note = Point.Note;
             this.Text = Point.Text;
             this.Context = Point.Context;
@@ -238,7 +247,8 @@ namespace AspectCore
         {
             PointOfInterest result = new PointOfInterest();
             result.FileName = FileName;
-            result.Name = Name;
+            result.Title = Title;
+            result.ID = ID;
             result.Note = Note;
             result.Items = Items;
             result.Context = new List<OuterContextNode>();
@@ -282,7 +292,7 @@ namespace AspectCore
         /// <param name="context"></param>
         public PointOfInterest(SerializationInfo info, StreamingContext context)
         {
-            Name = TryGetString(info, "Name");
+            Title = TryGetString(info, "Name");
             FileName = TryGetString(info, "FileName");
             Text = TryGetString(info, "Text");
             Note = TryGetString(info, "Note");
@@ -319,7 +329,7 @@ namespace AspectCore
         {
             info.AddValue("FileName", FileName);
             info.AddValue("Text", Text);
-            info.AddValue("Name", Name);
+            info.AddValue("Name", Title);
             info.AddValue("Note", Note);
             info.AddValue("Items", Items);
             info.AddValue("Context", Context);

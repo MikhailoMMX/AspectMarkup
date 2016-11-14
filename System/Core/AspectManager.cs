@@ -153,7 +153,7 @@ namespace AspectCore
         {
             PointOfInterest Result = new PointOfInterest();
             Result.FileName = TryFindValue(Node, "FileName");
-            Result.Name = TryFindValue(Node, "Name");
+            Result.Title = TryFindValue(Node, "Name");
             Result.Note = TryFindValue(Node, "Note");
             Result.Text = TryFindValue(Node, "Text");
             
@@ -208,7 +208,7 @@ namespace AspectCore
         {
             PointOfInterest Result = new PointOfInterest();
             Result.FileName = TryFindValue(Node, "FileName");
-            Result.Name = TryFindValue(Node, "Name");
+            Result.Title = TryFindValue(Node, "Name");
             Result.Note = TryFindValue(Node, "Note");
             Result.Text = TryFindValue(Node, "Text");
 
@@ -276,7 +276,8 @@ namespace AspectCore
         {
             PointOfInterest Result = new PointOfInterest();
             Result.FileName = TryFindValue(Node, "FileName");
-            Result.Name = Node.Attributes["Name"]?.InnerText;
+            Result.Title = Node.Attributes["Name"]?.InnerText;
+            Result.ID = Node.Attributes["ID"]?.InnerText;
             Result.Note = TryFindValue(Node, "Note");
             Result.Text = TryFindValue(Node, "Text");
             float.TryParse(Node.Attributes["NL"]?.InnerText, out Result.NearL);
@@ -390,11 +391,17 @@ namespace AspectCore
         private static XmlNode BuildPoint(PointOfInterest Point, XmlDocument Doc)
         {
             XmlElement Result = Doc.CreateElement("Node");
-            if (!string.IsNullOrWhiteSpace(Point.Name))
+            if (!string.IsNullOrWhiteSpace(Point.ID))
+            {
+                XmlAttribute Name = Doc.CreateAttribute("ID");
+                Result.Attributes.Append(Name);
+                Name.InnerText = Point.ID;
+            }
+            if (!string.IsNullOrWhiteSpace(Point.Title))
             {
                 XmlAttribute Name = Doc.CreateAttribute("Name");
                 Result.Attributes.Append(Name);
-                Name.InnerText = Point.Name;
+                Name.InnerText = Point.Title;
             }
             if (!string.IsNullOrWhiteSpace(Point.FileName))
             {

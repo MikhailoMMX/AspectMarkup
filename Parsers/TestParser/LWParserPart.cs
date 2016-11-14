@@ -2,32 +2,78 @@ using System.Collections.Generic;
 using AspectCore;
 using QUT.Gppg;
 
-namespace LWLex
+namespace LWParser
 {
-    public class LEX_TreeNode : SourceEntity
+    public class TXT_TreeNode : SourceEntity
     {
-        public LEX_TreeNode(List<string> Value, LexLocation Location)
+        public TXT_TreeNode(List<string> Value, LexLocation Location)
         {
             this.Value = Value;
             this.Location = Location;
         }
-        public LEX_TreeNode(string Value, LexLocation Location)
+        public TXT_TreeNode(string Value, LexLocation Location)
         {
             this.Value = new List<string>();
             this.Value.Add(Value);
             this.Location = Location;
         }
-        public LEX_TreeNode()
+        public TXT_TreeNode()
         {
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public virtual void Accept(LEX_Visitor v)
+        public virtual void Accept(TXT_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public class Token : LEX_TreeNode
+    public class Text : TXT_TreeNode
+    {
+        public Text(List<string> Value, LexLocation Location)
+        {
+            this.Value = Value;
+            this.Location = Location;
+        }
+        public Text(string Value, LexLocation Location)
+        {
+            this.Value = new List<string>();
+            this.Value.Add(Value);
+            this.Location = Location;
+        }
+        public Text()
+        {
+            this.Value = new List<string>();
+            this.Location = new LexLocation();
+        }
+        public override void Accept(TXT_Visitor v)
+        {
+            v.Visit(this);
+        }
+    }
+    public class Header : TXT_TreeNode
+    {
+        public Header(List<string> Value, LexLocation Location)
+        {
+            this.Value = Value;
+            this.Location = Location;
+        }
+        public Header(string Value, LexLocation Location)
+        {
+            this.Value = new List<string>();
+            this.Value.Add(Value);
+            this.Location = Location;
+        }
+        public Header()
+        {
+            this.Value = new List<string>();
+            this.Location = new LexLocation();
+        }
+        public override void Accept(TXT_Visitor v)
+        {
+            v.Visit(this);
+        }
+    }
+    public class Token : TXT_TreeNode
     {
         public Token(List<string> Value, LexLocation Location)
         {
@@ -45,14 +91,16 @@ namespace LWLex
             this.Value = new List<string>();
             this.Location = new LexLocation();
         }
-        public override void Accept(LEX_Visitor v)
+        public override void Accept(TXT_Visitor v)
         {
             v.Visit(this);
         }
     }
-    public interface LEX_Visitor
+    public interface TXT_Visitor
     {
-       void Visit(LEX_TreeNode _LEX_TreeNode);
+       void Visit(TXT_TreeNode _TXT_TreeNode);
+       void Visit(Text _Text);
+       void Visit(Header _Header);
        void Visit(Token _Token);
 
     }
@@ -79,11 +127,11 @@ namespace LWLex
     }
     public partial class LightweightScanner : ILightWeightScanner
     {
-        public string[] LanguageID { get { return new string[] { "lex" }; } }
+        public string[] LanguageID { get { return new string[] { "txt" }; } }
     }
     public partial class LightweightParser : LightweightParserBase
     {
-        public override string[] LanguageID { get { return new string[] { "lex" }; } }
+        public override string[] LanguageID { get { return new string[] { "txt" }; } }
     }
 
 

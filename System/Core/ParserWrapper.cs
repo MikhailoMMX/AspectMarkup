@@ -257,8 +257,9 @@ namespace AspectCore
             PointOfInterest res = new PointOfInterest(s.Location);
             res.Context.Add(new OuterContextNode(s.Value, s.GetType().Name));
             if (s.Value != null && s.Value.Count != 0)
-                res.Name = string.Join(" ", s.Value);
+                res.Title = string.Join(" ", s.Value);
             res.FileName = FileName;
+            res.ID = s.Name;
             foreach (SourceEntity se in s.Items)
                 res.Items.Add(ConvertSourceEntityToPointOfInterest(se, FileName));
             return res;

@@ -9,7 +9,7 @@ namespace AspectCore
     public class Strings
     {
         //public static string ToolWindowTitle = "Окно аспектов";
-        public static string ToolWindowTitle = "Concern tree";
+        public static string ToolWindowTitle = "Разметка кода";
 
         public static string CanNotCreateWindow = "Невозможно создать окно";
         public static string NoParsers = "Парсеры не загружены";
@@ -38,7 +38,7 @@ namespace AspectCore
 
         public const string SubAspectPropNameDescr = "Имя подаспекта";
         public const string SubAspectPropNameCat = "Subaspect Options";
-        public const string SubAspectPropNameName = "Name";
+        public const string SubAspectPropNameName = "Title";
 
         public const string SubAspectPropFileNameDescr = "Путь к файлу с подаспектом";
         public const string SubAspectPropFileNameCat = "Subaspect Options";

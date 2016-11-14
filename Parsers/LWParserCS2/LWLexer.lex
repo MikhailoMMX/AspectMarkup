@@ -80,6 +80,16 @@ DIRECTIVE #[^\r\n]*
 	yylval.type_Token = new Token(yytext, yylloc);
 	return (int)Tokens._Cclose;
 }
+"["  {
+    yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens._Sopen;
+}
+"]"  {
+    yylval = new ValueType();
+	yylval.type_Token = new Token(yytext, yylloc);
+	return (int)Tokens._Sclose;
+}
 ";"  {
     yylval = new ValueType();
 	yylval.type_Token = new Token(yytext, yylloc);
@@ -119,7 +129,8 @@ DIRECTIVE #[^\r\n]*
 "'" { 
     
     ReturnToLastState(); }
-
+"#" {}
+{newline} {ReturnToLastState(); }
 } //end of Anon4
 <Anon5> {
 	"\\\\" { }
@@ -127,13 +138,15 @@ DIRECTIVE #[^\r\n]*
 "\"" { 
     
     ReturnToLastState(); }
-
+{newline} {ReturnToLastState(); }
+"#" {}
 } //end of Anon5
 <Anon6> {
 	"\"" { 
     
     ReturnToLastState(); }
-
+"#" {}
+	"\"\"" { }
 } //end of Anon6
 
 
